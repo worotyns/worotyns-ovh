@@ -1,0 +1,26 @@
+version: "3"
+
+tasks:
+  dev:
+    desc: Serve the site locally with live reload
+    cmds:
+      - live-server .
+
+  deploy:prod:
+    desc: Deploy the site to Cloudflare Pages
+    cmds:
+      - wrangler pages deploy . --project-name worotyns
+
+  generate:og-image:
+    desc: Screenshot index.html → ogimage.jpg
+    cmds:
+      - >-
+        /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+        --headless --disable-gpu
+        --screenshot=ogimage.png
+        --window-size=1200,630
+        --default-background-color=000000
+        file://$(pwd)/index.html
+      - sips -s format jpeg ogimage.png --out ogimage.jpg
+      - rm -f ogimage.png
+      - echo "✅ ogimage.jpg generated"
