@@ -600,13 +600,29 @@ h1 em {
   gap: 0.85rem;
 }
 
+/* no marker: each situation is its own two-line block — the question, then
+   the answer underneath it */
 .situations li {
-  padding-left: 1.1rem;
-  font-size: 0.93rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0;
+  font-size: 0.95rem;
+}
+
+.situations li::before {
+  display: none;
 }
 
 .situations li strong {
   color: var(--ink);
+  font-weight: 700;
+}
+
+.situations li span {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 /* the consolidated "everything else" list inside a wide cell */
