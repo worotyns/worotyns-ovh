@@ -267,6 +267,14 @@ for (const file of files) {
     if (!/\balt=/.test(m[0])) fail(`${file}: <img> without alt — ${m[0].slice(0, 60)}`);
   }
 
+  // tag balance: a regex edit once ate a </p> and the CTA ended up inside the
+  // rate paragraph. Block tags are cheap to count and catch exactly that.
+  for (const tag of ["p", "div", "section", "aside", "nav", "footer", "dl", "ul"]) {
+    const opens = (html.match(new RegExp(`<${tag}\\b`, "g")) || []).length;
+    const closes = (html.match(new RegExp(`</${tag}>`, "g")) || []).length;
+    if (opens !== closes) fail(`${file}: ${opens} <${tag}> vs ${closes} </${tag}> — a tag is not closed`);
+  }
+
   // a noindex page (404, experiments) is not meant to rank: only the basics apply
   if (noindex) {
     notes.push(`${file}: noindex — skipping the social/SEO surface`);
