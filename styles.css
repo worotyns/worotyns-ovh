@@ -513,6 +513,109 @@ h1 em {
   color: var(--biz);
 }
 
+/* ---------- hero rate line + proof strip ---------- */
+
+.hero-rate {
+  margin: 1.4rem 0 0;
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+
+.hero-rate strong {
+  color: var(--ink);
+}
+
+.proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 2.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.proof > div {
+  padding: 1.15rem 1.25rem 1.25rem;
+  background: var(--surface);
+}
+
+.proof strong {
+  display: block;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--biz);
+}
+
+.proof span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.proof-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.95rem 1.25rem;
+  background: var(--surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  line-height: 1.7;
+  color: var(--faint);
+}
+
+/* ---------- full-width cells inside the matrix ---------- */
+
+.cell.wide {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border-right: 0;
+}
+
+.cell.wide.reason h3 {
+  font-size: 1.12rem;
+}
+
+.cell.wide.reason p {
+  max-width: 82ch;
+}
+
+.situations {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 2rem;
+}
+
+.situations li {
+  padding-left: 1.1rem;
+  font-size: 0.93rem;
+}
+
+.situations li strong {
+  color: var(--ink);
+}
+
+@media (max-width: 62rem) {
+  .proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .situations {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 34rem) {
+  .proof {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- a colourful strip of small blocks ---------- */
 
 .strip {

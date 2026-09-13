@@ -40,6 +40,17 @@ Kolejność grup jest celowa: **najpierw to, co można kupić, potem najmocniejs
 
 Anchor links, brakujące pliki, wewnętrzne linki rozwiązane tak, jak zrobi to przeglądarka, wewnętrzne linki w `llms.txt`, JSON-LD, `llms.txt` (tytuł, streszczenie, stawka, kontakt, projekty), liczba par w macierzy, klikalność kart, `target`/`rel` na linkach zewnętrznych, nagrania + miniatury, obecność arkuszy `vendor/*` i `styles.css`.
 
+## Reedycja komunikacji: startup jako główny odbiorca
+
+Design, struktura macierzy i większość treści bez zmian — przestawiona została komunikacja.
+
+- **hero** mówi teraz o decyzji foundera, nie o mnie: „I help founders make the calls that get expensive later." W leadzie jest, dlaczego to drogie: „cheap to get right at the start and expensive to unwind a year in", plus dowód (miliard zdarzeń, zespół piętnastu, akwizycja). Pod CTA jedna linia: „Senior product & technology advice at a startup-friendly 175 PLN/hour."
+- **pas dowodów** tuż pod hero: 1B+ zdarzeń dziennie · 200+ klientów enterprise · 15 inżynierów · exit do Vercom S.A. + notka, że rady o skalowaniu i architekturze pochodzą z budowania i prowadzenia produktu, nie z samego konsultingu
+- **nowa grupa „Where startups call me in"** — pięć cytatów-sytuacji (brak CTO i brak budżetu, architektura zaczyna boleć, nie wiadomo co dalej budować, zespół potrzebuje starszej perspektywy, jedna ważna decyzja do podjęcia)
+- **nowa grupa „The three reasons startups hire me"** — trzy pełnoszerokościowe wiersze: Fractional CTO, Architecture & technical review, Product & business strategy. Nic nie zostało usunięte: pozostałe kompetencje są niżej pod etykietą „Everything else I help with"
+- **stawka** w panelu zamykającym jest przedstawiona jako świadoma decyzja: 175 PLN/h celowo na poziomie dostępnym dla wczesnych zespołów, przy czym ta sama rada od pełnoetatowego CTO albo dużej firmy konsultingowej kosztuje wielokrotność. Panel zamykający pyta teraz „Bring me the decision that is keeping you up."
+- **meta i `llms.txt`** przestawione na ten sam przekaz (tytuł: „Fractional CTO & CPO for startups"), a podstrony usługowe dostały to samo uzasadnienie stawki, żeby nie było sprzeczności
+
 ## Podstrony usługowe (SEO)
 
 Dwa adresy pod frazy, każdy z **własną treścią** — nie kopią strony głównej, żeby nie dublować:

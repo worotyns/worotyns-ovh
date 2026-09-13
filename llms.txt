@@ -1,6 +1,6 @@
 # Mateusz Worotyński — Fractional CTO & Product Consultant
 
-> Mateusz Worotyński is a fractional CTO, fractional CPO and product consultant based in Kraków, Poland. He co-founded PushPushGo in 2016, grew it to 200+ enterprise clients and over a billion events per day, and took it through a majority acquisition by Warsaw Stock Exchange-listed Vercom S.A. in 2021. He now works with founders and leadership teams on two tracks — technology & architecture, and product & business. **Hourly rate: 175 PLN / hour.**
+> Mateusz Worotyński is a fractional CTO, fractional CPO and product consultant based in Kraków, Poland, working mainly with early-stage and growing startups. He co-founded PushPushGo in 2016, grew it to 200+ enterprise clients and over a billion events per day, and took it through a majority acquisition by Warsaw Stock Exchange-listed Vercom S.A. in 2021. He now works with founders and leadership teams on two tracks — technology & architecture, and product & business. **Hourly rate: 175 PLN / hour — deliberately a startup-friendly rate**, kept low on purpose so early-stage teams can afford senior product and technology judgement before expensive mistakes; the same advice from a full-time CTO or a large consultancy costs a multiple of it.
 
 Canonical site: https://worotyns.ovh/
 Service pages: https://worotyns.ovh/fractional-cto/ (technology track) and https://worotyns.ovh/product-leadership/ (product & business track)
@@ -16,6 +16,14 @@ Languages: English, Polish
 - **Engagement types:** hourly consulting, monthly fractional CTO/CPO retainers (1–4 days a month), fixed-scope reviews (architecture review, technical due diligence), product & pricing sprints
 - **Contact:** i@worotyns.ovh · +48 790 793 138 · https://www.linkedin.com/in/worotyns
 - **LinkedIn headline:** Fractional CTO | Technology Advisor | Co-founder @ PushPushGo | Bridging Tech, Product & Business
+
+## The three reasons startups hire him
+
+1. **Fractional CTO** — CTO-level thinking without the full-time hire: architecture, hiring and the technical bar, build-versus-buy, vendor and cloud choices, the technical side of a raise or an acquisition. One to four days a month.
+2. **Architecture & technical review** — an outside read on architecture, scaling and technical debt: what breaks first at 10×, what the debt costs in weeks per month, which risks are real, and a prioritised plan. Two to three weeks.
+3. **Product & business strategy** — decisions rather than workshops: what to build, what to kill, pricing, positioning and priorities, argued against revenue with the trade-offs written down.
+
+Typical triggers: no CTO yet and no budget for one, growth that the architecture is starting to resist, a roadmap that is a list of requests, a team that needs a more senior perspective, or one important technical/product decision that is expensive to undo.
 
 ## Services — Technology & architecture
 
