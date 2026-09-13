@@ -125,7 +125,31 @@ Sprawdziłem publiczne źródła i użyłem: **Vercom S.A. nabył 67,42% udział
 
 **Uwaga:** zdjęcie pojawia się teraz dwa razy na stronie — w navbarze (34 px) i w sekcji About (88 px). Powiedz, jeśli mam zostawić tylko jedno.
 
-## 8. Co proponuję dalej (kolejność wg zwrotu)
+## 9. Eksperyment: wersja „simple" (`/simple/`)
+
+Osobna, równoległa wersja do porównania — **nie nadpisuje obecnej strony**. Jest na `noindex` (to eksperyment, nie druga strona do pozycjonowania), a obie wersje linkują do siebie w stopce.
+
+Zasady, które sobie narzuciłem:
+
+- **zero JavaScriptu** — żadnego przełącznika torów, animacji, fasad wideo; nagrania są zwykłymi linkami
+- **zero webfontów** — systemowy stos fontów, więc zero zapytań do Google Fonts
+- **jedna kolumna**, 42 rem, bez kart, cieni i zaokrągleń; sekcje oddzielone samym nagłówkiem
+- **tor biznesowy i techniczny scalone** w jedną uczciwą listę (4 + 4 punkty) zamiast przełącznika
+- dark mode wyłącznie przez `prefers-color-scheme` (bez przycisku i bez zapisu w `localStorage`)
+- treść ta sama: kim jestem, co robię, cztery własne produkty, track record, AI, R&D (WDFT), nagrania, compliance, kontakt
+
+Pomiar (Chrome, zimny start):
+
+| | Pełna wersja | Wersja simple |
+|---|---|---|
+| Żądania | 8 | **3** |
+| Transfer | 66 KB | **11 KB** |
+| JavaScript | tak (przełącznik, fasady, reveal) | **0 B** |
+| Pliki | HTML + CSS + JS + Google Fonts | HTML (8 KB) + CSS (2,7 KB) |
+
+Czego wersja simple **nie** ma: przełącznika torów, kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, sekcji z opiniami, ściany klientów, panelu ASCII. Jeśli wybierzesz tę drogę, najsensowniej jest przenieść do niej treść z pełnej wersji, a nie odwrotnie.
+
+## 10. Co proponuję dalej (kolejność wg zwrotu)
 
 1. **Podstrony SEO** `/fractional-cto/` i `/product-leadership/` — przełącznik toru jest świetny dla człowieka, ale Google nie zaindeksuje dwóch wariantów jednego URL-a jako dwóch osobnych ofert. Dwie lekkie strony na tym samym CSS + linki z głównej.
 2. **Screenshoty projektów** (4 obrazki) — zamiana kafelków tekstowych na wizualne.
