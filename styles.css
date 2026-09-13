@@ -600,6 +600,56 @@ h1 em {
   color: var(--ink);
 }
 
+/* the consolidated "everything else" list inside a wide cell */
+.wide-note {
+  max-width: 78ch;
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* the additional competencies, as a definition table inside each track cell */
+.more {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 1rem 1.35rem;
+  margin: 0;
+  align-items: baseline;
+}
+
+.more dt {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.more dd {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 44rem) {
+  .more {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .more dt {
+    margin-top: 0.9rem;
+  }
+
+  .more dt:first-of-type {
+    margin-top: 0;
+  }
+
+  .more dd {
+    margin-bottom: 0.4rem;
+  }
+}
+
 @media (max-width: 62rem) {
   .proof {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -837,6 +887,16 @@ footer p {
 
 .wall.three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* the doorway cards are links to the service pages */
+.card-cta {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--accent, var(--biz));
 }
 
 .faq {

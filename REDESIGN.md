@@ -46,8 +46,9 @@ Design, struktura macierzy i większość treści bez zmian — przestawiona zos
 
 - **hero** mówi teraz o decyzji foundera, nie o mnie: „I help founders make the calls that get expensive later." W leadzie jest, dlaczego to drogie: „cheap to get right at the start and expensive to unwind a year in", plus dowód (miliard zdarzeń, zespół piętnastu, akwizycja). Pod CTA jedna linia: „Senior product & technology advice at a startup-friendly 175 PLN/hour."
 - **pas dowodów** tuż pod hero: 1B+ zdarzeń dziennie · 200+ klientów enterprise · 15 inżynierów · exit do Vercom S.A. + notka, że rady o skalowaniu i architekturze pochodzą z budowania i prowadzenia produktu, nie z samego konsultingu
-- **nowa grupa „Where startups call me in"** — pięć cytatów-sytuacji (brak CTO i brak budżetu, architektura zaczyna boleć, nie wiadomo co dalej budować, zespół potrzebuje starszej perspektywy, jedna ważna decyzja do podjęcia)
-- **nowa grupa „The three reasons startups hire me"** — trzy pełnoszerokościowe wiersze: Fractional CTO, Architecture & technical review, Product & business strategy. Nic nie zostało usunięte: pozostałe kompetencje są niżej pod etykietą „Everything else I help with"
+- **sekcja „The three reasons startups hire me" przed macierzą** — trzy karty-klocki: Fractional CTO, Architecture & technical review, Product & business strategy. Każda linkuje do swojej podstrony usługowej (linkowanie wewnętrzne), więc sekcja jest jednocześnie doorwayem i nawigacją
+- **„Where startups call me in" jako para biznes | technologia** — po trzy sytuacje na stronę, sformułowane słowami foundera (brak CTO i brak budżetu, architektura zaczyna boleć, zespół potrzebuje starszej perspektywy / nie wiadomo co dalej budować, spory o priorytety, pricing bez podstaw)
+- **„Everything else I help with" jako para biznes | technologia** — pozostałe kompetencje w układzie tabeli (nazwa | opis), nic nie zostało usunięte. Trzy pozycje, które są już w doorwayu, mają przy sobie dopisek, że to ten sam obszar w wersji abonamentowej („row 02 run as a rolling review"), żeby nie wyglądały na dublet
 - **stawka** w panelu zamykającym jest przedstawiona jako świadoma decyzja: 175 PLN/h celowo na poziomie dostępnym dla wczesnych zespołów, przy czym ta sama rada od pełnoetatowego CTO albo dużej firmy konsultingowej kosztuje wielokrotność. Panel zamykający pyta teraz „Bring me the decision that is keeping you up."
 - **meta i `llms.txt`** przestawione na ten sam przekaz (tytuł: „Fractional CTO & CPO for startups"), a podstrony usługowe dostały to samo uzasadnienie stawki, żeby nie było sprzeczności
 
@@ -59,6 +60,12 @@ Dwa adresy pod frazy, każdy z **własną treścią** — nie kopią strony gł�
 - **`/product-leadership/`** — „The product problem is rarely the product problem." Sekcje: gdzie mnie wołają, jak wygląda współpraca, dowody (PPG / Terapeuto / uff.email, framing biznesowy), pytania, czego nie robię.
 
 Każda ma: własny `title` i `description` w limicie, canonical do siebie, `og:image` **własny** (generowany przez `task generate:og-image`), breadcrumb widoczny i w JSON-LD, `FAQPage` z trzema realnymi pytaniami, `Service` z ceną (`UnitPriceSpecification`, `unitCode: HUR`), linki w stopce strony głównej i wzajemne. `sitemap.xml` ma trzy adresy.
+
+## Poprawka po reedycji: koncept dwóch torów
+
+Pierwsza wersja reedycji wstawiła trzy grupy **pełnej szerokości** na sam początek macierzy (sytuacje, trzy powody, skonsolidowana lista kompetencji). Skutek: czytelnik dostawał trzy akapity bez podziału na tory, zanim zobaczył nagłówki „Track 01 / Track 02" — czyli dokładnie tam, gdzie koncept „tej samej pracy czytanej na dwa sposoby" miał się ustanowić. Koncept się rozjechał.
+
+Naprawa: doorway został **przeniesiony przed macierz** (tam pełna szerokość jest naturalna, bo to wprowadzenie), a wewnątrz macierzy **wszystkie wiersze są znów parowane** biznes | technologia — sytuacje, lista kompetencji, track record, R&D, produkty, AI. Stan obecny: **12 wierszy, wszystkie pary, zero komórek pełnej szerokości wewnątrz macierzy**. `task check` pilnuje teraz także tego, że liczba komórek biznesowych równa się technologicznym, i że macierz nie ma wycieków.
 
 ## Linki i dostępność
 
