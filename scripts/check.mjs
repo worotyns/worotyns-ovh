@@ -10,7 +10,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-const files = ["index.html", "404.html", "simple/index.html", "simple/tech/index.html", "blocks/index.html"];
+const files = ["index.html", "404.html"];
 const problems = [];
 const notes = [];
 
@@ -80,17 +80,42 @@ for (const file of files) {
   }
 }
 
-/* ---------- index.html specific ---------- */
+/* ---------- index.html: the single page ---------- */
 
 const index = readFileSync("index.html", "utf8");
 
-for (const id of ["main", "about", "services", "work", "experience", "testimonials", "contact"]) {
-  if (!index.includes(`id="${id}"`)) fail(`index.html: expected section #${id} is gone — check the nav`);
+// anchors the hero and the track switches point at
+for (const id of ["biz", "tech", "work"]) {
+  if (!index.includes(`id="${id}"`)) fail(`index.html: expected #${id} — the track switches or the hero link point at it`);
 }
 
-for (const btn of ['data-lane-set="biz"', 'data-lane-set="tech"']) {
-  if (!index.includes(btn)) fail(`index.html: track switch button ${btn} missing`);
+// the whole point of the layout: every business cell has a technology cell,
+// so the rows line up. A missing one silently breaks the alignment.
+const bizCells = (index.match(/class="cell(?: head)? biz"/g) || []).length;
+const techCells = (index.match(/class="cell(?: head)? tech"/g) || []).length;
+if (bizCells !== techCells) {
+  fail(`index.html: ${bizCells} business cells vs ${techCells} technology cells — the matrix would fall out of alignment`);
 }
+notes.push(`index.html: ${bizCells} aligned row pairs`);
+
+// every product card must be clickable, and open in a new tab
+for (const m of index.matchAll(/<div[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
+  if (!/<a\s/.test(m[1])) fail("index.html: a card is a plain div with no link inside it");
+}
+for (const m of index.matchAll(/<a[^>]*class="[^"]*\bcard\b[^"]*"([^>]*)>/g)) {
+  const attrs = m[1];
+  if (!/href="/.test(attrs)) fail(`index.html: a card link has no href — ${attrs.trim()}`);
+  // mailto cards are exempt: they open a mail client, not a tab
+  const external = /href="https?:/.test(attrs);
+  if (external && !/target="_blank"/.test(attrs)) fail(`index.html: an external card link does not open in a new tab — ${attrs.trim()}`);
+  if (external && !/rel="[^"]*noopener/.test(attrs)) fail(`index.html: an external card link opens a new tab without rel=noopener — ${attrs.trim()}`);
+}
+
+// no dead CTAs anywhere
+for (const m of index.matchAll(/<a[^>]*class="block accent"([^>]*)>/g)) {
+  if (!/href="/.test(m[1])) fail("index.html: an accent block (a CTA) has no href");
+}
+
 
 /* ---------- llms.txt (machine-readable summary) ---------- */
 
@@ -124,32 +149,23 @@ for (const m of index.matchAll(/<article[^>]*class="project[^"]*"[^>]*>([\s\S]*?
   }
 }
 
-if (!/<a[^>]*class="project project-open/.test(index)) {
-  fail("index.html: the open-slot card is not a link — its CTA cannot be clicked");
+/* ---------- recordings ---------- */
+
+const records = [...index.matchAll(/<a[^>]*class="[^"]*\brecord\b[^"]*"[^>]*href="([^"]+)"/g)].map((m) => m[1]);
+if (!records.length) fail("index.html: no recordings found — did the watch list get removed?");
+for (const url of records) {
+  if (!/^https:\/\/www\.youtube\.com\/watch\?v=/.test(url)) fail(`index.html: a recording links somewhere unexpected — ${url}`);
 }
-
-/* ---------- recordings (video facades) ---------- */
-
-const videoIds = [...index.matchAll(/data-video-id="([^"]+)"/g)].map((m) => m[1]);
-const facades = (index.match(/class="video-facade"/g) || []).length;
-
-if (!videoIds.length) {
-  fail("index.html: no recordings found — did the #talk section get removed?");
-} else {
-  if (new Set(videoIds).size !== videoIds.length) fail("index.html: the same video id is used twice");
-  if (facades !== videoIds.length) {
-    fail(`index.html: ${videoIds.length} recordings but ${facades} facades — every .video needs a .video-facade button`);
-  }
-  if (!/data-video-title=/.test(index)) fail("index.html: recordings are missing data-video-title (used as iframe title)");
-  notes.push(`index.html: ${videoIds.length} recordings — ${videoIds.join(", ")}`);
-
-  if (existsSync("llms.txt")) {
-    const llms = readFileSync("llms.txt", "utf8");
-    for (const id of videoIds) {
-      if (!llms.includes(id)) fail(`llms.txt: recording ${id} is not listed under Talks`);
-    }
+const recordImgs = (index.match(/class="thumb"/g) || []).length;
+if (recordImgs !== records.length) fail(`index.html: ${records.length} recordings but ${recordImgs} thumbnails`);
+if (existsSync("llms.txt")) {
+  const llms = readFileSync("llms.txt", "utf8");
+  for (const url of records) {
+    const id = url.split("v=")[1];
+    if (!llms.includes(id)) fail(`llms.txt: recording ${id} is not listed under Talks`);
   }
 }
+notes.push(`index.html: ${records.length} recordings with thumbnails`);
 
 /* ---------- internal links must resolve to a real file ---------- */
 
@@ -175,54 +191,15 @@ for (const file of files) {
   }
 }
 
-/* ---------- experiment pages: each one must load its own stylesheet ---------- */
+/* ---------- the page must load the vendored library and its own sheet ---------- */
 
-const experiments = {
-  "simple/index.html": "simple/styles.css",
-  "simple/tech/index.html": "simple/styles.css",
-  "blocks/index.html": "blocks/style.css",
-  "blocks/split.html": "blocks/split.css",
-};
-
-for (const [file, expected] of Object.entries(experiments)) {
-  if (!existsSync(file)) {
-    fail(`${file}: experiment page missing`);
-    continue;
+{
+  const page = readFileSync("index.html", "utf8");
+  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref("index.html", m[1]));
+  for (const expected of ["vendor/reset.min.css", "vendor/blocks.min.css", "styles.css"]) {
+    if (!sheets.includes(expected)) fail(`index.html: does not load ${expected} (loads ${sheets.join(", ")})`);
   }
-  const page = readFileSync(file, "utf8");
-  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
-  if (!sheets.includes(expected)) {
-    fail(`${file}: loads ${sheets.join(", ") || "no stylesheet"} — it must load ${expected}`);
-  }
-  notes.push(`${file}: ${Math.round(page.length / 1024)} KB, stylesheets ${sheets.join(" + ")}`);
-}
-
-/* ---------- the simple experiment: two tracks, two real URLs ---------- */
-
-const simplePages = {
-  biz: "simple/index.html",
-  tech: "simple/tech/index.html",
-};
-
-if (existsSync(simplePages.biz) || existsSync(simplePages.tech)) {
-  for (const [lane, file] of Object.entries(simplePages)) {
-    if (!existsSync(file)) {
-      fail(`${file}: the ${lane} track of the simple version is missing — the two pages must exist as a pair`);
-      continue;
-    }
-    const page = readFileSync(file, "utf8");
-    const otherHref = lane === "biz" ? "/simple/tech/" : "/simple/";
-    const otherFile = lane === "biz" ? simplePages.tech : simplePages.biz;
-    // the switch must point at the other page, resolved from this page's URL
-    const links = [...page.matchAll(/href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
-    if (!links.includes(otherFile)) {
-      fail(`${file}: the track switch does not resolve to ${otherHref} (${otherFile})`);
-    }
-    if (!/aria-current="page"/.test(page)) {
-      fail(`${file}: the track switch does not mark the current page`);
-    }
-    notes.push(`${file}: ${lane} track`);
-  }
+  notes.push(`index.html: stylesheets ${sheets.join(" + ")}`);
 }
 
 /* ---------- report ---------- */

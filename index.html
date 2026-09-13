@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-lane="tech">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mateusz Worotyński — Fractional CTO &amp; Product Consultant</title>
-  <meta name="description" content="Two tracks, one person: fractional CTO for teams that need architecture and delivery leadership, and product &amp; business consulting from a co-founder who took PushPushGo to 200+ enterprise clients and an exit to Vercom S.A.">
-  <meta name="keywords" content="Fractional CTO, Product Consultant, Fractional CPO, SaaS Architecture, Technical Due Diligence, Engineering Leadership, Technology Strategy, Product Strategy, Pricing, Go-to-market">
+  <title>Mateusz Worotyński — fractional CTO &amp; product consultant</title>
+  <meta name="description" content="Fractional CTO and product consultant. The same work read two ways: business and technology. Co-founder of PushPushGo (exit to Vercom S.A.), founder of Terapeuto, uff.email and Krazeta.">
   <meta name="author" content="Mateusz Worotyński">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0f6f6a">
+  <meta name="theme-color" content="#e6ddcb">
   <link rel="canonical" href="https://worotyns.ovh/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mateusz Worotyński — Fractional CTO &amp; Product Consultant">
-  <meta property="og:description" content="Ten years building products end to end. Now available as fractional CTO, fractional CPO or both. PushPushGo (exit to Vercom S.A.), Terapeuto, uff.email, GetViaMsg.">
+  <meta property="og:title" content="Mateusz Worotyński — fractional CTO &amp; product consultant">
+  <meta property="og:description" content="Two tracks, one person: product &amp; business on the left, technology &amp; architecture on the right. Co-founder of PushPushGo (exit to Vercom S.A.).">
   <meta property="og:url" content="https://worotyns.ovh/">
   <meta property="og:site_name" content="Mateusz Worotyński">
   <meta property="og:image" content="/ogimage.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mateusz Worotyński — Fractional CTO &amp; Product Consultant">
-  <meta name="twitter:description" content="Two tracks, one person: technology and product leadership for founders who need both.">
+  <meta name="twitter:title" content="Mateusz Worotyński — fractional CTO &amp; product consultant">
+  <meta name="twitter:description" content="Ten years building products and the systems underneath them. Now available as fractional CTO or fractional CPO.">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,8 +29,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/reset.min.css">
+  <link rel="stylesheet" href="/vendor/blocks.min.css">
+  <link rel="stylesheet" href="/styles.css">
 
   <script type="application/ld+json">
   {
@@ -42,7 +44,7 @@
     "email": "mailto:i@worotyns.ovh",
     "telephone": "+48790793138",
     "jobTitle": "Fractional CTO, Fractional CPO & Technology Advisor",
-    "image": "https://worotyns.ovh/avatar.jpg",
+    "image": "https://worotyns.ovh/avatar-96.jpg",
     "description": "Co-founder of PushPushGo (acquired by Vercom S.A.). Works as a fractional CTO and product consultant — architecture, engineering leadership, product strategy, pricing and go-to-market.",
     "knowsAbout": [
       "Fractional CTO",
@@ -56,14 +58,17 @@
       "Engineering Leadership",
       "Technical Due Diligence",
       "DORA readiness",
-      "Cloud Infrastructure"
+      "Cloud Infrastructure",
+      "AI adoption in engineering teams"
     ],
     "founder": [
       { "@type": "Organization", "name": "Terapeuto", "url": "https://terapeuto.com" },
-      { "@type": "Organization", "name": "uff.email", "url": "https://uff.email" }
+      { "@type": "Organization", "name": "uff.email", "url": "https://uff.email" },
+      { "@type": "Organization", "name": "Krazeta", "url": "https://krazeta.pl" }
     ],
     "worksFor": [
-      { "@type": "Organization", "name": "GetViaMsg", "url": "https://getviamsg.wdft.ovh" }
+      { "@type": "Organization", "name": "GetViaMsg", "url": "https://getviamsg.wdft.ovh" },
+      { "@type": "Organization", "name": "WDFT", "url": "https://wdft.ovh" }
     ],
     "sameAs": [
       "https://www.linkedin.com/in/worotyns",
@@ -80,1250 +85,364 @@
     "description": "Fractional CTO services, product and business consulting, technical due diligence and engineering leadership for startups and SaaS companies."
   }
   </script>
-
-  <script>
-    (function () {
-      var root = document.documentElement;
-      try {
-        var param = new URLSearchParams(location.search).get("track");
-        var lane = param || localStorage.getItem("lane") || "tech";
-        if (lane !== "biz" && lane !== "tech") lane = "tech";
-        root.setAttribute("data-lane", lane);
-
-        var stored = localStorage.getItem("theme");
-        var system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        root.setAttribute("data-theme", stored || system);
-      } catch (e) {}
-    })();
-  </script>
 </head>
 <body>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <nav class="nav container" aria-label="Primary">
-      <a class="nav-brand" href="#top">
-        <img class="brand-mark" src="avatar.jpg" alt="" width="34" height="34">
-        <span class="brand-name">Mateusz Worotyński</span>
-      </a>
-
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact" class="nav-cta">Let's talk</a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <div class="lane-switch" role="group" aria-label="Choose track: business or technology">
-          <span class="lane-switch-thumb" aria-hidden="true"></span>
-          <button type="button" class="lane-opt" data-lane-set="biz" aria-pressed="false">
-            <span class="lane-opt-full">Business</span><span class="lane-opt-short">Biz</span>
-          </button>
-          <button type="button" class="lane-opt" data-lane-set="tech" aria-pressed="true">
-            <span class="lane-opt-full">Technology</span><span class="lane-opt-short">Tech</span>
-          </button>
-        </div>
-
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
-          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4.5"></circle>
-            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path>
-          </svg>
-          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
-          </svg>
-        </button>
-
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
-          <span></span><span></span>
-        </button>
+  <header class="page-head">
+    <div class="who">
+      <img src="/avatar-96.jpg" alt="" width="46" height="46">
+      <div>
+        <strong>Mateusz Worotyński</strong>
+        <span>Fractional CTO &amp; product consultant · Kraków, Poland · EN / PL</span>
       </div>
+    </div>
+    <nav class="nav-links" aria-label="Contact">
+      <a href="mailto:i@worotyns.ovh">i@worotyns.ovh</a>
+      <a href="https://www.linkedin.com/in/worotyns" rel="me">LinkedIn</a>
+      <a href="https://github.com/worotyns" rel="me">GitHub</a>
     </nav>
   </header>
 
-  <main id="top">
-
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="main">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow reveal">
-            <span class="only-tech">Fractional CTO &middot; Architecture &middot; Delivery leadership</span>
-            <span class="only-biz">Product &amp; business consulting &middot; Fractional CPO</span>
-          </p>
-
-          <h1 class="hero-title reveal">
-            <span class="only-tech">I build systems that survive <em>their own success</em>.</span>
-            <span class="only-biz">I help founders build products that <em>earn their keep</em>.</span>
-          </h1>
-
-          <p class="hero-sub reveal">
-            <span class="only-tech">
-              Fractional CTO for teams that need senior architecture and delivery leadership.
-              Ten years building and running a platform that processes over a billion events a day —
-              now pointed at your system.
-            </span>
-            <span class="only-biz">
-              Product and business consulting from a co-founder who has done it end to end:
-              from a first prototype to a team of fifteen, from the pricing model to an acquisition
-              by WSE-listed Vercom S.A.
-            </span>
-          </p>
-
-          <div class="hero-cta reveal">
-            <a class="btn btn-primary" href="mailto:i@worotyns.ovh?subject=Let%27s%20talk%20%E2%80%94%20worotyns.ovh&amp;body=Hi%20Mateusz%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20We%27re%20building%20%5Bproject%5D%20and%20currently%20stuck%20on%20%5Bone-sentence%20challenge%5D.%0A%0AWhat%20I%27m%20looking%20for%3A%20%5Bfractional%20CTO%20%2F%20architecture%20review%20%2F%20product%20%26%20pricing%20%2F%20due%20diligence%5D.%0A%0AWould%20you%20have%2030%20minutes%20this%20week%3F%0A%0ABest%2C%0A%5BYour%20name%5D">
-              <span class="only-tech">Book an architecture call</span>
-              <span class="only-biz">Book a product call</span>
-            </a>
-            <a class="btn btn-secondary" href="#work">See the work</a>
-          </div>
-
-          <ul class="stats reveal">
-            <li class="stat only-tech">
-              <span class="stat-value">1B+</span>
-              <span class="stat-label">events a day on a platform I architected</span>
-            </li>
-            <li class="stat only-tech">
-              <span class="stat-value">15</span>
-              <span class="stat-label">engineers hired, led and mentored at peak</span>
-            </li>
-            <li class="stat only-tech">
-              <span class="stat-value">30 days</span>
-              <span class="stat-label">from empty repo to working prototype</span>
-            </li>
-            <li class="stat only-tech">
-              <span class="stat-value">10 yrs</span>
-              <span class="stat-label">designing, shipping and running production systems</span>
-            </li>
-
-            <li class="stat only-biz">
-              <span class="stat-value">Exit</span>
-              <span class="stat-label">majority stake acquired by Vercom S.A.</span>
-            </li>
-            <li class="stat only-biz">
-              <span class="stat-value">200+</span>
-              <span class="stat-label">enterprise clients on the product I co-built</span>
-            </li>
-            <li class="stat only-biz">
-              <span class="stat-value">4</span>
-              <span class="stat-label">products taken from idea to market</span>
-            </li>
-            <li class="stat only-biz">
-              <span class="stat-value">10 yrs</span>
-              <span class="stat-label">co-founder, CPO and CTO — the whole stretch</span>
-            </li>
-          </ul>
-        </div>
-
-        <aside class="hero-panel reveal">
-          <div class="panel only-tech">
-            <div class="panel-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="panel-title">pushpushgo — delivery path</span>
-            </div>
-<pre class="ascii">
-  web push       ┐
-  mobile push    ├──→ ingest ──→ queue ──→ workers
-  onsite / popup │    │
-  whatsapp       ┘    └──→ warehouse ──→ analytics
-
-$ ppg --stats
-  events/day    1,000,000,000+
-  enterprise    200+
-  p99 delivery  ~seconds
-</pre>
-          </div>
-
-          <div class="panel only-biz">
-            <div class="panel-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="panel-title">where I am useful</span>
-            </div>
-            <ul class="brief">
-              <li>
-                <span class="brief-key">Product</span>
-                <span class="brief-val">What to build, what to kill, in what order.</span>
-              </li>
-              <li>
-                <span class="brief-key">Pricing</span>
-                <span class="brief-val">Tiers, packaging and commissions that hold up.</span>
-              </li>
-              <li>
-                <span class="brief-key">Market</span>
-                <span class="brief-val">Who it is for, what it replaces, how it gets sold.</span>
-              </li>
-              <li>
-                <span class="brief-key">Team</span>
-                <span class="brief-val">The product org, the hires, the cadence.</span>
-              </li>
-              <li class="brief-note">Currently building Terapeuto and uff.email as founder, CTO and CPO.</li>
-            </ul>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ============ LANE GATE ============ -->
-    <section class="section section-gate" id="tracks">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">Two tracks, one person</p>
-          <h2 class="section-title">Same person. <em>Two ways to use me.</em></h2>
-          <p class="section-lede">
-            I have spent ten years on both sides of the same table — running the product organisation
-            and running the engineering one. Pick the track that matches your problem; the page rewrites itself.
-          </p>
-        </div>
-
-        <div class="gate-grid">
-          <button class="gate reveal" type="button" data-lane-set="biz" aria-pressed="false">
-            <span class="gate-top">
-              <span class="gate-label">Track 01</span>
-              <span class="gate-state" data-state-for="biz">Select</span>
-            </span>
-            <span class="gate-title">Product &amp; business</span>
-            <span class="gate-desc">
-              You have a product and a market to win. I have been the CPO of a platform with 200+
-              enterprise clients — pricing, packaging, roadmap, positioning, hiring and the hard calls
-              about what not to build.
-            </span>
-            <span class="gate-list">
-              <span>Product strategy &amp; roadmap</span>
-              <span>Pricing &amp; monetisation</span>
-              <span>Go-to-market &amp; positioning</span>
-              <span>Fractional CPO</span>
-            </span>
-          </button>
-
-          <button class="gate reveal" type="button" data-lane-set="tech" aria-pressed="true">
-            <span class="gate-top">
-              <span class="gate-label">Track 02</span>
-              <span class="gate-state" data-state-for="tech">Current</span>
-            </span>
-            <span class="gate-title">Technology &amp; architecture</span>
-            <span class="gate-desc">
-              You have a system to build, scale or de-risk. I have architected and run high-throughput
-              infrastructure, built engineering teams from zero, and sat on the technical side of an
-              acquisition.
-            </span>
-            <span class="gate-list">
-              <span>Fractional CTO</span>
-              <span>Architecture &amp; scaling reviews</span>
-              <span>Technical due diligence</span>
-              <span>Engineering leadership</span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ABOUT ============ -->
-    <section class="section section-alt" id="about">
-      <div class="container about">
-        <div class="section-head reveal">
-          <img class="about-avatar" src="avatar.jpg" alt="Mateusz Worotyński" width="88" height="88" loading="lazy">
-          <p class="about-meta">Kraków, Poland &middot; working in English and Polish</p>
-          <p class="section-kicker">About</p>
-          <h2 class="section-title">
-            <span class="only-tech">The engineer who also ran the business.</span>
-            <span class="only-biz">The co-founder who also wrote the code.</span>
-          </h2>
-        </div>
-
-        <div class="about-body reveal">
-          <div class="only-tech">
-            <p>
-              I'm Mateusz. I spent ten years at PushPushGo — the company I co-founded — starting as a
-              full-stack developer, designing the architecture, then leading engineering and product as
-              CTO and CPO. At peak that was a team of fifteen, a platform processing over a billion
-              events a day, and roughly two hundred enterprise clients.
-            </p>
-            <p>
-              What I bring as a fractional CTO is not a framework. It is the memory of what actually
-              breaks: the queue that backs up on Black Friday, the migration you cannot roll back, the
-              hire that arrives three months too late, the cloud bill nobody owns. I would rather
-              de-risk that than discover it.
-            </p>
-            <p>
-              Public bits, experiments and things I maintain live on
-              <a href="https://github.com/worotyns" rel="me">github.com/worotyns</a>.
-            </p>
-          </div>
-          <div class="only-biz">
-            <p>
-              I'm Mateusz. I co-founded PushPushGo in 2016 and stayed for ten years, moving from
-              developer to CTO and then to CPO. In 2021 WSE-listed Vercom S.A. acquired a majority
-              stake — the outcome of decisions about pricing, focus and which customers to say no to,
-              as much as about code.
-            </p>
-            <p>
-              Today I run two products of my own as founder, CTO and CPO: Terapeuto, practice-management
-              software for therapy centres, and uff.email, an assistant that lives in your inbox. I
-              consult because the pattern repeats: the product problem is rarely the product problem.
-              It is a pricing problem, a positioning problem or a focus problem wearing a product costume.
-            </p>
-          </div>
-        </div>
-
-        <ul class="role-list reveal">
-          <li>Co-founder, PushPushGo</li>
-          <li>CPO &amp; CTO</li>
-          <li>Fractional CTO</li>
-          <li>Fractional CPO</li>
-          <li>Founder, Terapeuto</li>
-          <li>Founder, uff.email</li>
-          <li class="only-biz">Pricing &amp; monetisation</li>
-          <li class="only-biz">Go-to-market</li>
-          <li class="only-tech">Event-driven architecture</li>
-          <li class="only-tech">High-throughput systems</li>
-          <li class="only-tech">Team building &amp; hiring</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============ SERVICES ============ -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 01 ] — how I help</span>
-            <span class="only-biz">How I help</span>
-          </p>
-          <h2 class="section-title">
-            <span class="only-tech">Senior technology leadership, <em>on retainer or on a deadline</em>.</span>
-            <span class="only-biz">Senior product leadership, <em>without the full-time hire</em>.</span>
-          </h2>
-        </div>
-
-        <div class="grid">
-          <!-- TECH services -->
-          <article class="card reveal only-tech">
-            <span class="card-index">01</span>
-            <h3 class="card-title">Fractional CTO</h3>
-            <p class="card-desc">Ongoing technology leadership for founders and leadership teams, one to four days a month.</p>
-            <ul class="card-list">
-              <li>Architecture decisions with the reasoning written down</li>
-              <li>Roadmap, priorities and build-versus-buy calls</li>
-              <li>Vendor, cloud and cost decisions</li>
-              <li>A technical counterpart for the board and investors</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-tech">
-            <span class="card-index">02</span>
-            <h3 class="card-title">Architecture &amp; scaling review</h3>
-            <p class="card-desc">A short, blunt engagement: what breaks first, what it costs, in what order to fix it.</p>
-            <ul class="card-list">
-              <li>Where the system breaks at 10&times; load</li>
-              <li>Data model, queues, delivery paths, failure modes</li>
-              <li>Cost of each option, in money and in weeks</li>
-              <li>A prioritised plan your engineers can start on Monday</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-tech">
-            <span class="card-index">03</span>
-            <h3 class="card-title">Technical due diligence</h3>
-            <p class="card-desc">Independent evaluation for investors, acquirers and boards.</p>
-            <ul class="card-list">
-              <li>Code, infrastructure and delivery-process assessment</li>
-              <li>Key-person and knowledge risk</li>
-              <li>Post-acquisition integration reality check</li>
-              <li>Written findings, no hedging</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-tech">
-            <span class="card-index">04</span>
-            <h3 class="card-title">Engineering leadership</h3>
-            <p class="card-desc">Building the team and the cadence that keeps delivery speed stable as you grow.</p>
-            <ul class="card-list">
-              <li>Hiring plans, interviews and technical bar</li>
-              <li>Process, code review and release cadence</li>
-              <li>Mentoring the first tech lead or CTO</li>
-              <li>Working with up to fifteen engineers, as I did at PushPushGo</li>
-            </ul>
-          </article>
-
-          <!-- BIZ services -->
-          <article class="card reveal only-biz">
-            <span class="card-index">01</span>
-            <h3 class="card-title">Product strategy &amp; roadmap</h3>
-            <p class="card-desc">What to build, what to kill, and in what order — with the trade-offs on one page.</p>
-            <ul class="card-list">
-              <li>Positioning and the problem you actually solve</li>
-              <li>Roadmap prioritised against revenue, not opinions</li>
-              <li>The features you should refuse to build</li>
-              <li>Discovery that fits your team's size</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-biz">
-            <span class="card-index">02</span>
-            <h3 class="card-title">Pricing &amp; monetisation</h3>
-            <p class="card-desc">Packaging, tiers and commission models that survive contact with real invoices.</p>
-            <ul class="card-list">
-              <li>Tier design and the value metric behind it</li>
-              <li>Freemium, trial and commission models</li>
-              <li>Margin per segment, branch and customer</li>
-              <li>Rollout without churning your existing base</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-biz">
-            <span class="card-index">03</span>
-            <h3 class="card-title">Go-to-market &amp; positioning</h3>
-            <p class="card-desc">Who it is for, what it replaces, and the sentence that makes it obvious.</p>
-            <ul class="card-list">
-              <li>Message and category — what you are compared against</li>
-              <li>Acquisition channels that fit your price point</li>
-              <li>Sales motion for enterprise and for self-serve</li>
-              <li>Retention and the reason customers stay</li>
-            </ul>
-          </article>
-
-          <article class="card reveal only-biz">
-            <span class="card-index">04</span>
-            <h3 class="card-title">Fractional CPO</h3>
-            <p class="card-desc">Running the product organisation when you need senior product leadership, not another hire.</p>
-            <ul class="card-list">
-              <li>Product process, cadence and decision rights</li>
-              <li>Hiring and mentoring the first PM or Head of Product</li>
-              <li>Working with founders and leadership teams</li>
-              <li>Customer research and prioritisation discipline</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PROCESS ============ -->
-    <section class="section section-alt" id="process">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 02 ] — how it runs</span>
-            <span class="only-biz">How it runs</span>
-          </p>
-          <h2 class="section-title">Four steps. <em>No theatre.</em></h2>
-        </div>
-
-        <ol class="process">
-          <li class="process-step reveal">
-            <span class="process-num">01</span>
-            <h3>Diagnose</h3>
-            <p class="only-tech">A call, then a hard look at what exists: code, infrastructure, delivery, hiring plan. I read the system before I recommend anything.</p>
-            <p class="only-biz">A call, then a hard look at the numbers: funnel, pricing, churn, the roadmap you are actually shipping against.</p>
-            <span class="process-out only-tech">You get: an architecture map, a risk list and the cost of each option.</span>
-            <span class="process-out only-biz">You get: where the money is, where it leaks, and what is blocking growth.</span>
-          </li>
-          <li class="process-step reveal">
-            <span class="process-num">02</span>
-            <h3>Decide</h3>
-            <p class="only-tech">Two or three options with honest trade-offs, written down so the decision outlives the meeting.</p>
-            <p class="only-biz">Two or three options with honest trade-offs, framed in revenue and in time-to-market.</p>
-            <span class="process-out only-tech">You get: a decision with the reasoning recorded, plus the things I would deliberately not do yet.</span>
-            <span class="process-out only-biz">You get: a prioritised plan with numbers attached and owners named.</span>
-          </li>
-          <li class="process-step reveal">
-            <span class="process-num">03</span>
-            <h3>Build</h3>
-            <p class="only-tech">I build it myself or lead your engineers through it — whichever gets there faster without leaving a mess.</p>
-            <p class="only-biz">I run the rollout with your team: pricing change, launch, repositioning, hiring.</p>
-            <span class="process-out only-tech">You get: shipped code, pipelines, tests and migrations.</span>
-            <span class="process-out only-biz">You get: a launched change and a team that knows how it was done.</span>
-          </li>
-          <li class="process-step reveal">
-            <span class="process-num">04</span>
-            <h3>Hand over</h3>
-            <p class="only-tech">Documented and owned by your team. No dependency on me, no proprietary framework.</p>
-            <p class="only-biz">Written down as a playbook your team keeps running after I am gone.</p>
-            <span class="process-out only-tech">You get: docs, decision records and runbooks.</span>
-            <span class="process-out only-biz">You get: a product playbook, not a slide deck.</span>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ============ WORK ============ -->
-    <section class="section" id="work">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 03 ] — selected work</span>
-            <span class="only-biz">Selected work</span>
-          </p>
-          <h2 class="section-title">
-            <span class="only-tech">Systems I designed, built and still run.</span>
-            <span class="only-biz">Products I founded, shaped and took to market.</span>
-          </h2>
-          <p class="section-lede">
-            <span class="only-tech">
-              Two groups: the platforms I built and scaled with teams, and the products and builds I run
-              today. Every card is described twice — switch the track in the header and watch it change.
-            </span>
-            <span class="only-biz">
-              Two groups: the companies I co-founded and scaled, and the products and builds I run today.
-              Every card is described twice — switch the track in the header and watch it change.
-            </span>
-          </p>
-        </div>
-
-        <h3 class="work-group reveal">
-          <span class="work-group-label">Group 01</span>
-          <span class="work-group-name only-tech">Platforms built and scaled with teams</span>
-          <span class="work-group-name only-biz">Companies I co-founded and scaled</span>
-          <span class="work-group-hint">co-founded &middot; scaled &middot; exit</span>
-        </h3>
-
-        <div class="project-list">
-          <a class="project reveal" href="https://pushpushgo.com" target="_blank" rel="noopener">
-            <div class="project-meta">
-              <span class="project-index">01</span>
-              <span class="only-tech">Event-driven &middot; high-throughput</span>
-              <span class="only-biz">MarTech &middot; exit</span>
-            </div>
-            <h3>PushPushGo</h3>
-            <p class="only-tech">
-              A multi-channel delivery platform: event ingest, fan-out, queueing and delivery for web
-              and mobile push, running on bare metal and cloud at over a billion events a day.
-            </p>
-            <p class="only-biz">
-              From a side project to the leading push-notification platform in Poland — two hundred
-              enterprise clients and a majority acquisition by WSE-listed Vercom S.A. in 2021.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Event-driven architecture</li>
-              <li>Bare metal + cloud</li>
-              <li>Data warehouse</li>
-              <li>SDKs &amp; APIs</li>
-              <li>Delivery pipelines</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Co-founder</li>
-              <li>CPO &amp; CTO</li>
-              <li>200+ enterprise clients</li>
-              <li>Exit to Vercom S.A.</li>
-              <li>Team of 15</li>
-            </ul>
-            <p class="project-stack only-tech">
-              <span class="stack-label">Stack</span> MongoDB &middot; RabbitMQ &middot; TypeScript
-            </p>
-            <span class="project-link">pushpushgo.com <span aria-hidden="true">→</span></span>
-          </a>
-
-          <a class="project reveal" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener">
-            <div class="project-meta">
-              <span class="project-index">02</span>
-              <span class="only-tech">Session-based payments &middot; DORA</span>
-              <span class="only-biz">FinTech &middot; beta, going to market</span>
-            </div>
-            <h3>GetViaMsg</h3>
-            <p class="only-tech">
-              Session-based micro-payments: QR or link, one SMS, content unlocked in seconds with
-              settlement handled asynchronously. Operator webhooks, idempotent accounting, two SMS
-              operators, across three clouds, with DORA-aligned controls.
-            </p>
-            <p class="only-biz">
-              57% of readers leave when they hit a paywall. GetViaMsg gives publishers a
-              pay-as-you-go option: one SMS unlocks one article, no card and no account, commission
-              instead of fixed fees, and payout the next business day instead of after sixty.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Prototype in 30 days</li>
-              <li>Idempotent settlement</li>
-              <li>SMS gateway integration</li>
-              <li>DORA compliance</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Co-founder</li>
-              <li>CTO</li>
-              <li>0.25 PLN entry price</li>
-              <li>Payout in 1 day, not 60</li>
-              <li>No registration, no cards</li>
-            </ul>
-            <p class="project-stack only-tech">
-              <span class="stack-label">Stack</span> Fly.io &middot; Cloudflare &middot; Oracle Cloud &middot; 2 SMS operators
-            </p>
-            <span class="project-link">getviamsg.wdft.ovh <span aria-hidden="true">→</span></span>
-          </a>
-        </div>
-
-        <h3 class="work-group reveal">
-          <span class="work-group-label">Group 02</span>
-          <span class="work-group-name only-tech">Products and builds I run today</span>
-          <span class="work-group-name only-biz">Products and builds I run today</span>
-          <span class="work-group-hint">founded &middot; operated &middot; in progress</span>
-        </h3>
-
-        <div class="project-list">
-          <a class="project reveal" href="https://terapeuto.com" target="_blank" rel="noopener">
-            <div class="project-meta">
-              <span class="project-index">03</span>
-              <span class="only-tech">Multi-tenant &middot; encrypted records</span>
-              <span class="only-biz">MedTech &middot; live, paying customers</span>
-            </div>
-            <h3>Terapeuto</h3>
-            <p class="only-tech">
-              Practice-management CRM for therapy centres under medical-data constraints: four-level
-              pricing engine, encrypted session records, conflict-free room and therapist scheduling,
-              end-to-end test coverage.
-            </p>
-            <p class="only-biz">
-              Scheduling, records and billing in one system for therapy centres — with bookings arriving
-              through a widget on the clinic's own domain instead of a marketplace that takes the patient,
-              the commission and the brand.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Prototype in 30 days</li>
-              <li>AES-256 at rest</li>
-              <li>E2E coverage</li>
-              <li>Feature lead time ~2 days</li>
-              <li>PL regulatory</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Founder</li>
-              <li>CTO &amp; CPO</li>
-              <li>0% commission per visit</li>
-              <li>Month closed in under an hour</li>
-              <li>Schedule live in 15 min</li>
-            </ul>
-            <p class="project-stack only-tech">
-              <span class="stack-label">Stack</span> Python &middot; SQLite &middot; Litestream &middot; Fly.io &middot; Docker
-            </p>
-            <span class="project-link">terapeuto.com <span aria-hidden="true">→</span></span>
-          </a>
-
-          <a class="project reveal" href="https://uff.email" target="_blank" rel="noopener">
-            <div class="project-meta">
-              <span class="project-index">04</span>
-              <span class="only-tech">Agentic &middot; knowledge graph</span>
-              <span class="only-biz">AI &middot; live, paying customers</span>
-            </div>
-            <h3>uff.email</h3>
-            <p class="only-tech">
-              An email-native agent: its own address, its own memory. A knowledge graph of people,
-              companies, documents and events, isolated per assistant, with deeper retrieval modes
-              behind <code>+researcher</code> and <code>+sources</code>.
-            </p>
-            <p class="only-biz">
-              An assistant you hire by naming it. Forward it the work you hate — a contract, a thread,
-              a spreadsheet — and the answer comes back in the same thread. No app, no onboarding,
-              thirty days free.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Email-native interface</li>
-              <li>Knowledge graph memory</li>
-              <li>Per-assistant isolation</li>
-              <li>Retrieval modes</li>
-              <li>No mailbox access beyond what you send</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Founder</li>
-              <li>CTO &amp; CPO</li>
-              <li>Zero onboarding</li>
-              <li>Privacy as the product</li>
-              <li>30 days free, no card</li>
-            </ul>
-            <p class="project-stack only-tech">
-              <span class="stack-label">Stack</span> Python &middot; Docker &middot; knowledge graph &middot; AI
-            </p>
-            <span class="project-link">uff.email <span aria-hidden="true">→</span></span>
-          </a>
-
-          <a class="project reveal" href="https://krazeta.pl" target="_blank" rel="noopener">
-            <div class="project-meta">
-              <span class="project-index">05</span>
-              <span class="only-tech">AI newsroom &middot; media</span>
-              <span class="only-biz">Local media &middot; AI-run newsroom</span>
-            </div>
-            <h3>Krazeta</h3>
-            <p class="only-tech">
-              A daily Kraków edition produced end to end by an AI newsroom: agents collect sources,
-              draft, section and publish the issue, orchestrated in Python workflows with Paperclip and
-              Conductor, model calls routed through OpenRouter. City chronicle, business, sport, weather
-              and an audio version of every edition.
-            </p>
-            <p class="only-biz">
-              A local newspaper for Kraków where the editorial team is AI: a new edition every day,
-              sections from city chronicle to sport, an audio version and reader comments — at a cost
-              base a traditional newsroom cannot match.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>AI editorial pipeline</li>
-              <li>Agent workflows</li>
-              <li>Daily edition</li>
-              <li>Audio generation</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Founder</li>
-              <li>AI editorial team</li>
-              <li>New edition daily</li>
-              <li>Audio + text</li>
-            </ul>
-            <p class="project-stack only-tech">
-              <span class="stack-label">Stack</span> Python &middot; Paperclip &middot; Conductor &middot; OpenRouter
-            </p>
-            <span class="project-link">krazeta.pl <span aria-hidden="true">→</span></span>
-          </a>
-
-          <article class="project reveal">
-            <div class="project-meta">
-              <span class="project-index">06</span>
-              <span class="only-tech">PoC &middot; in progress</span>
-              <span class="only-biz">Publishing tech &middot; in progress</span>
-            </div>
-            <h3>ceemes.</h3>
-            <p class="only-tech">
-              A proof of concept for a modern CMS for publishers: content model, editorial workflow and
-              delivery, kept non-public while it is being built. I own the project, the technology
-              decisions and the delivery.
-            </p>
-            <p class="only-biz">
-              Publishers still run on CMSs designed a decade ago. ceemes is a non-public proof of
-              concept for a modern one — I am responsible for the product, the technology and for
-              getting it built.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Editorial workflow</li>
-              <li>Content model</li>
-              <li>Delivery pipeline</li>
-              <li>Non-public PoC</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Project owner</li>
-              <li>Technology owner</li>
-              <li>Delivery</li>
-              <li>Non-public PoC</li>
-            </ul>
-            <div class="project-links">
-              <a class="project-link" href="mailto:i@worotyns.ovh?subject=ceemes%20%E2%80%94%20tell%20me%20more">Ask me about ceemes <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <a class="project project-open reveal" href="mailto:i@worotyns.ovh?subject=30%20minutes%20%E2%80%94%20worotyns.ovh&amp;body=Hi%20Mateusz%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20We%27re%20building%20%5Bproject%5D%20and%20currently%20stuck%20on%20%5Bone-sentence%20challenge%5D.%0A%0AWhat%20I%27m%20looking%20for%3A%20%5Bfractional%20CTO%20%2F%20architecture%20review%20%2F%20product%20%26%20pricing%20%2F%20due%20diligence%5D.%0A%0AWould%20you%20have%2030%20minutes%20this%20week%3F%0A%0ABest%2C%0A%5BYour%20name%5D">
-            <div class="project-meta">
-              <span class="project-index">→</span>
-              <span class="only-tech">Open slot</span>
-              <span class="only-biz">Open slot</span>
-            </div>
-            <h3>Your project here</h3>
-            <p class="only-tech">
-              You have a system to build, a platform to scale or a decision to de-risk with an
-              independent pair of eyes. This space could be the case study.
-            </p>
-            <p class="only-biz">
-              You have a product, a market and a decision to make this quarter. This space could be
-              the case study.
-            </p>
-            <span class="project-link">Start with a 30-minute call <span aria-hidden="true">→</span></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ AI ============ -->
-    <section class="section section-alt" id="ai">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 04 ] — ai, actually deployed</span>
-            <span class="only-biz">AI in practice</span>
-          </p>
-          <h2 class="section-title">
-            <span class="only-tech">AI that <em>survives production</em>.</span>
-            <span class="only-biz">Where AI <em>actually pays off</em>.</span>
-          </h2>
-          <p class="section-lede">
-            <span class="only-tech">
-              I deploy AI where it holds up: agent workflows inside real delivery pipelines, frontier
-              models where quality changes the outcome, non-frontier and local models where it does not,
-              and cost per task as the metric that decides.
-            </span>
-            <span class="only-biz">
-              Most teams buy AI and then wonder where the value went. I help pick the two or three
-              workflows where it pays for itself — and I run two AI products of my own, so the advice
-              comes from operating them, not from a webinar.
-            </span>
-          </p>
-        </div>
-
-        <div class="ai-grid">
-          <div class="ai-block reveal">
-            <h3 class="ai-block-title">
-              <span class="only-tech">Rolling AI into a team</span>
-              <span class="only-biz">In your company</span>
-            </h3>
-            <ul class="ai-list only-tech">
-              <li><strong>Agent workflows</strong> — pi agent, paperclip and opencode wired into delivery and research pipelines, not into slide decks.</li>
-              <li><strong>Model routing</strong> — frontier models where quality changes the outcome, non-frontier and local models where it does not.</li>
-              <li><strong>Local models</strong> for data that must not leave the building.</li>
-              <li><strong>Cost control</strong> — cost per task, caching, batching and deliberate downgrades as models improve.</li>
-            </ul>
-            <ul class="ai-list only-biz">
-              <li><strong>The right two workflows</strong> — where AI pays for itself in your product or team, and where it is a toy.</li>
-              <li><strong>Cost per outcome</strong>, not cost per token.</li>
-              <li><strong>Privacy and compliance</strong> — what may leave the building and what must stay.</li>
-              <li><strong>Team adoption</strong> — conventions, review and guardrails, so the output stays trustworthy.</li>
-            </ul>
-          </div>
-
-          <div class="ai-block reveal">
-            <h3 class="ai-block-title">In my own products</h3>
-            <ul class="ai-products">
-              <li>
-                <a href="https://krazeta.pl" target="_blank" rel="noopener">Krazeta</a>
-                <span>
-                  A daily Kraków newspaper whose editorial team is AI — agent workflows write, section
-                  and publish every edition, with an audio version.
-                </span>
-              </li>
-              <li>
-                <a href="https://uff.email" target="_blank" rel="noopener">uff.email</a>
-                <span>
-                  A self-hosted, email-native AI assistant with a knowledge-graph memory. It runs on my
-                  own infrastructure, not somebody else's.
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ EXPERIENCE ============ -->
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 05 ] — track record</span>
-            <span class="only-biz">Track record</span>
-          </p>
-          <h2 class="section-title">Ten years, <em>one long arc</em>.</h2>
-        </div>
-
-        <ol class="timeline">
-          <li class="timeline-item reveal">
-            <span class="timeline-when">2016</span>
-            <div class="timeline-body">
-              <h3>PushPushGo — co-founder &amp; software developer</h3>
-              <p>Co-founded the company and wrote the first versions: frontend, backend and the architecture underneath. Push notifications for the web and, later, mobile apps.</p>
-              <ul class="timeline-tags"><li>Full-stack</li><li>FE / BE / architecture</li><li>Zero to first clients</li></ul>
-            </div>
-          </li>
-          <li class="timeline-item reveal">
-            <span class="timeline-when">→ 2021</span>
-            <div class="timeline-body">
-              <h3>Scale, teams and the acquisition</h3>
-              <p>The platform grows past a billion events a day and two hundred enterprise clients. Vercom S.A., listed on the Warsaw Stock Exchange, acquires a majority stake in July 2021.</p>
-              <ul class="timeline-tags"><li>Exit to Vercom S.A.</li><li>High-throughput platform</li><li>Team up to 15</li></ul>
-            </div>
-          </li>
-          <li class="timeline-item reveal">
-            <span class="timeline-when">CPO</span>
-            <div class="timeline-body">
-              <h3>Chief Product Officer</h3>
-              <p>Owned the product organisation: roadmap, pricing and packaging, discovery, the roadmap-vs-revenue arguments, and the hiring that came with them.</p>
-              <ul class="timeline-tags"><li>Product organisation</li><li>Pricing &amp; packaging</li><li>Roadmap</li></ul>
-            </div>
-          </li>
-          <li class="timeline-item reveal">
-            <span class="timeline-when">CTO</span>
-            <div class="timeline-body">
-              <h3>Chief Technology Officer — the last two years</h3>
-              <p>Took over engineering and delivery: architecture decisions, hiring and mentoring, cloud strategy, security and compliance, and the technical side of working inside a listed group.</p>
-              <ul class="timeline-tags"><li>Engineering leadership</li><li>Architecture</li><li>Security &amp; compliance</li></ul>
-            </div>
-          </li>
-          <li class="timeline-item reveal">
-            <span class="timeline-when">Now</span>
-            <div class="timeline-body">
-              <h3>Founder, CTO and CPO — Terapeuto, uff.email, GetViaMsg</h3>
-              <p>Two products live with paying customers, one in go-to-market. I design them from A to Z and run them — which is also why the consulting advice is grounded in shipping, not in slides.</p>
-              <ul class="timeline-tags"><li>Terapeuto</li><li>uff.email</li><li>GetViaMsg</li></ul>
-            </div>
-          </li>
-        </ol>
-
-        <div class="logos reveal">
-          <p class="logos-title">
-            <span class="only-tech">The platform I architected was trusted by engineering and marketing teams at</span>
-            <span class="only-biz">Clients I sold to, onboarded and kept through ten years of the platform I co-founded</span>
-          </p>
-          <ul class="logos-list">
-            <li>TUI</li>
-            <li>POLITICO</li>
-            <li>Auchan</li>
-            <li>Douglas</li>
-            <li>Hearst</li>
-            <li>Aller</li>
-            <li>Planeta Sport</li>
-            <li>Home&amp;You</li>
-            <li>Lubimyczytać</li>
-            <li>Interia</li>
-            <li>SEISKA.FI</li>
-            <li>Suomi24</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ R&D / WDFT ============ -->
-    <section class="section section-alt" id="rnd">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 06 ] — research &amp; development</span>
-            <span class="only-biz">Research &amp; development</span>
-          </p>
-          <h2 class="section-title">
-            <span class="only-tech">Payment rails, <em>designed in the open</em>.</span>
-            <span class="only-biz">The R&amp;D company behind the payment products.</span>
-          </h2>
-          <p class="section-lede">
-            <span class="only-tech">
-              WDFT is a fintech R&amp;D company I co-own and drive. We publish concepts as open standards,
-              build proof-of-concepts for partners, and then implement them as products — the session-based
-              model already runs in production, the payment standard is a spec with a sandbox.
-            </span>
-            <span class="only-biz">
-              WDFT is the R&amp;D vehicle I co-own and where I drive the research agenda: we write the
-              standards first, then take them to market as products. One concept became a live business;
-              the other is aimed at banks.
-            </span>
-          </p>
-        </div>
-
-        <a class="rnd-company reveal" href="https://wdft.ovh" target="_blank" rel="noopener">
-          <span class="rnd-company-id">
-            <span class="rnd-company-name">WDFT PSA</span>
-            <span class="rnd-company-role">Co-founder &middot; fintech R&amp;D company</span>
-          </span>
-          <span class="rnd-company-desc">
-            <span class="only-tech">
-              Co-owned research company: concepts published as open standards, plus proof-of-concept
-              infrastructure — including a sandbox environment for bank partners evaluating the payment
-              standard.
-            </span>
-            <span class="only-biz">
-              Co-owned research company for fintech. I drive the research agenda, write the standards with
-              the team, and decide which concept is worth turning into a product.
-            </span>
-          </span>
-          <span class="rnd-company-link">wdft.ovh <span aria-hidden="true">→</span></span>
-        </a>
-
-        <div class="rnd-grid">
-          <article class="project reveal">
-            <div class="project-meta">
-              <span class="project-index">01</span>
-              <span class="only-tech">Concept &middot; spec + PoC sandbox</span>
-              <span class="only-biz">Open standard &middot; in research</span>
-            </div>
-            <h3>Federated Payment Standard</h3>
-            <p class="only-tech">
-              An open payment protocol built on banking infrastructure instead of card networks: a
-              federated registry of banks and providers, SDK-generated links and QR codes that open
-              prefilled in the payer's banking app, and two signed webhook confirmations — one when the
-              user approves, one when the funds actually settle. The registry never touches money.
-            </p>
-            <p class="only-biz">
-              Card networks make small payments uneconomical — roughly 0.25 PLN plus 1–3% per
-              transaction. This standard moves money directly from the buyer's bank to the merchant's
-              bank over rails that already exist, for under a grosz per transaction. Without
-              chargebacks, reserves or gateway contracts, per-article and per-cent pricing becomes
-              possible in the first place.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Federated bank registry</li>
-              <li>Signed webhooks</li>
-              <li>Bank SDK &amp; payment links</li>
-              <li>&lt; 0.01 PLN per transaction</li>
-              <li>PoC sandbox</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Open standard</li>
-              <li>&lt; 0.01 PLN per transaction</li>
-              <li>No intermediaries</li>
-              <li>No chargebacks or reserves</li>
-              <li>Bank-ready spec</li>
-            </ul>
-            <div class="project-links">
-              <a class="project-link" href="https://docs.wdft.ovh/concept-federated-payment-system" target="_blank" rel="noopener">Read the whitepaper <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <article class="project reveal">
-            <div class="project-meta">
-              <span class="project-index">02</span>
-              <span class="only-tech">Concept &middot; shipped as GetViaMsg</span>
-              <span class="only-biz">Concept &middot; turned into a product</span>
-            </div>
-            <h3>Session-Based Payments</h3>
-            <p class="only-tech">
-              Short-lived usage sessions instead of one-off transactions: the user makes small
-              commitments across partner sites, the operator aggregates them into a single settlement,
-              then reports and pays out to each partner. Four roles — user, operator, partner, bank —
-              and a settlement step that has to stay idempotent.
-            </p>
-            <p class="only-biz">
-              Instead of one subscription or nothing, a reader commits a few groszy per article inside a
-              session and settles it with a single transfer later. That opens up the readers who would
-              never subscribe — the concept I took from whitepaper to live product as GetViaMsg.
-            </p>
-            <ul class="project-tags only-tech">
-              <li>Session &amp; commitment model</li>
-              <li>Aggregated settlement</li>
-              <li>Operator / partner / bank roles</li>
-              <li>Payouts &amp; reporting</li>
-              <li>Runs in production</li>
-            </ul>
-            <ul class="project-tags only-biz">
-              <li>Pay-as-you-go</li>
-              <li>One settlement per session</li>
-              <li>Monetises non-subscribers</li>
-              <li>Whitepaper to live product</li>
-            </ul>
-            <div class="project-links">
-              <a class="project-link" href="https://docs.wdft.ovh/concept-session-based-payment" target="_blank" rel="noopener">Read the whitepaper <span aria-hidden="true">→</span></a>
-              <a class="project-link" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener">See the implementation <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TESTIMONIALS ============ -->
-    <section class="section" id="testimonials">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 07 ] — in their words</span>
-            <span class="only-biz">In their words</span>
-          </p>
-          <h2 class="section-title">What people say <em>after working with me</em>.</h2>
-        </div>
-
-        <div class="quotes">
-          <blockquote class="quote reveal">
-            <p>“A system that covers my entire workflow.”</p>
-            <footer>
-              <span class="quote-name">Psychoterapia Przy Botanicznym</span>
-              <span class="quote-role">Terapeuto customer</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="quote reveal">
-            <p>“A really interesting concept — fingers crossed for the market launch.”</p>
-            <footer>
-              <span class="quote-name">Paweł Nowacki</span>
-              <span class="quote-role">on GetViaMsg</span>
-            </footer>
-          </blockquote>
-
-          <blockquote class="quote reveal">
-            <p>
-              „We have been using PPG for over two years and have received good results with push
-              messaging both in mobile and desktop environments. The service was easy to implement and
-              technical problems are rare and usually dealt with quickly."
-            </p>
-            <footer>
-              <span class="quote-name">Karolina Leputa</span>
-              <span class="quote-role">Senior Brand Manager, Interia — on the PushPushGo platform</span>
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ TALK / VIDEO ============ -->
-    <section class="section section-alt" id="talk">
-      <div class="container">
-        <div class="talk">
-          <div class="talk-copy reveal">
-            <p class="section-kicker">
-              <span class="only-tech">[ 08 ] — on the record</span>
-              <span class="only-biz">On the record</span>
-            </p>
-            <h2 class="section-title">Micro-payments, scaling <em>and one award</em>.</h2>
-            <p class="section-lede">
-              Three recordings from the PushPushGo years and after: why micro-payments never worked in
-              Poland, how delivery scaled from thousands to hundreds of millions of notifications a day,
-              and a founder competition at the University of Warsaw.
-            </p>
-            <ul class="talk-points">
-              <li>Why card fees kill transactions below 5 PLN</li>
-              <li>Session-based payment and settlement you can actually settle</li>
-              <li>Scale versus quality in high-volume delivery</li>
-            </ul>
-          </div>
-
-          <figure class="video-card reveal">
-            <div class="video" data-video-id="gujtLc126JE" data-video-title="FinTalks: Mikropłatności w Polsce z Mateuszem Worotyńskim">
-              <button class="video-facade" type="button" aria-label="Play: FinTalks — micro-payments in Poland with Mateusz Worotyński">
-                <img src="https://i.ytimg.com/vi/gujtLc126JE/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720">
-                <span class="video-play" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5Z"></path></svg>
-                </span>
-              </button>
-            </div>
-            <figcaption class="video-meta">
-              <span class="video-src">FinTalks &middot; Future Processing</span>
-              <span class="video-name">Micro-payments in Poland</span>
-            </figcaption>
-          </figure>
-        </div>
-
-        <ul class="video-grid">
-          <li class="reveal">
-            <figure class="video-card">
-              <div class="video" data-video-id="hZGU3GvSFYc" data-video-title="From 5K to 500M notifications daily: scale vs quality, with PushPushGo">
-                <button class="video-facade" type="button" aria-label="Play: From 5K to 500M notifications daily — scaling PushPushGo">
-                  <img src="https://i.ytimg.com/vi/hZGU3GvSFYc/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720">
-                  <span class="video-play" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5Z"></path></svg>
-                  </span>
-                </button>
-              </div>
-              <figcaption class="video-meta">
-                <span class="video-src">OVH Experience &middot; PushPushGo</span>
-                <span class="video-name">From 5K to 500M notifications a day</span>
-                <span class="video-note">
-                  How the delivery platform scaled from 5,000 to 500 million notifications a day — and what
-                  that trade-off costs in quality.
-                </span>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li class="reveal">
-            <figure class="video-card">
-              <div class="video" data-video-id="DPmGlGyoMM8" data-video-title="Uniwersytet Warszawski — Przedsiębiorca Roku — Mateusz Worotyński">
-                <button class="video-facade" type="button" aria-label="Play: Entrepreneur of the Year, University of Warsaw — Mateusz Worotyński">
-                  <img src="https://i.ytimg.com/vi/DPmGlGyoMM8/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720">
-                  <span class="video-play" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5-11-6.5Z"></path></svg>
-                  </span>
-                </button>
-              </div>
-              <figcaption class="video-meta">
-                <span class="video-src">Entrepreneur of the Year &middot; University of Warsaw</span>
-                <span class="video-name">Founder pitch at the University of Warsaw</span>
-                <span class="video-note">
-                  The pitch that took PushPushGo through the Entrepreneur of the Year competition at the
-                  University of Warsaw.
-                </span>
-              </figcaption>
-            </figure>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============ SECURITY ============ -->
-    <section class="section" id="security">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-kicker">
-            <span class="only-tech">[ 09 ] — security &amp; compliance</span>
-            <span class="only-biz">Security &amp; compliance</span>
-          </p>
-          <h2 class="section-title">
-            <span class="only-tech">Regulation is an engineering problem.</span>
-            <span class="only-biz">Governance without the drama.</span>
-          </h2>
-        </div>
-
-        <div class="security">
-          <div class="security-body reveal">
-            <p>
-              Security and compliance are part of CTO-level leadership, not a separate consultancy
-              product. At PushPushGo that meant security practices inside a listed group. At GetViaMsg
-              it means building a payment product that has to satisfy DORA from the first line of code.
-            </p>
-            <p>
-              In practice: I treat a regulator's deadline the same way I treat a scaling problem —
-              work out what it actually requires, price the options, and fix the parts that carry real
-              risk rather than the parts that look good in a slide.
-            </p>
-          </div>
-          <ul class="security-list reveal">
-            <li><strong>DORA</strong> readiness and operational-resilience controls</li>
-            <li><strong>NIS2</strong> technology risk considerations</li>
-            <li><strong>ISO 27001</strong> practices and evidence</li>
-            <li>Security audits and vulnerability management</li>
-            <li>Encryption, access control and audit trails in practice</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="section section-contact" id="contact">
-      <div class="container contact">
-        <p class="section-kicker reveal">
-          <span class="only-tech">[ 10 ] — contact</span>
-          <span class="only-biz">Contact</span>
-        </p>
-        <h2 class="contact-title reveal">
-          <span class="only-tech">Need CTO-level judgement without hiring a CTO?</span>
-          <span class="only-biz">Need a product brain who has shipped and sold?</span>
-        </h2>
-        <p class="contact-sub reveal">
-          Tell me what you are building and where it hurts. If I am not the right person, I will say so
-          in the first reply — and probably point you at someone who is.
-        </p>
-
-        <div class="contact-cta reveal">
-          <a class="btn btn-primary" href="mailto:i@worotyns.ovh?subject=Let%27s%20talk%20%E2%80%94%20worotyns.ovh&amp;body=Hi%20Mateusz%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20We%27re%20building%20%5Bproject%5D%20and%20currently%20stuck%20on%20%5Bone-sentence%20challenge%5D.%0A%0AWhat%20I%27m%20looking%20for%3A%20%5Bfractional%20CTO%20%2F%20architecture%20review%20%2F%20product%20%26%20pricing%20%2F%20due%20diligence%5D.%0A%0AWould%20you%20have%2030%20minutes%20this%20week%3F%0A%0ABest%2C%0A%5BYour%20name%5D">
-            Let's talk
-          </a>
-        </div>
-
-        <ol class="next-steps reveal">
-          <li><span>1</span> A 30-minute call — your problem, my read on it.</li>
-          <li><span>2</span> I come back with what I would do first, in writing.</li>
-          <li><span>3</span> We decide together whether it is worth continuing.</li>
-        </ol>
-
-        <ul class="contact-links reveal">
-          <li>
-            <span class="contact-label">Email</span>
-            <a href="mailto:i@worotyns.ovh">i@worotyns.ovh</a>
-          </li>
-          <li>
-            <span class="contact-label">Phone</span>
-            <a href="tel:+48790793138">+48 790 793 138</a>
-          </li>
-          <li>
-            <span class="contact-label">LinkedIn</span>
-            <a href="https://www.linkedin.com/in/worotyns" target="_blank" rel="me noopener">in/worotyns</a>
-          </li>
-          <li>
-            <span class="contact-label">GitHub</span>
-            <a href="https://github.com/worotyns" target="_blank" rel="me noopener">/worotyns</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; <span id="year"></span> Mateusz Worotyński. Fractional CTO &amp; product consultant.</p>
-      <p class="footer-hint">
-        <span>Press <kbd>B</kbd> for business, <kbd>T</kbd> for technology.</span>
-        <a class="footer-llms" href="/llms.txt">llms.txt</a>
-        <a class="footer-llms" href="/simple/">simple version</a>
-        <a class="footer-llms" href="/blocks/">blocks.css version</a>
-        <a class="footer-llms" href="/blocks/split.html">split screen</a>
-      </p>
+  <section class="hero">
+    <span class="eyebrow">Two tracks — one person</span>
+    <h1>I build products, and the systems <em>underneath them</em>.</h1>
+    <p class="lede">
+      Ten years at PushPushGo — the company I co-founded — as developer, then CPO, then CTO: two hundred
+      enterprise clients, a billion events a day, a team of fifteen, and a majority acquisition by
+      WSE-listed Vercom S.A. in 2021.
+    </p>
+    <p class="lede">
+      Everything below is the same work read two ways: one column is the business, the other is the
+      technology. Pick the one that matches your problem.
+    </p>
+    <div class="actions">
+      <a class="block accent" href="mailto:i@worotyns.ovh?subject=30%20minutes%20%E2%80%94%20worotyns.ovh">Book a 30-minute call</a>
+      <a class="text-link" href="#work">See the work ↓</a>
     </div>
+  </section>
+
+  <!-- ============ THE MATRIX ============ -->
+  <div class="matrix">
+
+    <!-- track headers (sticky) -->
+    <div class="cell head biz" id="biz">
+      <span class="eyebrow">Track 01</span>
+      <h2>Product &amp; business</h2>
+      <p class="note">Strategy, pricing, market and the product organisation.</p>
+      <a class="jump" href="#tech">Technology track ↓</a>
+    </div>
+    <div class="cell head tech" id="tech">
+      <span class="eyebrow">Track 02</span>
+      <h2>Technology &amp; architecture</h2>
+      <p class="note">Systems, delivery, scale and the engineers who run them.</p>
+      <a class="jump" href="#biz">Business track ↑</a>
+    </div>
+
+    <!-- ---------- services ---------- -->
+    <div class="cell group"><p class="group-label">What I help with</p></div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Product strategy &amp; roadmap</h3>
+      <p>What to build, what to kill, in what order — prioritised against revenue rather than opinions.</p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Fractional CTO</h3>
+      <p>Architecture decisions with the reasoning written down, roadmap, build-versus-buy, vendors, a counterpart for the board.</p>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Pricing &amp; monetisation</h3>
+      <p>Tiers, the value metric behind them, commission and freemium models, margin per segment.</p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Architecture &amp; scaling review</h3>
+      <p>What breaks first at 10×, what each option costs in money and weeks, what to fix first.</p>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Go-to-market &amp; positioning</h3>
+      <p>Who it is for, what it replaces, the sentence that makes it obvious, channels that fit the price.</p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Technical due diligence</h3>
+      <p>Code, infrastructure and delivery process for investors, acquirers and boards.</p>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Fractional CPO</h3>
+      <p>Running the product organisation: process, cadence, discovery, hiring the first PM.</p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Engineering leadership</h3>
+      <p>Hiring and the technical bar, process, code review, release cadence, mentoring a first tech lead.</p>
+    </div>
+
+    <!-- ---------- products ---------- -->
+    <div class="cell group" id="work"><p class="group-label">Track record</p></div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="https://pushpushgo.com" target="_blank" rel="noopener" aria-label="PushPushGo — pushpushgo.com, opens in a new tab">
+        <span class="meta">MarTech · exit, 2021</span>
+        <h3>PushPushGo</h3>
+        <p>From a side project to the leading push-notification platform in Poland: two hundred enterprise clients including TUI, POLITICO, Auchan, Hearst and Interia, a team of fifteen, and a majority acquisition by WSE-listed Vercom S.A. Co-founder, then CPO, then CTO.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="https://pushpushgo.com" target="_blank" rel="noopener" aria-label="PushPushGo — pushpushgo.com, opens in a new tab">
+        <span class="meta">Event-driven · high throughput</span>
+        <h3>PushPushGo</h3>
+        <p>Multi-channel delivery platform: event ingest, fan-out, queueing and delivery for web and mobile push at over a billion events a day, on bare metal and cloud, with a data warehouse over the top and SDKs and APIs for customers — then inside a listed group after the acquisition, with the security and compliance reporting that comes with it.</p>
+        <p class="stack"><small><span>stack</span> · mongodb · rabbitmq · typescript · bare metal + cloud</small></p>
+      </a>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener" aria-label="GetViaMsg — getviamsg.wdft.ovh, opens in a new tab">
+        <span class="meta">FinTech · beta, going to market</span>
+        <h3>GetViaMsg</h3>
+        <p>57% of readers leave when they hit a paywall. One SMS unlocks one article — no card, no account, commission instead of fixed fees, and payout the next business day instead of after sixty. Co-founder and CTO.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener" aria-label="GetViaMsg — getviamsg.wdft.ovh, opens in a new tab">
+        <span class="meta">Session-based payments · DORA</span>
+        <h3>GetViaMsg</h3>
+        <p>Session-based micro-payments: QR or link, one SMS, content unlocked in seconds with settlement handled asynchronously. Operator webhooks, idempotent accounting, and DORA-aligned controls with documented operational resilience — the regulator's checklist treated as engineering work.</p>
+        <p class="stack"><small><span>stack</span> · fly.io · cloudflare · oracle cloud · two sms operators</small></p>
+      </a>
+    </div>
+
+    <!-- ---------- R&D ---------- -->
+    <div class="cell group"><p class="group-label">Research &amp; development — WDFT, co-owned</p></div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Federated Payment Standard</h3>
+      <p>Card fees make small payments uneconomical: roughly 0.25 PLN plus 1–3% per transaction. This standard moves money between banks over rails that already exist, for under a cent — so per-article and per-cent pricing becomes possible at all.</p>
+      <ul class="list">
+        <li>No intermediaries, no chargebacks, no reserves.</li>
+        <li>Aimed at banks and payment providers.</li>
+      </ul>
+      <p class="links"><small><a href="https://wdft.ovh">wdft.ovh</a></small></p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Federated Payment Standard</h3>
+      <p>An open payment protocol over existing banking infrastructure instead of card networks: a federated registry of banks and providers, SDK-generated links and QR codes that open prefilled in the payer's banking app, and two signed webhook confirmations — one when the user approves, one when funds settle. The registry never handles money, payment links are signature-verified and keys rotate.</p>
+      <p class="stack"><small><span>status</span> · spec + PoC sandbox for banks</small></p>
+      <p class="links"><small><a href="https://docs.wdft.ovh/concept-federated-payment-system">whitepaper</a></small></p>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>Session-Based Payments</h3>
+      <p>Instead of one subscription or nothing, a reader commits a few cents per article inside a session and settles it with a single transfer later — which monetises the readers who would never subscribe.</p>
+      <p class="links"><small><a href="https://getviamsg.wdft.ovh">live as GetViaMsg</a></small></p>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Session-Based Payments</h3>
+      <p>Short-lived sessions with small commitments, aggregated into a single settlement and paid out to partners. Four roles — user, operator, partner, bank — and a settlement step that has to stay idempotent.</p>
+      <p class="stack"><small><span>status</span> · runs in production as GetViaMsg</small></p>
+      <p class="links"><small><a href="https://docs.wdft.ovh/concept-session-based-payment">whitepaper</a>
+        <a href="https://getviamsg.wdft.ovh">implementation</a></small></p>
+    </div>
+  </div>
+
+  <div class="cell group"><p class="group-label">What I run today</p></div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="https://terapeuto.com" target="_blank" rel="noopener" aria-label="Terapeuto — terapeuto.com, opens in a new tab">
+        <span class="meta">MedTech · live, paying customers</span>
+        <h3>Terapeuto</h3>
+        <p>Scheduling, records, billing and waitlists in one system for therapy centres — with every booking arriving on the clinic's own domain instead of a marketplace that takes the patient and the commission. Founder, CTO and CPO.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="https://terapeuto.com" target="_blank" rel="noopener" aria-label="Terapeuto — terapeuto.com, opens in a new tab">
+        <span class="meta">Multi-tenant · encrypted records</span>
+        <h3>Terapeuto</h3>
+        <p>Four-level pricing engine, AES-256 session records, conflict-free room and therapist scheduling, end-to-end coverage. Prototype in 30 days, feature lead time around two days.</p>
+        <p class="stack"><small><span>stack</span> · python · sqlite · litestream · fly.io · docker</small></p>
+      </a>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="https://uff.email" target="_blank" rel="noopener" aria-label="uff.email — uff.email, opens in a new tab">
+        <span class="meta">AI · live, paying customers</span>
+        <h3>uff.email</h3>
+        <p>An assistant you hire by giving it a name: forward it the work you hate and the answer comes back in the same thread. No app, no onboarding, no card to start. Founder, CTO and CPO.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="https://uff.email" target="_blank" rel="noopener" aria-label="uff.email — uff.email, opens in a new tab">
+        <span class="meta">Agentic · knowledge graph</span>
+        <h3>uff.email</h3>
+        <p>Email-native agent with a knowledge graph of people, companies, documents and events, isolated per assistant, plus deeper retrieval modes behind <code>+researcher</code> and <code>+sources</code>.</p>
+        <p class="stack"><small><span>stack</span> · python · docker · knowledge graph · ai</small></p>
+      </a>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="https://krazeta.pl" target="_blank" rel="noopener" aria-label="Krazeta — krazeta.pl, opens in a new tab">
+        <span class="meta">Local media · AI newsroom</span>
+        <h3>Krazeta</h3>
+        <p>A daily Kraków newspaper whose editorial team is AI: a new edition every day, city chronicle, business, sport, weather, an audio version. Founder.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="https://krazeta.pl" target="_blank" rel="noopener" aria-label="Krazeta — krazeta.pl, opens in a new tab">
+        <span class="meta">Pipeline · agents</span>
+        <h3>Krazeta</h3>
+        <p>Agents collect sources, draft, section and publish the daily issue, orchestrated in Python workflows with model calls routed through OpenRouter. Audio edition generated per issue.</p>
+        <p class="stack"><small><span>stack</span> · python · paperclip · conductor · openrouter</small></p>
+      </a>
+    </div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <a class="block card" href="mailto:i@worotyns.ovh?subject=ceemes%20%E2%80%94%20tell%20me%20more" aria-label="ceemes. — email Mateusz about this project">
+        <span class="meta">Publishing tech · non-public PoC</span>
+        <h3>ceemes.</h3>
+        <p>A proof of concept for a modern CMS for publishers. I own the product, the technology and the delivery. Nothing public yet.</p>
+      </a>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <a class="block card" href="mailto:i@worotyns.ovh?subject=ceemes%20%E2%80%94%20tell%20me%20more" aria-label="ceemes. — email Mateusz about this project">
+        <span class="meta">PoC · in progress</span>
+        <h3>ceemes.</h3>
+        <p>Static-first: pages are generated as static files with islands for interactivity, and every piece is pluggable. The editorial side is built for AI to drive it — an MCP server is exposed, so agents manage content directly. Non-public while it is being built.</p>
+        <p class="stack"><small><span>design</span> · static-first generation · islands · pluggable · mcp server exposed</small></p>
+      </a>
+    </div>
+
+    <!-- ---------- AI ---------- -->
+    <div class="cell group"><p class="group-label">AI, two ways</p></div>
+
+    <div class="cell biz">
+      <span class="tag">Business</span>
+      <h3>In practice</h3>
+      <p>Most teams buy AI and then wonder where the value went. I help pick the two or three workflows where it pays for itself — and where it is a toy.</p>
+      <ul class="list">
+        <li>Cost per outcome, not cost per token.</li>
+        <li>Privacy: what may leave the building and what must stay.</li>
+        <li>Adoption: conventions, review and guardrails.</li>
+      </ul>
+    </div>
+    <div class="cell tech">
+      <span class="tag">Technology</span>
+      <h3>Actually deployed</h3>
+      <p>Two of my own products are AI products, so this is operations, not theory.</p>
+      <ul class="list">
+        <li>Agent workflows: pi agent, paperclip, opencode, inside real pipelines.</li>
+        <li>Model routing: frontier where quality changes the outcome, cheap and local where it does not.</li>
+        <li>Local models for data that must not leave the building.</li>
+        <li>Cost control: caching, batching, deliberate downgrades.</li>
+      </ul>
+    </div>
+
+    <!-- ---------- track record ---------- -->
+    <!-- ============ BELOW THE MATRIX ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>On the record</h2>
+      <span class="meta">3 recordings</span>
+    </div>
+    <div class="watch">
+      <a class="block record" href="https://www.youtube.com/watch?v=DPmGlGyoMM8" target="_blank" rel="noopener">
+        <img class="thumb" src="https://i.ytimg.com/vi/DPmGlGyoMM8/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+        <span class="record-body">
+          <strong>Entrepreneur of the Year</strong>
+          <span class="meta">Founder pitch · University of Warsaw</span>
+        </span>
+        <span class="time">1:37</span>
+      </a>
+      <a class="block record" href="https://www.youtube.com/watch?v=hZGU3GvSFYc" target="_blank" rel="noopener">
+        <img class="thumb" src="https://i.ytimg.com/vi/hZGU3GvSFYc/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+        <span class="record-body">
+          <strong>From 5K to 500M notifications a day</strong>
+          <span class="meta">Scale versus quality at PushPushGo · OVH Experience</span>
+        </span>
+        <span class="time">12:47</span>
+      </a>
+      <a class="block record" href="https://www.youtube.com/watch?v=gujtLc126JE" target="_blank" rel="noopener">
+        <img class="thumb" src="https://i.ytimg.com/vi/gujtLc126JE/mqdefault.jpg" alt="" width="320" height="180" loading="lazy">
+        <span class="record-body">
+          <strong>Micro-payments in Poland</strong>
+          <span class="meta">FinTalks · Future Processing</span>
+        </span>
+        <span class="time">36:49</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Compliance, folded into the work</h2>
+      <span class="meta">not a separate service</span>
+    </div>
+    <div class="strip">
+      <div class="block plain tile biz">
+        <span class="meta">regulation</span>
+        <strong>DORA readiness</strong>
+        <small>Operational resilience, controls and evidence — built into GetViaMsg from the first line of code.</small>
+      </div>
+      <div class="block plain tile tech">
+        <span class="meta">risk</span>
+        <strong>NIS2 technology risk</strong>
+        <small>Assessment and technical measures, treated as engineering work rather than paperwork.</small>
+      </div>
+      <div class="block plain tile tech">
+        <span class="meta">practices</span>
+        <strong>ISO 27001 practices</strong>
+        <small>Controls and evidence that survive an audit, kept where engineers actually work.</small>
+      </div>
+      <div class="block plain tile biz">
+        <span class="meta">reviews</span>
+        <strong>Audits &amp; vulnerabilities</strong>
+        <small>Security reviews, triage and fixes with the team that owns the code.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>Need one of those two conversations?</h2>
+    <p>
+      Tell me what you are building and where it hurts. A thirty-minute call, then I come back with what
+      I would do first, in writing. If I am not the right person, I will say so in the first reply.
+    </p>
+    <a class="block accent" href="mailto:i@worotyns.ovh?subject=30%20minutes%20%E2%80%94%20worotyns.ovh">Book a 30-minute call</a>
+  </section>
+
+  <footer>
+    <p>
+      Columns built on <a href="https://thesephist.github.io/blocks.css/" rel="noopener">blocks.css</a> by
+      Linus Lee (MIT), vendored locally. Type, spacing and colour are mine. No JavaScript, no cookies, no
+      tracking.
+    </p>
+    <p>
+      <a href="/llms.txt">llms.txt</a> — the machine-readable summary, including the hourly rate.
+    </p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>

@@ -1,42 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-lane="tech">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — page not found · Mateusz Worotyński</title>
   <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#0f6f6a">
+  <meta name="theme-color" content="#e6ddcb">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/reset.min.css">
+  <link rel="stylesheet" href="/vendor/blocks.min.css">
   <link rel="stylesheet" href="/styles.css">
-  <script>
-    (function () {
-      try {
-        var lane = localStorage.getItem("lane") || "tech";
-        document.documentElement.setAttribute("data-lane", lane === "biz" ? "biz" : "tech");
-        var stored = localStorage.getItem("theme");
-        var system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", stored || system);
-      } catch (e) {}
-    })();
-  </script>
 </head>
 <body>
-  <main class="hero">
-    <div class="container">
-      <p class="eyebrow">404 &middot; nothing at this address</p>
-      <h1 class="hero-title">This route <em>was never deployed</em>.</h1>
-      <p class="hero-sub">
-        The page you asked for does not exist. Some of the links on this site point to
-        <code>/work/&lt;project&gt;</code> case studies that are still being written.
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="/">Back to the homepage</a>
-        <a class="btn btn-secondary" href="mailto:i@worotyns.ovh">Email me</a>
-      </div>
+  <section class="hero">
+    <span class="eyebrow">404 — nothing at this address</span>
+    <h1>This route <em>was never deployed</em>.</h1>
+    <p class="lede">
+      The page you asked for does not exist. Either it moved, or it was one of the experiments this site
+      went through before it settled on the two columns.
+    </p>
+    <div class="actions">
+      <a class="block accent" href="/">Back to the homepage</a>
+      <a class="text-link" href="mailto:i@worotyns.ovh">i@worotyns.ovh</a>
     </div>
-  </main>
+  </section>
+  <footer>
+    <p><a href="/llms.txt">llms.txt</a> — the machine-readable summary.</p>
+  </footer>
 </body>
 </html>
