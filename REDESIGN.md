@@ -157,28 +157,31 @@ Po drodze złapałem dwa realne błędy, oba z tej samej rodziny (ścieżki wzgl
 
 Czego wersja C nie ma względem pełnej: kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, opinii, ściany klientów, panelu ASCII i zapamiętywania wybranego toru przy reloadzie (tu tor trzyma URL).
 
-## 10. Eksperyment 3: split screen na blocks.css (`/blocks/split.html`)
+## 10. Eksperyment 3: wyrównany split screen na blocks.css (`/blocks/split.html`)
 
-Trzecia wersja: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) jako prymityw, na nim własna warstwa typografii i przestrzeni. Split screen: lewa kolumna biznes, prawa technologia, pod nimi sekcje wspólne.
+Trzecia wersja: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) jako prymityw, na nim własna warstwa typografii, przestrzeni i koloru.
 
-**Zasada, która trzyma tę stronę:** blok coś znaczy. Blokiem są produkty, nagłówki torów i przyciski — czyli obiekty i akcje. Usługi, prośba, listy i stopka to zwykła typografia z hairline'ami. Dzięki temu strona nie jest ścianą pudełek.
+**Układ: jedna siatka, dwa tory, wiersze wyrównane co do piksela.** Każdy produkt w jednym wierszu — biznes po lewej, technologia po prawej, ta sama nazwa po obu stronach, wspólna linia oddzielająca. Zweryfikowane pomiarem: przy 1440 i 1000 px obie komórki każdego wiersza mają identyczne `top` (Terapeuto|Terapeuto, uff.email|uff.email, Krazeta|Krazeta, ceemes.|ceemes., PushPushGo, GetViaMsg, oba koncepty WDFT). Poniżej 62 rem siatka składa się do jednej kolumny, a każda komórka dostaje etykietę toru (`Business` / `Technology`) przez CSS, żeby po skróceniu było jasne, którą stronę się czyta.
 
-Jak zrobione:
+**Zasada: blok coś znaczy.** Blokiem są produkty (karty), wiersze nagrań i przyciski. Usługi, akapity, listy i stacki to zwykła typografia. Nagłówki torów są sticky, więc podczas przewijania wiesz, w której kolumnie jesteś.
 
-- **typografia**: Space Grotesk (400/500/700) w nagłówkach i treści, systemowy mono na metadanych, etykietach grup, stackach i stopce. Cztery rozmiary nagłówków z jasną hierarchią, `h1` do 3,5 rem z trackingiem -0,04 em
-- **kolor jako akcent, nie tapeta**: terakota dla biznesu, teal dla technologii — jako tint kolumny, kolor eyebrow, kolor podkreślenia linku i podkreślenie nagłówka `h1`. Nic nie jest wypełnione na płasko
-- **blocks.css nietknięte geometrycznie** (3 px ramka, offsetowy panel `:before`), zmieniony tylko kolor cienia na półprzezroczysty tusz — dzięki temu offset czyta się jako druga, odsunięta krawędź, a nie twardy cień
-- **sticky nagłówki kolumn** z linkiem do drugiej kolumny; kolumny równej wysokości
-- **stacki** jako cichy mono wiersz nad przerywaną linią, nie jako chipy
-- zero JavaScriptu; jedna rodzina webfontów
+**„On the record" jako lista do oglądania:** trzy klikalne wiersze z ikoną play w kółku, tytułem, źródłem i czasem trwania po prawej. Czasy prawdziwe, wyciągnięte z YouTube: 1:37, 12:47, 36:49.
 
-Pomiar (zimny start): 7 żądań / ~48 KB, z czego ~20 KB to Space Grotesk. Nadal ~5× lżej niż pełna wersja (268 KB), a wygląda jak zaprojektowana strona, nie jak eksperyment.
+Detale warte zapamiętania:
 
-**Dwa realne błędy złapane po drodze** (oba warte zapamiętania przy blocks.css):
-1. `blocks.css` maluje widoczne tło na `:before`, nie na `.block` — więc `background` ustawiony na samym bloku jest niewidoczny. Każde moje kolorowanie musi trafić w `.x, .x:before`.
-2. Sticky nagłówek z `top: 0.75rem` zostawia 12 px szczeliny, w której widać przewijaną treść — wygląda jak zepsuty layout. Przy `top: 0` problem znika.
+- **tło**: kolorowy „blat" (`--desk`, ciepły piasek z gradientem) plus strona jako arkusz na nim — z obramowaniem, zaokrągleniem i miękkim cieniem. Kolor widać na całym viewporcie, nie tylko pod treścią
+- **bloki blocks.css nietknięte geometrycznie** (3 px ramka, offsetowy panel), zmieniony tylko kolor cienia na półprzezroczysty tusz
+- **stacki** jako `<small>` w mono nad przerywaną linią — drobny druk, nie chipy
+- `html { overflow-x: clip }` — panele blocks.css wychodzą 3–6 px poza obrys bloku i robiły z tego kilka pikseli poziomego przewijania; `clip` (nie `hidden`) nie psuje sticky
 
-Poprzednia, surowsza wersja (wszystko blokiem, mono, kolorowe kolumny) została jako `/blocks/` do porównania: pokazuje różnicę między „wszystko jest blokiem" a „blok coś znaczy".
+Pomiar (zimny start): 7 żądań / ~48 KB, z czego ~20 KB to Space Grotesk. Nadal ~5× lżej niż pełna wersja (268 KB).
+
+**Trzy realne błędy złapane po drodze:**
+1. blocks.css maluje widoczne tło na `:before`, nie na `.block` — kolorowanie musi trafić w `.x, .x:before`, inaczej nagłówki zostają białe mimo poprawnego CSS-u.
+2. Sticky z `top: 0.75rem` zostawia szczelinę, w której widać przewijaną treść — wygląda jak zepsuty layout; `top: 0` naprawia.
+3. Dekoracyjne panele bloków wychodzą poza obrys o 3–6 px → poziomy scroll. Diagnoza zajęła chwilę, bo `scrollWidth` był o 9 px większy niż `clientWidth`, a żaden element nie przekraczał szerokości — winowajcą były pseudo-elementy, których nie da się zmierzyć przez `getBoundingClientRect`.
+
+Surowsza wersja („wszystko blokiem", mono) została jako `/blocks/` dla porównania.
 
 ## 11. Co proponuję dalej (kolejność wg zwrotu)
 
