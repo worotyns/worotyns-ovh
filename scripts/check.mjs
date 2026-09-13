@@ -43,8 +43,10 @@ for (const file of files) {
   }
 
   // 3. track variants: .only-biz and .only-tech should come in pairs
-  const biz = (html.match(/only-biz/g) || []).length;
-  const tech = (html.match(/only-tech/g) || []).length;
+  //    (blocks that are intentionally one-track only — project stacks — are stripped)
+  const paired = html.replace(/class="[^"]*project-stack[^"]*"/g, "");
+  const biz = (paired.match(/only-biz/g) || []).length;
+  const tech = (paired.match(/only-tech/g) || []).length;
   if (biz || tech) {
     notes.push(`${file}: track variants — only-biz ${biz} / only-tech ${tech}`);
     if (biz === 0 || tech === 0) fail(`${file}: one track has no content at all`);

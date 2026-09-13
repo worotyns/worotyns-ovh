@@ -1169,6 +1169,163 @@ a.project:hover .project-link {
   background: transparent;
 }
 
+/* ---------- Work groups ---------- */
+
+.work-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin: clamp(2.25rem, 4vw, 3rem) 0 1.1rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--border);
+}
+
+.work-group:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.work-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.work-group-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.work-group-hint {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+/* technology stack, under the descriptive tags */
+.project-stack {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.stack-label {
+  display: inline-block;
+  margin-right: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---------- AI ---------- */
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.ai-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), background-color var(--lane-transition);
+}
+
+.ai-block:hover {
+  border-color: var(--border-strong);
+}
+
+.ai-block-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.ai-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.ai-list li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.ai-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+html[data-lane="tech"] .ai-list li::before {
+  content: "›";
+  width: auto;
+  height: auto;
+  top: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.ai-list li strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.ai-products {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.ai-products li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.ai-products a {
+  align-self: flex-start;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--accent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.ai-products a:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent);
+}
+
 /* ---------- Timeline ---------- */
 
 .timeline {
@@ -1890,8 +2047,14 @@ kbd {
   .gate-grid,
   .grid,
   .project-list,
-  .rnd-grid {
+  .rnd-grid,
+  .ai-grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-group-hint {
+    margin-left: 0;
+    flex-basis: 100%;
   }
 
   .rnd-company {

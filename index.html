@@ -561,10 +561,23 @@ $ ppg --stats
             <span class="only-biz">Products I founded, shaped and took to market.</span>
           </h2>
           <p class="section-lede">
-            The same four products, described two ways — switch the track in the header and watch the
-            cards change. One is about outcomes, the other about how it was built.
+            <span class="only-tech">
+              Two groups: the platforms I built and scaled with teams, and the products and builds I run
+              today. Every card is described twice — switch the track in the header and watch it change.
+            </span>
+            <span class="only-biz">
+              Two groups: the companies I co-founded and scaled, and the products and builds I run today.
+              Every card is described twice — switch the track in the header and watch it change.
+            </span>
           </p>
         </div>
+
+        <h3 class="work-group reveal">
+          <span class="work-group-label">Group 01</span>
+          <span class="work-group-name only-tech">Platforms built and scaled with teams</span>
+          <span class="work-group-name only-biz">Companies I co-founded and scaled</span>
+          <span class="work-group-hint">co-founded &middot; scaled &middot; exit</span>
+        </h3>
 
         <div class="project-list">
           <a class="project reveal" href="https://pushpushgo.com" target="_blank" rel="noopener">
@@ -596,12 +609,60 @@ $ ppg --stats
               <li>Exit to Vercom S.A.</li>
               <li>Team of 15</li>
             </ul>
+            <p class="project-stack only-tech">
+              <span class="stack-label">Stack</span> MongoDB &middot; RabbitMQ &middot; TypeScript
+            </p>
             <span class="project-link">pushpushgo.com <span aria-hidden="true">→</span></span>
           </a>
 
-          <a class="project reveal" href="https://terapeuto.com" target="_blank" rel="noopener">
+          <a class="project reveal" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener">
             <div class="project-meta">
               <span class="project-index">02</span>
+              <span class="only-tech">Session-based payments &middot; DORA</span>
+              <span class="only-biz">FinTech &middot; beta, going to market</span>
+            </div>
+            <h3>GetViaMsg</h3>
+            <p class="only-tech">
+              Session-based micro-payments: QR or link, one SMS, content unlocked in seconds with
+              settlement handled asynchronously. Operator webhooks, idempotent accounting, two SMS
+              operators, across three clouds, with DORA-aligned controls.
+            </p>
+            <p class="only-biz">
+              57% of readers leave when they hit a paywall. GetViaMsg gives publishers a
+              pay-as-you-go option: one SMS unlocks one article, no card and no account, commission
+              instead of fixed fees, and payout the next business day instead of after sixty.
+            </p>
+            <ul class="project-tags only-tech">
+              <li>Prototype in 30 days</li>
+              <li>Idempotent settlement</li>
+              <li>SMS gateway integration</li>
+              <li>DORA compliance</li>
+            </ul>
+            <ul class="project-tags only-biz">
+              <li>Co-founder</li>
+              <li>CTO</li>
+              <li>0.25 PLN entry price</li>
+              <li>Payout in 1 day, not 60</li>
+              <li>No registration, no cards</li>
+            </ul>
+            <p class="project-stack only-tech">
+              <span class="stack-label">Stack</span> Fly.io &middot; Cloudflare &middot; Oracle Cloud &middot; 2 SMS operators
+            </p>
+            <span class="project-link">getviamsg.wdft.ovh <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+
+        <h3 class="work-group reveal">
+          <span class="work-group-label">Group 02</span>
+          <span class="work-group-name only-tech">Products and builds I run today</span>
+          <span class="work-group-name only-biz">Products and builds I run today</span>
+          <span class="work-group-hint">founded &middot; operated &middot; in progress</span>
+        </h3>
+
+        <div class="project-list">
+          <a class="project reveal" href="https://terapeuto.com" target="_blank" rel="noopener">
+            <div class="project-meta">
+              <span class="project-index">03</span>
               <span class="only-tech">Multi-tenant &middot; encrypted records</span>
               <span class="only-biz">MedTech &middot; live, paying customers</span>
             </div>
@@ -630,12 +691,15 @@ $ ppg --stats
               <li>Month closed in under an hour</li>
               <li>Schedule live in 15 min</li>
             </ul>
+            <p class="project-stack only-tech">
+              <span class="stack-label">Stack</span> Python &middot; SQLite &middot; Litestream &middot; Fly.io &middot; Docker
+            </p>
             <span class="project-link">terapeuto.com <span aria-hidden="true">→</span></span>
           </a>
 
           <a class="project reveal" href="https://uff.email" target="_blank" rel="noopener">
             <div class="project-meta">
-              <span class="project-index">03</span>
+              <span class="project-index">04</span>
               <span class="only-tech">Agentic &middot; knowledge graph</span>
               <span class="only-biz">AI &middot; live, paying customers</span>
             </div>
@@ -664,46 +728,85 @@ $ ppg --stats
               <li>Privacy as the product</li>
               <li>30 days free, no card</li>
             </ul>
+            <p class="project-stack only-tech">
+              <span class="stack-label">Stack</span> Python &middot; Docker &middot; knowledge graph &middot; AI
+            </p>
             <span class="project-link">uff.email <span aria-hidden="true">→</span></span>
           </a>
 
-          <a class="project reveal" href="https://getviamsg.wdft.ovh" target="_blank" rel="noopener">
+          <a class="project reveal" href="https://krazeta.pl" target="_blank" rel="noopener">
             <div class="project-meta">
-              <span class="project-index">04</span>
-              <span class="only-tech">Session-based payments &middot; DORA</span>
-              <span class="only-biz">FinTech &middot; beta, going to market</span>
+              <span class="project-index">05</span>
+              <span class="only-tech">AI newsroom &middot; media</span>
+              <span class="only-biz">Local media &middot; AI-run newsroom</span>
             </div>
-            <h3>GetViaMsg</h3>
+            <h3>Krazeta</h3>
             <p class="only-tech">
-              Session-based micro-payments: QR or link, one SMS, content unlocked in seconds with
-              settlement handled asynchronously. Operator webhooks, idempotent accounting, two SMS
-              operators, across Fly.io, Cloudflare and Oracle Cloud, with DORA-aligned controls.
+              A daily Kraków edition produced end to end by an AI newsroom: agents collect sources,
+              draft, section and publish the issue, orchestrated in Python workflows with Paperclip and
+              Conductor, model calls routed through OpenRouter. City chronicle, business, sport, weather
+              and an audio version of every edition.
             </p>
             <p class="only-biz">
-              57% of readers leave when they hit a paywall. GetViaMsg gives publishers a
-              pay-as-you-go option: one SMS unlocks one article, no card and no account, commission
-              instead of fixed fees, and payout the next business day instead of after sixty.
+              A local newspaper for Kraków where the editorial team is AI: a new edition every day,
+              sections from city chronicle to sport, an audio version and reader comments — at a cost
+              base a traditional newsroom cannot match.
             </p>
             <ul class="project-tags only-tech">
-              <li>Prototype in 30 days</li>
-              <li>Idempotent settlement</li>
-              <li>2 SMS operators</li>
-              <li>Fly.io &middot; Cloudflare &middot; Oracle Cloud</li>
-              <li>DORA compliance</li>
+              <li>AI editorial pipeline</li>
+              <li>Agent workflows</li>
+              <li>Daily edition</li>
+              <li>Audio generation</li>
             </ul>
             <ul class="project-tags only-biz">
-              <li>Co-founder</li>
-              <li>CTO</li>
-              <li>0.25 PLN entry price</li>
-              <li>Payout in 1 day, not 60</li>
-              <li>No registration, no cards</li>
+              <li>Founder</li>
+              <li>AI editorial team</li>
+              <li>New edition daily</li>
+              <li>Audio + text</li>
             </ul>
-            <span class="project-link">getviamsg.wdft.ovh <span aria-hidden="true">→</span></span>
+            <p class="project-stack only-tech">
+              <span class="stack-label">Stack</span> Python &middot; Paperclip &middot; Conductor &middot; OpenRouter
+            </p>
+            <span class="project-link">krazeta.pl <span aria-hidden="true">→</span></span>
           </a>
+
+          <article class="project reveal">
+            <div class="project-meta">
+              <span class="project-index">06</span>
+              <span class="only-tech">PoC &middot; in progress</span>
+              <span class="only-biz">Publishing tech &middot; in progress</span>
+            </div>
+            <h3>ceemes.</h3>
+            <p class="only-tech">
+              A proof of concept for a modern CMS for publishers: content model, editorial workflow and
+              delivery, kept non-public while it is being built. I own the project, the technology
+              decisions and the delivery.
+            </p>
+            <p class="only-biz">
+              Publishers still run on CMSs designed a decade ago. ceemes is a non-public proof of
+              concept for a modern one — I am responsible for the product, the technology and for
+              getting it built.
+            </p>
+            <ul class="project-tags only-tech">
+              <li>Editorial workflow</li>
+              <li>Content model</li>
+              <li>Delivery pipeline</li>
+              <li>Non-public PoC</li>
+            </ul>
+            <ul class="project-tags only-biz">
+              <li>Project owner</li>
+              <li>Technology owner</li>
+              <li>Delivery</li>
+              <li>Non-public PoC</li>
+            </ul>
+            <div class="project-links">
+              <a class="project-link" href="mailto:i@worotyns.ovh?subject=ceemes%20%E2%80%94%20tell%20me%20more">Ask me about ceemes <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
 
           <a class="project project-open reveal" href="mailto:i@worotyns.ovh?subject=30%20minutes%20%E2%80%94%20worotyns.ovh&amp;body=Hi%20Mateusz%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20We%27re%20building%20%5Bproject%5D%20and%20currently%20stuck%20on%20%5Bone-sentence%20challenge%5D.%0A%0AWhat%20I%27m%20looking%20for%3A%20%5Bfractional%20CTO%20%2F%20architecture%20review%20%2F%20product%20%26%20pricing%20%2F%20due%20diligence%5D.%0A%0AWould%20you%20have%2030%20minutes%20this%20week%3F%0A%0ABest%2C%0A%5BYour%20name%5D">
             <div class="project-meta">
-              <span class="project-index">05</span>
+              <span class="project-index">→</span>
               <span class="only-tech">Open slot</span>
               <span class="only-biz">Open slot</span>
             </div>
@@ -722,12 +825,81 @@ $ ppg --stats
       </div>
     </section>
 
-    <!-- ============ EXPERIENCE ============ -->
-    <section class="section section-alt" id="experience">
+    <!-- ============ AI ============ -->
+    <section class="section section-alt" id="ai">
       <div class="container">
         <div class="section-head reveal">
           <p class="section-kicker">
-            <span class="only-tech">[ 04 ] — track record</span>
+            <span class="only-tech">[ 04 ] — ai, actually deployed</span>
+            <span class="only-biz">AI in practice</span>
+          </p>
+          <h2 class="section-title">
+            <span class="only-tech">AI that <em>survives production</em>.</span>
+            <span class="only-biz">Where AI <em>actually pays off</em>.</span>
+          </h2>
+          <p class="section-lede">
+            <span class="only-tech">
+              I deploy AI where it holds up: agent workflows inside real delivery pipelines, frontier
+              models where quality changes the outcome, non-frontier and local models where it does not,
+              and cost per task as the metric that decides.
+            </span>
+            <span class="only-biz">
+              Most teams buy AI and then wonder where the value went. I help pick the two or three
+              workflows where it pays for itself — and I run two AI products of my own, so the advice
+              comes from operating them, not from a webinar.
+            </span>
+          </p>
+        </div>
+
+        <div class="ai-grid">
+          <div class="ai-block reveal">
+            <h3 class="ai-block-title">
+              <span class="only-tech">Rolling AI into a team</span>
+              <span class="only-biz">In your company</span>
+            </h3>
+            <ul class="ai-list only-tech">
+              <li><strong>Agent workflows</strong> — pi agent, paperclip and opencode wired into delivery and research pipelines, not into slide decks.</li>
+              <li><strong>Model routing</strong> — frontier models where quality changes the outcome, non-frontier and local models where it does not.</li>
+              <li><strong>Local models</strong> for data that must not leave the building.</li>
+              <li><strong>Cost control</strong> — cost per task, caching, batching and deliberate downgrades as models improve.</li>
+            </ul>
+            <ul class="ai-list only-biz">
+              <li><strong>The right two workflows</strong> — where AI pays for itself in your product or team, and where it is a toy.</li>
+              <li><strong>Cost per outcome</strong>, not cost per token.</li>
+              <li><strong>Privacy and compliance</strong> — what may leave the building and what must stay.</li>
+              <li><strong>Team adoption</strong> — conventions, review and guardrails, so the output stays trustworthy.</li>
+            </ul>
+          </div>
+
+          <div class="ai-block reveal">
+            <h3 class="ai-block-title">In my own products</h3>
+            <ul class="ai-products">
+              <li>
+                <a href="https://krazeta.pl" target="_blank" rel="noopener">Krazeta</a>
+                <span>
+                  A daily Kraków newspaper whose editorial team is AI — agent workflows write, section
+                  and publish every edition, with an audio version.
+                </span>
+              </li>
+              <li>
+                <a href="https://uff.email" target="_blank" rel="noopener">uff.email</a>
+                <span>
+                  A self-hosted, email-native AI assistant with a knowledge-graph memory. It runs on my
+                  own infrastructure, not somebody else's.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker">
+            <span class="only-tech">[ 05 ] — track record</span>
             <span class="only-biz">Track record</span>
           </p>
           <h2 class="section-title">Ten years, <em>one long arc</em>.</h2>
@@ -800,11 +972,11 @@ $ ppg --stats
     </section>
 
     <!-- ============ R&D / WDFT ============ -->
-    <section class="section" id="rnd">
+    <section class="section section-alt" id="rnd">
       <div class="container">
         <div class="section-head reveal">
           <p class="section-kicker">
-            <span class="only-tech">[ 05 ] — research &amp; development</span>
+            <span class="only-tech">[ 06 ] — research &amp; development</span>
             <span class="only-biz">Research &amp; development</span>
           </p>
           <h2 class="section-title">
@@ -925,11 +1097,11 @@ $ ppg --stats
     </section>
 
     <!-- ============ TESTIMONIALS ============ -->
-    <section class="section section-alt" id="testimonials">
+    <section class="section" id="testimonials">
       <div class="container">
         <div class="section-head reveal">
           <p class="section-kicker">
-            <span class="only-tech">[ 06 ] — in their words</span>
+            <span class="only-tech">[ 07 ] — in their words</span>
             <span class="only-biz">In their words</span>
           </p>
           <h2 class="section-title">What people say <em>after working with me</em>.</h2>
@@ -968,12 +1140,12 @@ $ ppg --stats
     </section>
 
     <!-- ============ TALK / VIDEO ============ -->
-    <section class="section" id="talk">
+    <section class="section section-alt" id="talk">
       <div class="container">
         <div class="talk">
           <div class="talk-copy reveal">
             <p class="section-kicker">
-              <span class="only-tech">[ 07 ] — on the record</span>
+              <span class="only-tech">[ 08 ] — on the record</span>
               <span class="only-biz">On the record</span>
             </p>
             <h2 class="section-title">Micro-payments, scaling <em>and one award</em>.</h2>
@@ -1052,11 +1224,11 @@ $ ppg --stats
     </section>
 
     <!-- ============ SECURITY ============ -->
-    <section class="section section-alt" id="security">
+    <section class="section" id="security">
       <div class="container">
         <div class="section-head reveal">
           <p class="section-kicker">
-            <span class="only-tech">[ 08 ] — security &amp; compliance</span>
+            <span class="only-tech">[ 09 ] — security &amp; compliance</span>
             <span class="only-biz">Security &amp; compliance</span>
           </p>
           <h2 class="section-title">
@@ -1093,7 +1265,7 @@ $ ppg --stats
     <section class="section section-contact" id="contact">
       <div class="container contact">
         <p class="section-kicker reveal">
-          <span class="only-tech">[ 09 ] — contact</span>
+          <span class="only-tech">[ 10 ] — contact</span>
           <span class="only-biz">Contact</span>
         </p>
         <h2 class="contact-title reveal">
