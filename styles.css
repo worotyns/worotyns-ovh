@@ -726,8 +726,7 @@ html[data-lane="tech"] .stat-value {
 
 .brief li {
   display: grid;
-  grid-template-columns: 5.2rem minmax(0, 1fr);
-  gap: 0.9rem;
+  gap: 0.2rem;
   padding: 0.7rem 0;
   border-bottom: 1px dashed var(--border);
 }
@@ -738,7 +737,6 @@ html[data-lane="tech"] .stat-value {
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--accent);
-  padding-top: 0.2rem;
 }
 
 .brief-val {
@@ -2103,11 +2101,6 @@ kbd {
 
   .hero-cta .btn {
     width: 100%;
-  }
-
-  .brief li {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
   }
 
   .next-steps li {
