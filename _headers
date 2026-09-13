@@ -5,17 +5,23 @@
   Permissions-Policy: geolocation=(), camera=(), microphone=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
+# Stylesheets are content-addressed: the HTML links them as
+# /styles.css?v=<sha1 of the file>, so a new version is a new URL and the old
+# one can stay cached forever. Without that, Cloudflare's zone-level Browser
+# Cache TTL served stale CSS for hours after a deploy and the layout broke.
+# After editing CSS run: task cache-bust
 /styles.css
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=604800, immutable
 
 /vendor/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=604800, immutable
 
+# Images are not content-addressed, so they revalidate within a day.
 /*.jpg
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /*.png
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /*.ico
   Cache-Control: public, max-age=604800

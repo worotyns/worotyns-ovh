@@ -21,6 +21,19 @@ tasks:
     cmds:
       - wrangler pages deploy . --project-name worotyns
 
+  cache-bust:
+    desc: Rewrite the ?v= hash on every stylesheet reference after editing CSS
+    cmds:
+      - |
+        set -e
+        V=$(shasum -a 1 styles.css | cut -c1-8)
+        B=$(shasum -a 1 vendor/blocks.min.css | cut -c1-8)
+        R=$(shasum -a 1 vendor/reset.min.css | cut -c1-8)
+        for f in index.html 404.html fractional-cto/index.html product-leadership/index.html; do
+          perl -pi -e "s|/vendor/reset\.min\.css(\?v=[a-f0-9]+)?|/vendor/reset.min.css?v=$R|g; s|/vendor/blocks\.min\.css(\?v=[a-f0-9]+)?|/vendor/blocks.min.css?v=$B|g; s|/styles\.css(\?v=[a-f0-9]+)?|/styles.css?v=$V|g" "$f"
+        done
+        echo "✅ styles.css?v=$V blocks?v=$B reset?v=$R"
+
   generate:og-image:
     desc: Screenshot every page into a 1200x630 og image (needs a local server, the pages use absolute paths)
     cmds:

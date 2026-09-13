@@ -9,6 +9,7 @@
 
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
 
 const files = ["index.html", "404.html", "fractional-cto/index.html", "product-leadership/index.html"];
 const problems = [];
@@ -212,11 +213,33 @@ for (const file of files) {
   }
 }
 
+/* ---------- stylesheets must be cache-busted ----------
+   Cloudflare served a stale styles.css for hours after a deploy (the zone's
+   Browser Cache TTL overrides _headers), so new HTML met old CSS and the
+   layout looked broken. Every stylesheet URL carries a hash of its own
+   contents: change the CSS without bumping the hash and this fails. */
+
+for (const [sheet, version] of [
+  ["styles.css", createHash("sha1").update(readFileSync("styles.css")).digest("hex").slice(0, 8)],
+  ["vendor/blocks.min.css", createHash("sha1").update(readFileSync("vendor/blocks.min.css")).digest("hex").slice(0, 8)],
+  ["vendor/reset.min.css", createHash("sha1").update(readFileSync("vendor/reset.min.css")).digest("hex").slice(0, 8)],
+]) {
+  for (const file of files) {
+    if (!existsSync(file)) continue;
+    const html = readFileSync(file, "utf8");
+    if (!html.includes(`/${sheet}?v=${version}`)) {
+      const found = (html.match(new RegExp(`/${sheet.replace(".", "\\.")}(\\?v=[a-f0-9]+)?`)) || [null, "not linked"])[0];
+      fail(`${file}: ${sheet} is referenced as "${found}" but its contents hash to v=${version} — run: task cache-bust`);
+    }
+  }
+}
+notes.push(`css cache-busting: styles.css?v=${createHash("sha1").update(readFileSync("styles.css")).digest("hex").slice(0, 8)}`);
+
 /* ---------- the page must load the vendored library and its own sheet ---------- */
 
 {
   const page = readFileSync("index.html", "utf8");
-  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref("index.html", m[1]));
+  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref("index.html", m[1].split("?")[0]));
   for (const expected of ["vendor/reset.min.css", "vendor/blocks.min.css", "styles.css"]) {
     if (!sheets.includes(expected)) fail(`index.html: does not load ${expected} (loads ${sheets.join(", ")})`);
   }
