@@ -798,6 +798,72 @@ footer p {
   color: var(--paper);
 }
 
+/* on the homepage the closing panel is copy on the left, price on the right */
+.closing-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 2.25rem 3rem;
+  align-items: start;
+}
+
+.closing-split h2 {
+  max-width: 24ch;
+}
+
+.closing-copy p {
+  margin-bottom: 1.75rem;
+}
+
+.closing-rate {
+  padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid #3d3a30;
+  border-radius: 6px;
+  background: #1e1d17;
+}
+
+.closing-rate .meta {
+  color: #8f8b7b;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  margin-bottom: 0.5rem;
+}
+
+.closing-rate strong {
+  display: block;
+  font-size: clamp(1.6rem, 2.6vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--paper);
+}
+
+.closing-rate strong span {
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #b9b5a5;
+}
+
+.closing-rate p {
+  margin: 0.95rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #b9b5a5;
+}
+
+.closing-rate p.fine {
+  font-size: 0.78rem;
+  color: #8f8b7b;
+}
+
+@media (max-width: 62rem) {
+  .closing-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 /* ---------- narrow: the matrix becomes one column, pairs stack ---------- */
 
 @media (max-width: 62rem) {
@@ -889,14 +955,48 @@ footer p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-/* the doorway cards are links to the service pages */
+/* a block that is itself a link (a doorway card, a CTA button) must not
+   underline its own content: the block is the affordance, not the text.
+   Note: text-decoration from an ancestor is *painted* over descendants, so
+   checking computed style on the children does not reveal it — this rule
+   has to sit on the anchor. */
+a.block {
+  text-decoration: none;
+}
+
+a.block .links a,
+a.block .jump {
+  text-decoration: underline;
+}
+
+a.block:focus-visible {
+  outline: 2px solid var(--biz);
+  outline-offset: 3px;
+}
+
+/* the doorway cards are links to the service pages: the label is not a link
+   of its own, so it carries no underline — the whole card is the affordance */
 .card-cta {
   display: block;
-  margin-top: 0.9rem;
+  margin-top: 0.95rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.7rem;
   letter-spacing: 0.02em;
+  color: var(--faint);
+  text-decoration: none;
+}
+
+.card-cta span {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+a.card:hover .card-cta {
   color: var(--accent, var(--biz));
+}
+
+a.card:hover .card-cta span {
+  transform: translateX(3px);
 }
 
 .faq {

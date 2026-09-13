@@ -67,6 +67,12 @@ Pierwsza wersja reedycji wstawiła trzy grupy **pełnej szerokości** na sam poc
 
 Naprawa: doorway został **przeniesiony przed macierz** (tam pełna szerokość jest naturalna, bo to wprowadzenie), a wewnątrz macierzy **wszystkie wiersze są znów parowane** biznes | technologia — sytuacje, lista kompetencji, track record, R&D, produkty, AI. Stan obecny: **12 wierszy, wszystkie pary, zero komórek pełnej szerokości wewnątrz macierzy**. `task check` pilnuje teraz także tego, że liczba komórek biznesowych równa się technologicznym, i że macierz nie ma wycieków.
 
+## Panel zamykający: dwie kolumny
+
+Copy po lewej, cena po prawej jako osobny blok z ramką („RATE" + duże 175 PLN / hour + uzasadnienie i drobny druk). Na wąskim ekranie kolumny się układają. Podstrony usługowe mają nadal układ jednokolumnowy — dwukolumnowy jest wariantem `.closing-split`, żeby ich nie łamać.
+
+Przy okazji wyszło, że **kafelki-linki podkreślały całą swoją treść**: `text-decoration` z kotwicy jest rysowane przez wszystkie dzieci, więc tytuły, akapity i podpisy w kartach doorwaya (oraz napisy na przyciskach CTA) miały linie. `a.block { text-decoration: none }` to naprawia; podkreślenia zostają tylko tam, gdzie link jest osobny: `.links a` w kartach i `.jump` przy nagłówkach torów. Uwaga metodyczna: sprawdzenie `getComputedStyle` na dzieciach tego **nie wykryje** — dekoracja przodka nie pojawia się w ich computed style, trzeba patrzeć na zrzut.
+
 ## Linki i dostępność
 
 - **Wszystkie linki zewnętrzne otwierają się w nowej karcie** (`target="_blank" rel="noopener"`) — i pilnuje tego checker dla każdej strony, nie tylko dla kart.
