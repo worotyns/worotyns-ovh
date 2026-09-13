@@ -22,37 +22,51 @@ tasks:
       - wrangler pages deploy . --project-name worotyns
 
   cache-bust:
-    desc: Rewrite the ?v= hash on every stylesheet reference after editing CSS
+    desc: Rewrite the ?v= hash on stylesheets and og images after editing or regenerating them
     cmds:
       - |
         set -e
         V=$(shasum -a 1 styles.css | cut -c1-8)
         B=$(shasum -a 1 vendor/blocks.min.css | cut -c1-8)
         R=$(shasum -a 1 vendor/reset.min.css | cut -c1-8)
+        O=$(shasum -a 1 ogimage.jpg | cut -c1-8)
+        OF=$(shasum -a 1 og-fractional-cto.jpg | cut -c1-8)
+        OP=$(shasum -a 1 og-product-leadership.jpg | cut -c1-8)
         for f in index.html 404.html fractional-cto/index.html product-leadership/index.html; do
-          perl -pi -e "s|/vendor/reset\.min\.css(\?v=[a-f0-9]+)?|/vendor/reset.min.css?v=$R|g; s|/vendor/blocks\.min\.css(\?v=[a-f0-9]+)?|/vendor/blocks.min.css?v=$B|g; s|/styles\.css(\?v=[a-f0-9]+)?|/styles.css?v=$V|g" "$f"
+          perl -pi -e "s|/vendor/reset\.min\.css(\?v=[a-f0-9]+)?|/vendor/reset.min.css?v=$R|g; s|/vendor/blocks\.min\.css(\?v=[a-f0-9]+)?|/vendor/blocks.min.css?v=$B|g; s|/styles\.css(\?v=[a-f0-9]+)?|/styles.css?v=$V|g; s|ogimage\.jpg(\?v=[a-f0-9]+)?|ogimage.jpg?v=$O|g; s|og-fractional-cto\.jpg(\?v=[a-f0-9]+)?|og-fractional-cto.jpg?v=$OF|g; s|og-product-leadership\.jpg(\?v=[a-f0-9]+)?|og-product-leadership.jpg?v=$OP|g" "$f"
         done
-        echo "✅ styles.css?v=$V blocks?v=$B reset?v=$R"
+        echo "✅ styles?v=$V blocks?v=$B reset?v=$R og?v=$O/$OF/$OP"
 
   generate:og-image:
-    desc: Screenshot every page into a 1200x630 og image (needs a local server, the pages use absolute paths)
+    desc: Screenshot each page into a 1200x630 og image (local server, the pages use absolute paths)
     cmds:
       - |
         set -e
         CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        python3 -m http.server 8899 --bind 127.0.0.1 >/dev/null 2>&1 &
+        # a fixed port once left a stale server from another directory answering,
+        # so every page produced the same screenshot. Ask the OS for a free port.
+        PORT=$(python3 -c "import socket; s=socket.socket(); s.bind(('127.0.0.1',0)); print(s.getsockname()[1]); s.close()")
+        python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
         SERVER=$!
         trap 'kill $SERVER 2>/dev/null || true' EXIT
         sleep 1
+        if ! curl -sf -o /dev/null "http://127.0.0.1:$PORT/"; then
+          echo "server on $PORT did not answer"; exit 1
+        fi
         shot() {
           "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
             --virtual-time-budget=6000 \
             --screenshot="$2" --window-size=1200,630 \
-            "http://127.0.0.1:8899/$1"
+            "http://127.0.0.1:$PORT/$1"
           sips -s format jpeg -s formatOptions 88 "$2" --out "${2%.png}.jpg" >/dev/null
           rm -f "$2"
         }
         shot "" ogimage.png
         shot fractional-cto/ og-fractional-cto.png
         shot product-leadership/ og-product-leadership.png
-        echo "✅ og images regenerated (3)"
+        # three different pages cannot produce one identical image: if they do,
+        # the shots came from the wrong place
+        if [ "$(shasum -a 1 ogimage.jpg | cut -d' ' -f1)" = "$(shasum -a 1 og-fractional-cto.jpg | cut -d' ' -f1)" ]; then
+          echo "og images are identical — the screenshots did not hit the pages"; exit 1
+        fi
+        echo "✅ og images regenerated (3, distinct)"

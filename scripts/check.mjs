@@ -233,6 +233,23 @@ for (const [sheet, version] of [
     }
   }
 }
+// the og images are cached too, so the page's own og:image carries a hash
+for (const file of files) {
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, "utf8");
+  const url = (html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/) || [null, null])[1];
+  if (!url) continue; // noindex pages have no og:image
+  const name = url.split("/").pop().split("?")[0];
+  if (!existsSync(name)) {
+    fail(`${file}: og:image points at ${url}, which is not a file here`);
+    continue;
+  }
+  const v = createHash("sha1").update(readFileSync(name)).digest("hex").slice(0, 8);
+  if (!url.includes(`?v=${v}`)) {
+    fail(`${file}: og:image is "${url}" but ${name} hashes to v=${v} — run: task cache-bust`);
+  }
+}
+
 notes.push(`css cache-busting: styles.css?v=${createHash("sha1").update(readFileSync("styles.css")).digest("hex").slice(0, 8)}`);
 
 /* ---------- the page must load the vendored library and its own sheet ---------- */
