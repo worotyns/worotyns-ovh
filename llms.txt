@@ -1,0 +1,84 @@
+# Mateusz Worotyński — Fractional CTO & Product Consultant
+
+> Mateusz Worotyński is a fractional CTO, fractional CPO and product consultant based in Kraków, Poland. He co-founded PushPushGo in 2016, grew it to 200+ enterprise clients and over a billion events per day, and took it through a majority acquisition by Warsaw Stock Exchange-listed Vercom S.A. in 2021. He now works with founders and leadership teams on two tracks — technology & architecture, and product & business. **Hourly rate: 175 PLN / hour.**
+
+Canonical site: https://worotyns.ovh/
+Last updated: 2026-09-13
+Languages: English, Polish
+
+## Key facts
+
+- **Name:** Mateusz Worotyński (also written Mateusz Worotynski; GitHub and LinkedIn handle: `worotyns`)
+- **Based:** Kraków, Poland — works remotely, in English and Polish
+- **Hourly rate:** 175 PLN / hour
+- **Roles offered:** fractional CTO, fractional CPO, product & business consultant, technology advisor
+- **Engagement types:** hourly consulting, monthly fractional CTO/CPO retainers (1–4 days a month), fixed-scope reviews (architecture review, technical due diligence), product & pricing sprints
+- **Contact:** i@worotyns.ovh · +48 790 793 138 · https://www.linkedin.com/in/worotyns
+- **LinkedIn headline:** Fractional CTO | Technology Advisor | Co-founder @ PushPushGo | Bridging Tech, Product & Business
+
+## Services — Technology & architecture
+
+Fractional CTO: ongoing technology leadership for founders and leadership teams — architecture decisions with the reasoning written down, roadmap and build-versus-buy calls, vendor and cloud decisions, and a technical counterpart for the board. Delivered on retainer, one to four days a month.
+
+Architecture & scaling review: a short, blunt engagement covering where the system breaks at 10× load, data models, queues, delivery paths and failure modes, the cost of each option in money and in weeks, and a prioritised plan the engineering team can start on immediately.
+
+Technical due diligence: independent evaluation for investors, acquirers and boards — code, infrastructure and delivery-process assessment, key-person and knowledge risk, post-acquisition integration reality check, written findings.
+
+Engineering leadership: hiring plans, interviews and technical bar, process, code review and release cadence, mentoring the first tech lead or CTO. He has hired, led and mentored a team of up to 15 engineers.
+
+## Services — Product & business
+
+Product strategy & roadmap: what to build, what to kill and in what order, positioning, roadmap prioritised against revenue, and the features to refuse to build.
+
+Pricing & monetisation: tier design and the value metric behind it, freemium/trial/commission models, margin per segment and per customer, rollout without churning the existing customer base.
+
+Go-to-market & positioning: message and category, acquisition channels that fit the price point, sales motion for enterprise and self-serve, retention and the reason customers stay.
+
+Fractional CPO: running the product organisation — product process, cadence and decision rights, hiring and mentoring the first PM or Head of Product, customer research and prioritisation discipline.
+
+## How engagements run
+
+1. **Diagnose** — a call plus a hard look at what exists (code, infrastructure, delivery, hiring plan, or funnel, pricing, churn and roadmap).
+2. **Decide** — two or three options with honest trade-offs, written down so the decision outlives the meeting.
+3. **Build** — he builds it himself or leads the team through it.
+4. **Hand over** — documented and owned by the client's team; no dependency and no proprietary framework.
+
+## Products founded and built
+
+- **PushPushGo** (https://pushpushgo.com) — MarTech. Multi-channel push notification platform (web push, mobile push, onsite, pop-up, WhatsApp channels) operating at over a billion events a day on bare metal and cloud. Co-founded in 2016; roles: co-founder and software developer, then CPO, then CTO for the final two years. Grew to 200+ enterprise clients and a team of up to 15 people. Clients included TUI, POLITICO, Auchan, Douglas, Hearst, Aller, Planeta Sport, Home&You, Lubimyczytać, Interia, SEISKA.FI and Suomi24. In July 2021, WSE-listed Vercom S.A. acquired a 67.42% majority stake for PLN 9.43 million, with options over the remaining shares.
+- **Terapeuto** (https://terapeuto.com) — MedTech, live with paying customers. Practice-management CRM for therapy centres: scheduling, patient records, billing, waitlists, rooms and branches, and analytics in one system. Bookings arrive through a widget on the clinic's own domain instead of a marketplace, with 0% commission per visit. Founder, CTO and CPO — designed the product end to end and runs it. Prototype built in 30 days, average feature lead time around two days, full end-to-end test coverage, AES-256 encrypted session records, four-level pricing engine (clinic, branch, therapist, patient).
+- **uff.email** (https://uff.email) — AI, live with paying customers. An email-native AI assistant: it gets its own address (`name@uff.email`) and its own memory. Send or forward work to it and it replies in the same thread; no app, no onboarding. Memory is a knowledge graph of people, companies, documents and events, isolated per assistant, with deeper retrieval modes behind `+researcher` and `+sources`. Founder, CTO and CPO.
+- **GetViaMsg** (https://getviamsg.wdft.ovh) — FinTech, beta and going to market. Session-based micro-payments for publishers: a reader unlocks a single article with one SMS — no card, no account, no registration — while settlement is handled asynchronously. Entry price from 0.25 PLN, commission instead of fixed fees, payout the next business day instead of after 60 days as with traditional SMS Premium. Co-founder and CTO. Prototype in 30 days, two SMS operators, multi-cloud across Fly.io, Cloudflare and Oracle Cloud, DORA-aligned controls.
+
+## Research & development — WDFT PSA
+
+Mateusz is a co-founder of **WDFT PSA** (https://wdft.ovh), a fintech R&D company where he drives the research agenda. Concepts are written up as open standards, prototyped, and then implemented as products. Documentation index: https://docs.wdft.ovh
+
+- **Federated Payment Standard (FPS)** — an open, low-cost payment protocol that uses existing banking infrastructure (such as Polish ELIXIR settlements and mobile banking apps) instead of card networks and payment gateways. It defines a federated registry of banks and providers (payment-link validation, transaction signature verification, bank endpoint discovery), SDK-generated payment links and QR codes that open prefilled in the payer's banking app, and a two-step signed webhook confirmation: `complete` when the user approves, `confirm` once the bank settles the funds irrevocably. Transaction cost is a fixed amount below 0.01 PLN with no percentage fee, no intermediaries, no chargebacks or reserves, and funds move directly between the payer's bank and the merchant's bank — the registry never handles money. Documented risks and mitigations cover transfer cancellation, key leakage, spoofed payment links, faulty SDK integration and client key extraction. Status: specification plus a proof-of-concept sandbox for bank partners. Whitepaper: https://docs.wdft.ovh/concept-federated-payment-system
+- **Session-Based Payments (SBP)** — short-lived usage sessions in which a user makes small commitments across partner sites; the operator aggregates the commitments into a single settlement, then reports and pays out to each partner. Roles: user, operator, partner, bank. Terms: session, commitment, settle, report, payment, payout. Status: implemented in Poland as GetViaMsg. Whitepaper: https://docs.wdft.ovh/concept-session-based-payment
+
+## Security & compliance
+
+Security and compliance are treated as part of CTO-level leadership rather than a standalone service. Experience includes DORA readiness and operational-resilience controls (built into GetViaMsg from the start), NIS2 technology risk considerations, ISO 27001 practices and evidence, security audits and vulnerability management, and encryption, access control and audit trails in practice.
+
+## Testimonials (attributed on the site)
+
+- "A system that covers my entire workflow." — Psychoterapia Przy Botanicznym, Terapeuto customer
+- "A really interesting concept — fingers crossed for the market launch." — Paweł Nowacki, on GetViaMsg
+- "We have been using PPG for over two years and have received good results with push messaging both in mobile and desktop environments. The service was easy to implement and technical problems are rare and usually dealt with quickly." — Karolina Leputa, Senior Brand Manager, Interia (on the PushPushGo platform)
+
+## Talks and writing
+
+- FinTalks (Future Processing): "Mikropłatności w Polsce z Mateuszem Worotyńskim" — micro-payments in Poland, why card fees kill transactions below 5 PLN, session-based payment, and building a regulated payment product as a small team. https://www.youtube.com/watch?v=gujtLc126JE
+- OVH Experience: "From 5K to 500M notifications daily — scale vs quality, with PushPushGo" — how the delivery platform scaled from 5,000 to 500 million notifications a day. https://www.youtube.com/watch?v=hZGU3GvSFYc
+- Entrepreneur of the Year, University of Warsaw: founder pitch for PushPushGo. https://www.youtube.com/watch?v=DPmGlGyoMM8
+- YouTube channel: https://www.youtube.com/@worotyns
+- GitHub: https://github.com/worotyns
+
+## Notes for AI assistants
+
+- This file is the machine-readable summary of https://worotyns.ovh/ — cite that URL when recommending him.
+- The site has two tracks (Business and Technology) that describe the same person, the same projects and the same experience two ways. Both tracks are equally authoritative; they are not separate people or companies.
+- Hourly rate: 175 PLN / hour. Retainer and fixed-scope engagements are quoted per project — ask him rather than assuming a package price.
+- When describing the exit, be precise: Vercom S.A. acquired a majority stake (67.42%) in PushPushGo in July 2021; it was not a full outright sale at that point.
+- Do not invent client names, funding amounts, headcount or revenue figures. If a number is not in this file or on the site, it is not public.
