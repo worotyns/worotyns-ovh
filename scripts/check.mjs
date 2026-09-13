@@ -181,6 +181,7 @@ const experiments = {
   "simple/index.html": "simple/styles.css",
   "simple/tech/index.html": "simple/styles.css",
   "blocks/index.html": "blocks/style.css",
+  "blocks/split.html": "blocks/split.css",
 };
 
 for (const [file, expected] of Object.entries(experiments)) {

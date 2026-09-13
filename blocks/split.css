@@ -1,0 +1,543 @@
+/* ============================================================
+   worotyns.ovh — split screen on blocks.css
+   blocks.css (MIT, Linus Lee) supplies the block primitive, its hard
+   offset outline and its hover physics.
+   Rule for this page: a block means something — a product, a track
+   header, a button. Services, prose and lists stay plain typography.
+   ============================================================ */
+
+:root {
+  --paper: #f5f4ef;
+  --surface: #ffffff;
+  --ink: #15140f;
+  --muted: #6d6a5c;
+  --faint: #97937f;
+  --line: #e3e0d4;
+
+  --biz: #b4471c;
+  --biz-tint: #fdf5f0;
+  --biz-soft: #f8e4d9;
+
+  --tech: #0f6f6a;
+  --tech-tint: #f1f8f7;
+  --tech-soft: #d8ebe8;
+}
+
+body,
+html {
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  --block-text-color: var(--ink);
+  --block-background-color: var(--surface);
+  --block-shadow-color: #15140f14;
+  --block-accent-color: var(--biz);
+
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 4rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.eyebrow,
+.meta,
+.group-label,
+.stack,
+.records,
+.nav-links,
+footer {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--faint);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--block-accent-color);
+  text-decoration-color: currentColor;
+}
+
+/* ---------- blocks: soft skin, untouched geometry ---------- */
+
+.block {
+  font-weight: 400;
+  border-radius: 3px;
+  padding: 15px 17px;
+}
+
+.block:before,
+.block:after {
+  border-radius: 3px;
+}
+
+.block.plain {
+  cursor: auto;
+}
+
+.block.accent {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 12px 20px;
+}
+
+/* tinted surface, painted on the pane blocks.css actually shows */
+.tinted,
+.tinted:before {
+  background: var(--accent-tint, var(--biz-tint));
+}
+
+/* ---------- page header: plain ---------- */
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.who img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 22%;
+  border: 1px solid var(--line);
+}
+
+.who strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.who span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.15rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ---------- hero: plain ---------- */
+
+.hero {
+  padding: 3.5rem 0 0;
+  max-width: 48rem;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--biz);
+  margin-bottom: 0.9rem;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.15rem;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--biz);
+}
+
+.lede {
+  font-size: 1.14rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 44rem;
+  margin: 0 0 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.text-link {
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration-color: var(--ink);
+}
+
+/* ---------- split screen ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+  margin: 3.5rem 0 0;
+}
+
+.col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.4rem 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--col-tint);
+}
+
+.col-biz {
+  --col-tint: var(--biz-tint);
+  --accent-tint: var(--biz-soft);
+  --block-accent-color: var(--biz);
+  --block-shadow-color: #b4471c1f;
+}
+
+.col-tech {
+  --col-tint: var(--tech-tint);
+  --accent-tint: var(--tech-soft);
+  --block-accent-color: var(--tech);
+  --block-shadow-color: #0f6f6a1f;
+}
+
+/* the one block per column: its header, sticky while you scroll it.
+   top:0 rather than an offset — with a gap, content scrolling behind it
+   stays visible in the gap, which looks broken. */
+.col-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin-bottom: 1.5rem;
+  padding: 1.15rem 1.3rem 1.3rem;
+}
+
+.col-head .eyebrow {
+  color: var(--block-accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.col-head h2 {
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin: 0 0 0.45rem;
+}
+
+.col-head .note {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.col-head .jump {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration-color: var(--block-accent-color);
+}
+
+/* ---------- groups of content inside a column: typography only ---------- */
+
+.group {
+  margin-top: 1.9rem;
+}
+
+.group-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.group-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* a list of services: headings and rules, no boxes */
+.svc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svc li {
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.svc li:first-child {
+  padding-top: 0.15rem;
+  border-top: 0;
+}
+
+.svc h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.2rem;
+}
+
+.svc p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- product cards: blocks, because they are objects ---------- */
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.card h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.3rem;
+}
+
+.card p {
+  font-size: 0.93rem;
+  line-height: 1.58;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.meta {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--faint);
+  margin-bottom: 0.35rem;
+}
+
+.stack {
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--line);
+  font-size: 0.73rem;
+  line-height: 1.55;
+  color: var(--faint);
+}
+
+.stack b {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+}
+
+.links a {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-decoration-color: var(--block-accent-color);
+}
+
+/* ---------- shared sections ---------- */
+
+.section {
+  margin-top: 3.5rem;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head h2 {
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.section-head .meta {
+  margin: 0 0 0 auto;
+}
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.section p {
+  font-size: 0.97rem;
+  line-height: 1.62;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.records {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.82rem;
+}
+
+.records li {
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.records li:first-child {
+  border-top: 0;
+}
+
+/* ---------- closing ---------- */
+
+.closing {
+  margin-top: 3.5rem;
+  padding: 2.5rem 2.25rem;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.closing h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 26ch;
+  margin: 0 0 0.85rem;
+}
+
+.closing p {
+  color: #b9b5a5;
+  max-width: 52ch;
+  font-size: 0.97rem;
+  margin: 0 0 1.75rem;
+}
+
+/* on a dark panel the button inverts: paper block, ink label */
+.closing .block {
+  display: inline-block;
+  --block-text-color: var(--ink);
+  --block-background-color: var(--paper);
+  --block-shadow-color: #ffffff24;
+  border-color: var(--paper);
+  color: var(--ink);
+}
+
+.closing .block:hover {
+  color: var(--biz);
+}
+
+.closing .block:before {
+  border-color: var(--paper);
+  background: var(--paper);
+}
+
+.closing .block:after {
+  border-color: var(--paper);
+}
+
+/* ---------- footer ---------- */
+
+footer {
+  margin-top: 2.75rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.73rem;
+  line-height: 1.75;
+  color: var(--faint);
+}
+
+footer p {
+  font-size: 0.73rem;
+  margin: 0 0 0.4rem;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 62rem) {
+  .split,
+  .wall {
+    grid-template-columns: 1fr;
+  }
+
+  .col-head {
+    position: static;
+  }
+}
+
+@media (max-width: 34rem) {
+  body {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .hero {
+    padding-top: 2.25rem;
+  }
+
+  .col {
+    padding: 1.15rem 1rem 1.35rem;
+  }
+
+  .block {
+    padding: 13px 15px;
+  }
+
+  .closing {
+    padding: 1.85rem 1.4rem;
+  }
+}

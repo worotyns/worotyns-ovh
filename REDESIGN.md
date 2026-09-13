@@ -157,31 +157,28 @@ Po drodze złapałem dwa realne błędy, oba z tej samej rodziny (ścieżki wzgl
 
 Czego wersja C nie ma względem pełnej: kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, opinii, ściany klientów, panelu ASCII i zapamiętywania wybranego toru przy reloadzie (tu tor trzyma URL).
 
-## 10. Eksperyment 3: blocks.css, split screen (`/blocks/`)
+## 10. Eksperyment 3: split screen na blocks.css (`/blocks/split.html`)
 
-Trzecia wersja, na cudzej bibliotece: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) — brutalistyczne „klocki" z twardym cieniem i przesunięciem na hover. To biblioteka **komponentowa**, nie styl strony, więc nie „przestylowałem strony blocks.cssem", tylko użyłem go zgodnie z przeznaczeniem i dołożyłem cienką warstwę.
+Trzecia wersja: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) jako prymityw, na nim własna warstwa typografii i przestrzeni. Split screen: lewa kolumna biznes, prawa technologia, pod nimi sekcje wspólne.
 
-**Layout: split screen w dwóch kolumnach.** Lewa to biznes, prawa to technologia; poniżej sekcje wspólne (track record, R&D, nagrania, compliance, kontakt) w neutralnych klockach. To najlepiej oddaje „dwa tory" z Twojego pierwotnego pomysłu, bo obie oferty widać jednocześnie, bez przełączania czegokolwiek.
+**Zasada, która trzyma tę stronę:** blok coś znaczy. Blokiem są produkty, nagłówki torów i przyciski — czyli obiekty i akcje. Usługi, prośba, listy i stopka to zwykła typografia z hairline'ami. Dzięki temu strona nie jest ścianą pudełek.
 
 Jak zrobione:
 
-- **kolumny re-kolorują własne klocki przez zmienne CSS biblioteki** — `.col-biz { --block-accent-color: #b4471c }`, `.col-tech { --block-accent-color: #0f6f6a }`. Wszystko w środku (barwy sekcji, chipy, CTA, obramowania) zmienia kolor bez ani jednego selektora na dzieciach
-- **sticky nagłówki kolumn** (`position: sticky`, 10 px od góry) — przy scrollu cały czas widzisz, w którym torze jesteś; każdy ma chip-link do drugiej kolumny
-- etykiety sekcji jako **kolorowe belki** (`.block.accent` z biblioteki), chipy ze stacków jako `.block.inline`
-- kolumny równej wysokości (`align-items: stretch`, 2450 px obie)
-- mono na całej stronie (`ui-monospace, SF Mono, Menlo, Consolas`), więcej powietrza w klockach (padding 9/11 px), zero JavaScriptu, zero webfontów
-- dark mode przez `prefers-color-scheme` — własne tinty kolumn i jaśniejsze akcenty
-- na wąskim ekranie kolumny się układają jedna pod drugą, sticky wyłącza się
+- **typografia**: Space Grotesk (400/500/700) w nagłówkach i treści, systemowy mono na metadanych, etykietach grup, stackach i stopce. Cztery rozmiary nagłówków z jasną hierarchią, `h1` do 3,5 rem z trackingiem -0,04 em
+- **kolor jako akcent, nie tapeta**: terakota dla biznesu, teal dla technologii — jako tint kolumny, kolor eyebrow, kolor podkreślenia linku i podkreślenie nagłówka `h1`. Nic nie jest wypełnione na płasko
+- **blocks.css nietknięte geometrycznie** (3 px ramka, offsetowy panel `:before`), zmieniony tylko kolor cienia na półprzezroczysty tusz — dzięki temu offset czyta się jako druga, odsunięta krawędź, a nie twardy cień
+- **sticky nagłówki kolumn** z linkiem do drugiej kolumny; kolumny równej wysokości
+- **stacki** jako cichy mono wiersz nad przerywaną linią, nie jako chipy
+- zero JavaScriptu; jedna rodzina webfontów
 
-Pomiar (zimny start, cache wyczyszczony):
+Pomiar (zimny start): 7 żądań / ~48 KB, z czego ~20 KB to Space Grotesk. Nadal ~5× lżej niż pełna wersja (268 KB), a wygląda jak zaprojektowana strona, nie jak eksperyment.
 
-| Wersja | Żądania | Transfer | JS |
-|---|---|---|---|
-| `/` pełna | 9 | 268 KB | 8 KB |
-| `/simple/` (C) | 4 | 21 KB | 0 |
-| `/blocks/` | 6 | **31 KB** | **0** |
+**Dwa realne błędy złapane po drodze** (oba warte zapamiętania przy blocks.css):
+1. `blocks.css` maluje widoczne tło na `:before`, nie na `.block` — więc `background` ustawiony na samym bloku jest niewidoczny. Każde moje kolorowanie musi trafić w `.x, .x:before`.
+2. Sticky nagłówek z `top: 0.75rem` zostawia 12 px szczeliny, w której widać przewijaną treść — wygląda jak zepsuty layout. Przy `top: 0` problem znika.
 
-Wrażenie: najbardziej charakterne z trzech podejść i jedyne, w którym widać oba tory naraz. Split screen + kolor per kolumna czyta się lepiej niż sam blocks.css w jednej kolumnie — kolumny same organizują treść, więc nie trzeba ani jednego separatora. Minus bez zmian: mono w długich akapitach (opis PushPushGo) jest głośne.
+Poprzednia, surowsza wersja (wszystko blokiem, mono, kolorowe kolumny) została jako `/blocks/` do porównania: pokazuje różnicę między „wszystko jest blokiem" a „blok coś znaczy".
 
 ## 11. Co proponuję dalej (kolejność wg zwrotu)
 
