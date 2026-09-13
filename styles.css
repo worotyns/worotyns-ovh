@@ -836,6 +836,49 @@ footer p {
   margin-bottom: 1.75rem;
 }
 
+/* two ways to start a conversation, side by side — same box, so they read
+   as a pair rather than one big and one small */
+.closing .actions {
+  margin-top: 0;
+  gap: 0.9rem;
+}
+
+.closing .actions .block {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+/* the secondary button is a ghost: dark pane, light label. The pane is
+   painted by :before in blocks.css, so it has to be overridden there too —
+   setting only the text colour gives invisible text on the paper pane. */
+.closing .block:not(.accent) {
+  --block-text-color: var(--paper);
+  color: var(--paper);
+  border-color: #4a4638;
+  font-weight: 700;
+}
+
+.closing .block:not(.accent):before {
+  background: #1e1d17;
+  border-color: #4a4638;
+}
+
+.closing .block:not(.accent):after {
+  border-color: #4a4638;
+  background: #0000003d;
+}
+
+.closing .block:not(.accent):hover {
+  color: var(--biz);
+  border-color: var(--biz);
+}
+
+.closing .block:not(.accent):hover:before,
+.closing .block:not(.accent):hover:after {
+  border-color: var(--biz);
+}
+
 .closing-rate {
   padding: 1.4rem 1.5rem 1.5rem;
   border: 1px solid #3d3a30;
