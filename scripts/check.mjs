@@ -89,6 +89,39 @@ for (const id of ["biz", "tech", "work"]) {
   if (!index.includes(`id="${id}"`)) fail(`index.html: expected #${id} — the track switches or the hero link point at it`);
 }
 
+// the matrix must contain every cell: it once closed early, which silently
+// pushed the last groups out to <body> and rendered them in one column
+{
+  const start = index.indexOf('<div class="matrix">');
+  const marker = index.indexOf("<!-- ============ BELOW THE MATRIX");
+  if (start === -1 || marker === -1) {
+    fail("index.html: cannot find the matrix or its end marker");
+  } else {
+    let depth = 0;
+    let closesAt = -1;
+    for (const m of index.matchAll(/<div\b|<!--\s*<\/div>|\/div>/g)) {
+      if (m.index < start) continue;
+      depth += m[0].startsWith("<div") ? 1 : -1;
+      if (depth === 0) { closesAt = m.index; break; }
+    }
+    if (closesAt === -1 || closesAt > marker) {
+      fail("index.html: the matrix does not close before its end marker — cells are leaking out of the grid");
+    }
+    const inside = index.slice(start, closesAt);
+    const inMatrix = (inside.match(/class="cell/g) || []).length;
+    const total = (index.match(/class="cell/g) || []).length;
+    if (inMatrix !== total) fail(`index.html: ${total - inMatrix} cells sit outside the matrix — they will render full width`);
+    notes.push(`index.html: ${inMatrix} cells inside the matrix, ${inMatrix / 2} aligned rows`);
+  }
+}
+
+// sections must balance too: a missing </section> once swallowed the strip
+{
+  const opens = (index.match(/<section\b/g) || []).length;
+  const closes = (index.match(/<\/section>/g) || []).length;
+  if (opens !== closes) fail(`index.html: ${opens} <section> vs ${closes} </section> — a section is not closed`);
+}
+
 // the whole point of the layout: every business cell has a technology cell,
 // so the rows line up. A missing one silently breaks the alignment.
 const bizCells = (index.match(/class="cell(?: head)? biz"/g) || []).length;
@@ -96,7 +129,6 @@ const techCells = (index.match(/class="cell(?: head)? tech"/g) || []).length;
 if (bizCells !== techCells) {
   fail(`index.html: ${bizCells} business cells vs ${techCells} technology cells — the matrix would fall out of alignment`);
 }
-notes.push(`index.html: ${bizCells} aligned row pairs`);
 
 // every product card must be clickable, and open in a new tab
 for (const m of index.matchAll(/<div[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {

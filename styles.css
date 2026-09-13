@@ -363,37 +363,38 @@ h1 em {
   color: var(--accent, var(--ink));
 }
 
-.stack {
-  margin-top: 0.65rem;
-  padding-top: 0.6rem;
+/* .cell p sets 0.93rem, so the fine print needs to out-specify it */
+.cell .stack {
+  margin-top: 1rem;
+  padding-top: 0.95rem;
   border-top: 1px dashed var(--line);
   font-size: 0.62rem;
-  line-height: 1.6;
+  line-height: 1.7;
   letter-spacing: 0.01em;
   color: var(--faint);
 }
 
-.stack small {
+.cell .stack small {
   font-size: 1em;
 }
 
-.stack span {
+.cell .stack span {
   color: var(--muted);
 }
 
-.links {
+.cell .links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 0.8rem;
+  margin-top: 0.9rem;
   font-size: 0.66rem;
 }
 
-.links small {
+.cell .links small {
   font-size: 1em;
 }
 
-.links a {
+.cell .links a {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   text-decoration-color: var(--accent, var(--faint));
 }
