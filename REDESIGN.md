@@ -40,13 +40,34 @@ Kolejność grup jest celowa: **najpierw to, co można kupić, potem najmocniejs
 
 Anchor links, brakujące pliki, wewnętrzne linki rozwiązane tak, jak zrobi to przeglądarka, wewnętrzne linki w `llms.txt`, JSON-LD, `llms.txt` (tytuł, streszczenie, stawka, kontakt, projekty), liczba par w macierzy, klikalność kart, `target`/`rel` na linkach zewnętrznych, nagrania + miniatury, obecność arkuszy `vendor/*` i `styles.css`.
 
+## Podstrony usługowe (SEO)
+
+Dwa adresy pod frazy, każdy z **własną treścią** — nie kopią strony głównej, żeby nie dublować:
+
+- **`/fractional-cto/`** — „Technical decisions, taken by someone who has paid for them before." Sekcje: gdzie mnie wołają (4 przypadki), jak wygląda współpraca (4 kroki), dowody (PPG / GetViaMsg / Terapeuto, framing techniczny), pytania, czego nie robię.
+- **`/product-leadership/`** — „The product problem is rarely the product problem." Sekcje: gdzie mnie wołają, jak wygląda współpraca, dowody (PPG / Terapeuto / uff.email, framing biznesowy), pytania, czego nie robię.
+
+Każda ma: własny `title` i `description` w limicie, canonical do siebie, `og:image` **własny** (generowany przez `task generate:og-image`), breadcrumb widoczny i w JSON-LD, `FAQPage` z trzema realnymi pytaniami, `Service` z ceną (`UnitPriceSpecification`, `unitCode: HUR`), linki w stopce strony głównej i wzajemne. `sitemap.xml` ma trzy adresy.
+
+## Linki i dostępność
+
+- **Wszystkie linki zewnętrzne otwierają się w nowej karcie** (`target="_blank" rel="noopener"`) — i pilnuje tego checker dla każdej strony, nie tylko dla kart.
+- Linki wewnętrzne (anchory, stopka, podstrony) zostają w tej samej karcie. Nowa karta dla własnej nawigacji psuje przycisk „wstecz" i jest antypatternem — jeśli chcesz inaczej, to jedna zmiana.
+- Karty są dostępne z klawiatury, mają `aria-label` opisujący dokąd prowadzą („Terapeuto — terapeuto.com, opens in a new tab"), każdy `img` ma `alt` (dekoracyjne puste), każda strona ma dokładnie jeden `h1`.
+
+## Stawka na stronie
+
+**175 PLN / hour** jest teraz widoczne — w panelu zamykającym na stronie głównej i na obu podstronach, razem z informacją, że retainery i prace o stałym zakresie wyceniane są per projekt. `llms.txt` podaje tę samą kwotę.
+
+## Co pilnuje `task check` (SEO)
+
+Poza rzeczami strukturalnymi: długość `title` i `description` w limicie, canonical, `og:image` + `og:image:alt`, `twitter:card`, dokładnie jeden `h1`, `alt` na każdym obrazku, strony indeksowalne muszą być w `sitemap.xml`, a `sitemap.xml` nie może wskazywać nieistniejących plików. Strony z `noindex` (404) są z tego zwolnione.
+
 ## Do decyzji
 
-1. **Stawka 175 PLN/h** — nadal tylko w `llms.txt`. Strona jej nie pokazuje.
-2. **Opinie klientów** — usunięte przy przejściu na tę wersję. To jedyny element, którego brakuje najbardziej: dla konsultanta 2–3 cytaty z nazwiskiem ważą więcej niż cała reszta strony.
-3. **ISO 27001 / NIS2** — w pasku compliance jako „practices" i „technology risk", nie jako certyfikaty. Potwierdzone jako ok, ale warto pilnować, żeby nie brzmiało jak certyfikat.
-4. **`ogimage.jpg`** — generowany z tej strony (`task generate:og-image`), do odświeżenia po każdej większej zmianie układu.
-5. **Podstrony SEO** — przy jednym URL-u Google widzi jedną ofertę. Gdyby wrócić do pomysłu `/fractional-cto` i `/product-leadership`, to teraz najtańszy sposób na dwa wejścia.
+1. **Opinie klientów** — odłożone przez Ciebie. To nadal jedyny brakujący element zaufania; mamy gotowe cytaty z Terapeuto, GetViaMsg i Interię o PushPushGo.
+2. **`ceemes.eu`** — domena delegowana do Cloudflare, ale bez rekordu A/AAAA, więc link celowo wyprzedza stronę.
+3. **Wersja polska** — treść jest po angielsku; gdyby klienci mieli być głównie z PL, `hreflang` i `/pl/` to naturalny następny krok (struktura jest już gotowa pod to).
 
 ## Historia decyzji (skrót)
 

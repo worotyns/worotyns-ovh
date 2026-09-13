@@ -22,16 +22,24 @@ tasks:
       - wrangler pages deploy . --project-name worotyns
 
   generate:og-image:
-    desc: Screenshot index.html → ogimage.jpg (1200×630)
+    desc: Screenshot every page into a 1200x630 og image (needs a local server, the pages use absolute paths)
     cmds:
-      - >-
-        /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-        --headless=new --disable-gpu --hide-scrollbars
-        --virtual-time-budget=6000
-        --screenshot=ogimage.png
-        --window-size=1200,630
-        --default-background-color=000000
-        "file://$(pwd)/index.html"
-      - sips -s format jpeg -s formatOptions 88 ogimage.png --out ogimage.jpg
-      - rm -f ogimage.png
-      - echo "✅ ogimage.jpg regenerated"
+      - |
+        set -e
+        CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        python3 -m http.server 8899 --bind 127.0.0.1 >/dev/null 2>&1 &
+        SERVER=$!
+        trap 'kill $SERVER 2>/dev/null || true' EXIT
+        sleep 1
+        shot() {
+          "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=6000 \
+            --screenshot="$2" --window-size=1200,630 \
+            "http://127.0.0.1:8899/$1"
+          sips -s format jpeg -s formatOptions 88 "$2" --out "${2%.png}.jpg" >/dev/null
+          rm -f "$2"
+        }
+        shot "" ogimage.png
+        shot fractional-cto/ og-fractional-cto.png
+        shot product-leadership/ og-product-leadership.png
+        echo "✅ og images regenerated (3)"

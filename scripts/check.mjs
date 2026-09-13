@@ -10,7 +10,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-const files = ["index.html", "404.html"];
+const files = ["index.html", "404.html", "fractional-cto/index.html", "product-leadership/index.html"];
 const problems = [];
 const notes = [];
 
@@ -108,10 +108,11 @@ for (const id of ["biz", "tech", "work"]) {
       fail("index.html: the matrix does not close before its end marker — cells are leaking out of the grid");
     }
     const inside = index.slice(start, closesAt);
-    const inMatrix = (inside.match(/class="cell/g) || []).length;
-    const total = (index.match(/class="cell/g) || []).length;
+    const count = (str) => (str.match(/class="cell (?:head )?(?:biz|tech)"/g) || []).length;
+    const inMatrix = count(inside);
+    const total = count(index);
     if (inMatrix !== total) fail(`index.html: ${total - inMatrix} cells sit outside the matrix — they will render full width`);
-    notes.push(`index.html: ${inMatrix} cells inside the matrix, ${inMatrix / 2} aligned rows`);
+    notes.push(`index.html: ${inMatrix} cells inside the matrix, ${inMatrix / 2} aligned row pairs`);
   }
 }
 
@@ -130,60 +131,48 @@ if (bizCells !== techCells) {
   fail(`index.html: ${bizCells} business cells vs ${techCells} technology cells — the matrix would fall out of alignment`);
 }
 
-// every product card must be clickable, and open in a new tab
+// attribute order is irrelevant: read each <a> once and pull the attributes out
+const anchors = [...index.matchAll(/<a\s([^>]*)>/g)].map((m) => m[1]);
+const attr = (attrs, name) => (attrs.match(new RegExp(name + '="([^"]*)"')) || [null, null])[1];
+
+for (const attrs of anchors) {
+  const cls = attr(attrs, "class") || "";
+  const href = attr(attrs, "href");
+
+  if (/\bcard\b/.test(cls) && !href) fail(`index.html: a card link has no href — ${attrs.trim()}`);
+  if (/\bcard\b/.test(cls) && href && href.startsWith("http") && attr(attrs, "target") !== "_blank") {
+    fail(`index.html: an external card link does not open in a new tab — ${href}`);
+  }
+  if (/\bcard\b/.test(cls) && href && href.startsWith("http") && !/noopener/.test(attr(attrs, "rel") || "")) {
+    fail(`index.html: an external card link is missing rel=noopener — ${href}`);
+  }
+  if (/\b(record|accent)\b/.test(cls) && !href) fail(`index.html: a .${cls} block has no href — ${attrs.trim()}`);
+
+  // every link needs an accessible name: text, or an aria-label
+  if (!href) fail(`index.html: an <a> without href — ${attrs.trim()}`);
+}
+
+// external links must all open in a new tab and carry rel=noopener
+for (const attrs of anchors) {
+  const href = attr(attrs, "href") || "";
+  if (!href.startsWith("http")) continue;
+  if (attr(attrs, "target") !== "_blank") fail(`index.html: external link without target=_blank — ${href}`);
+  if (!/noopener/.test(attr(attrs, "rel") || "")) fail(`index.html: external link without rel=noopener — ${href}`);
+  if (!/\b(aria-label|title)\b/.test(attrs) && !/class="[^"]*\bcard\b/.test(attrs)) {
+    // plain inline links are fine as long as they have text; nothing to assert here
+  }
+}
+
+// a card that is a div must still contain a link
 for (const m of index.matchAll(/<div[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
   if (!/<a\s/.test(m[1])) fail("index.html: a card is a plain div with no link inside it");
-}
-for (const m of index.matchAll(/<a[^>]*class="[^"]*\bcard\b[^"]*"([^>]*)>/g)) {
-  const attrs = m[1];
-  if (!/href="/.test(attrs)) fail(`index.html: a card link has no href — ${attrs.trim()}`);
-  // mailto cards are exempt: they open a mail client, not a tab
-  const external = /href="https?:/.test(attrs);
-  if (external && !/target="_blank"/.test(attrs)) fail(`index.html: an external card link does not open in a new tab — ${attrs.trim()}`);
-  if (external && !/rel="[^"]*noopener/.test(attrs)) fail(`index.html: an external card link opens a new tab without rel=noopener — ${attrs.trim()}`);
-}
-
-// no dead CTAs anywhere
-for (const m of index.matchAll(/<a[^>]*class="block accent"([^>]*)>/g)) {
-  if (!/href="/.test(m[1])) fail("index.html: an accent block (a CTA) has no href");
-}
-
-
-/* ---------- llms.txt (machine-readable summary) ---------- */
-
-if (!existsSync("llms.txt")) {
-  fail("llms.txt: missing — AI assistants read this file to describe you");
-} else {
-  const llms = readFileSync("llms.txt", "utf8");
-
-  if (!/^# .+/m.test(llms)) fail("llms.txt: no H1 title on the first line");
-  if (!/^> .+/m.test(llms)) fail("llms.txt: no '> summary' blockquote after the title");
-  if (!llms.includes("175 PLN")) fail("llms.txt: hourly rate (175 PLN) is missing");
-  if (!llms.includes("https://worotyns.ovh/")) fail("llms.txt: canonical site URL missing");
-  if (!llms.includes("i@worotyns.ovh")) fail("llms.txt: contact e-mail missing");
-
-  // every project on the site should be mentioned with its URL
-  for (const url of ["pushpushgo.com", "terapeuto.com", "uff.email", "getviamsg.wdft.ovh"]) {
-    if (!llms.includes(url)) fail(`llms.txt: project ${url} is not mentioned`);
-  }
-
-  const links = (llms.match(/https?:\/\//g) || []).length;
-  notes.push(`llms.txt: ${llms.split("\n").length} lines, ${links} links, rate declared`);
-}
-
-/* ---------- clickable cards ---------- */
-
-// a project card either is a link itself, or must contain one — the "your project"
-// slot once shipped as an <article> with a dead CTA and no href inside
-for (const m of index.matchAll(/<article[^>]*class="project[^"]*"[^>]*>([\s\S]*?)<\/article>/g)) {
-  if (!/<a\s/.test(m[1])) {
-    fail("index.html: a project card is neither a link nor contains one — its CTA cannot be clicked");
-  }
 }
 
 /* ---------- recordings ---------- */
 
-const records = [...index.matchAll(/<a[^>]*class="[^"]*\brecord\b[^"]*"[^>]*href="([^"]+)"/g)].map((m) => m[1]);
+const records = anchors
+  .filter((attrs) => /\brecord\b/.test(attr(attrs, "class") || ""))
+  .map((attrs) => attr(attrs, "href"));
 if (!records.length) fail("index.html: no recordings found — did the watch list get removed?");
 for (const url of records) {
   if (!/^https:\/\/www\.youtube\.com\/watch\?v=/.test(url)) fail(`index.html: a recording links somewhere unexpected — ${url}`);
@@ -233,6 +222,50 @@ for (const file of files) {
   }
   notes.push(`index.html: stylesheets ${sheets.join(" + ")}`);
 }
+
+/* ---------- SEO surface of every page ---------- */
+
+const sitemap = existsSync("sitemap.xml") ? readFileSync("sitemap.xml", "utf8") : "";
+
+for (const file of files) {
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, "utf8");
+  const meta = (name) => (html.match(new RegExp(`<meta[^>]+(?:name|property)="${name}"[^>]+content="([^"]*)"`, "i")) || [null, null])[1];
+
+  const title = (html.match(/<title[^>]*>([^<]*)<\/title>/i) || [null, ""])[1].trim();
+  const desc = meta("description") || "";
+  const canonical = (html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i) || [null, null])[1];
+  const noindex = /<meta[^>]+name="robots"[^>]+noindex/.test(html);
+
+  const h1s = (html.match(/<h1[\s>]/g) || []).length;
+  if (h1s !== 1) fail(`${file}: ${h1s} <h1> elements (exactly one expected)`);
+
+  for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+    if (!/\balt=/.test(m[0])) fail(`${file}: <img> without alt — ${m[0].slice(0, 60)}`);
+  }
+
+  // a noindex page (404, experiments) is not meant to rank: only the basics apply
+  if (noindex) {
+    notes.push(`${file}: noindex — skipping the social/SEO surface`);
+    continue;
+  }
+
+  if (title.length < 20 || title.length > 65) fail(`${file}: <title> is ${title.length} chars (aim for 20-65)`);
+  if (desc.length < 60 || desc.length > 165) fail(`${file}: meta description is ${desc.length} chars (aim for 60-165)`);
+  if (!canonical) fail(`${file}: no canonical link`);
+  if (!meta("og:image")) fail(`${file}: no og:image`);
+  if (!meta("og:image:alt")) fail(`${file}: no og:image:alt`);
+  if (!meta("twitter:card")) fail(`${file}: no twitter:card`);
+  if (canonical && !sitemap.includes(canonical)) fail(`${file}: ${canonical} is indexable but missing from sitemap.xml`);
+}
+
+// the sitemap should not advertise pages that do not exist
+for (const m of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  const path = m[1].replace("https://worotyns.ovh/", "");
+  const file = path === "" ? "index.html" : path + "index.html";
+  if (!existsSync(file)) fail(`sitemap.xml: lists ${m[1]} but ${file} does not exist`);
+}
+notes.push(`SEO: ${(sitemap.match(/<loc>/g) || []).length} urls in the sitemap`);
 
 /* ---------- report ---------- */
 

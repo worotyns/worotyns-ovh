@@ -620,6 +620,31 @@ footer p {
   margin: 0 0 0.4rem;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.76rem;
+}
+
+.footer-links a {
+  font-weight: 700;
+  text-decoration-color: var(--ink);
+}
+
+/* the rate, where a buyer actually reads it */
+.closing .rate {
+  margin: 0 0 1.75rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #3a382e;
+  font-size: 0.88rem;
+}
+
+.closing .rate strong {
+  color: var(--paper);
+}
+
 /* ---------- narrow: the matrix becomes one column, pairs stack ---------- */
 
 @media (max-width: 62rem) {
@@ -687,5 +712,60 @@ footer p {
 
   .closing {
     padding: 1.85rem 1.4rem;
+  }
+}
+
+/* ---------- service pages (/fractional-cto, /product-leadership) ---------- */
+
+.crumbs {
+  margin: 1.5rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  color: var(--faint);
+}
+
+.crumbs a {
+  text-decoration-color: var(--faint);
+}
+
+.crumbs span {
+  margin: 0 0.45rem;
+}
+
+.wall.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.faq dt {
+  padding-top: 1.25rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  border-top: 1px solid var(--line);
+}
+
+.faq dt:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.faq dd {
+  margin: 0.4rem 0 1.4rem;
+  max-width: 62ch;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 62rem) {
+  .wall.three {
+    grid-template-columns: 1fr;
   }
 }
