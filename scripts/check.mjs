@@ -10,7 +10,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-const files = ["index.html", "404.html", "simple/index.html", "simple/tech/index.html"];
+const files = ["index.html", "404.html", "simple/index.html", "simple/tech/index.html", "blocks/index.html"];
 const problems = [];
 const notes = [];
 
@@ -175,6 +175,27 @@ for (const file of files) {
   }
 }
 
+/* ---------- experiment pages: each one must load its own stylesheet ---------- */
+
+const experiments = {
+  "simple/index.html": "simple/styles.css",
+  "simple/tech/index.html": "simple/styles.css",
+  "blocks/index.html": "blocks/style.css",
+};
+
+for (const [file, expected] of Object.entries(experiments)) {
+  if (!existsSync(file)) {
+    fail(`${file}: experiment page missing`);
+    continue;
+  }
+  const page = readFileSync(file, "utf8");
+  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
+  if (!sheets.includes(expected)) {
+    fail(`${file}: loads ${sheets.join(", ") || "no stylesheet"} — it must load ${expected}`);
+  }
+  notes.push(`${file}: ${Math.round(page.length / 1024)} KB, stylesheets ${sheets.join(" + ")}`);
+}
+
 /* ---------- the simple experiment: two tracks, two real URLs ---------- */
 
 const simplePages = {
@@ -199,12 +220,7 @@ if (existsSync(simplePages.biz) || existsSync(simplePages.tech)) {
     if (!/aria-current="page"/.test(page)) {
       fail(`${file}: the track switch does not mark the current page`);
     }
-    // the simple pages must load the simple stylesheet, not the main one
-    const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
-    if (sheets.length !== 1 || sheets[0] !== "simple/styles.css") {
-      fail(`${file}: loads ${sheets.join(", ") || "no stylesheet"} — it must resolve to simple/styles.css`);
-    }
-    notes.push(`${file}: ${Math.round(page.length / 1024)} KB, ${lane} track, stylesheet ${sheets[0]}`);
+    notes.push(`${file}: ${lane} track`);
   }
 }
 

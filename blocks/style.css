@@ -1,0 +1,218 @@
+/* ============================================================
+   worotyns.ovh — "blocks.css" experiment
+   Vendored blocks.css (MIT, Linus Lee) + this thin layer.
+   Everything here is either typography or the mono override;
+   the block look itself is blocks.css doing its thing.
+   ============================================================ */
+
+body,
+html {
+  /* mono everywhere — the reset asks for system-ui, we overrule it */
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+body {
+  --block-text-color: #14140f;
+  --block-background-color: #ffffff;
+  --block-shadow-color: #a8a8a0;
+  --block-accent-color: #0f6f6a;
+
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 4.5rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  background: #f2f1ee;
+  color: var(--block-text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --block-text-color: #ececec;
+    --block-background-color: #17181c;
+    --block-shadow-color: #000000;
+    --block-accent-color: #2fa39a;
+    background: #0d0e11;
+    color: var(--block-text-color);
+  }
+}
+
+/* blocks are chunky by default; keep body copy readable, headings loud */
+.block {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+strong,
+.heading,
+.stat {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+h3 {
+  font-size: 0.95rem;
+}
+
+/* section labels: small, uppercase, quiet */
+.heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--block-text-color);
+  opacity: 0.75;
+}
+
+p {
+  margin: 0 0 0.55rem;
+  line-height: 1.65;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+li::marker {
+  color: var(--block-shadow-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--block-accent-color);
+}
+
+code {
+  font-size: 0.9em;
+}
+
+/* a block that only holds text, not a link or button */
+.block.plain {
+  cursor: auto;
+}
+
+/* masthead */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.masthead img {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  object-fit: cover;
+  object-position: center 22%;
+  flex: none;
+  border: 2px solid var(--block-text-color);
+}
+
+.masthead span {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+/* two column walls of blocks */
+.wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.wall .block {
+  margin: 6px 5px 10px;
+}
+
+/* stack chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 0.35rem;
+}
+
+.chips .block.inline {
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* metadata under a title */
+.meta {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  margin-bottom: 0.35rem;
+}
+
+/* a link block that wraps a whole item */
+.item {
+  display: block;
+  text-decoration: none;
+}
+
+.item:hover {
+  color: var(--block-text-color);
+}
+
+/* the call to action */
+.block.accent {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* footer */
+footer {
+  margin-top: 2rem;
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+footer p {
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 34rem) {
+  body {
+    padding: 1.5rem 0.5rem 3rem;
+    font-size: 0.9rem;
+  }
+
+  .wall {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.05rem;
+  }
+}

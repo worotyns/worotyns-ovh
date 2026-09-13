@@ -157,7 +157,29 @@ Po drodze złapałem dwa realne błędy, oba z tej samej rodziny (ścieżki wzgl
 
 Czego wersja C nie ma względem pełnej: kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, opinii, ściany klientów, panelu ASCII i zapamiętywania wybranego toru przy reloadzie (tu tor trzyma URL).
 
-## 10. Co proponuję dalej (kolejność wg zwrotu)
+## 10. Eksperyment 3: blocks.css (`/blocks/`)
+
+Trzecia wersja, tym razem na cudzej bibliotece: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) — brutalistyczne „klocki" z twardym cieniem i przesunięciem na hover. Blocks.css to biblioteka **komponentowa**, nie styl strony: reset ustawia `system-ui`, a `.block` to klasa dla przycisków/kart. Więc:
+
+- blocks.css i jego reset **vendored lokalnie** (`blocks/blocks.min.css`, `blocks/reset.min.css`, licencja obok) — zero zależności z CDN
+- **mono na całej stronie** (`ui-monospace, SF Mono, Menlo, Consolas`) — zgodnie z prośbą; reset prosi o `system-ui`, moja warstwa to nadpisuje
+- ~120 linii własnej warstwy: font, szerokość kolumny, dwa „mury" klocków w gridzie, chipy ze stacków jako `.block.inline`, akcentowy CTA na końcu
+- dark mode przez `prefers-color-scheme` (blocks.css ma zmienne CSS, więc to zmiana czterech wartości)
+- zero JavaScriptu, zero webfontów, 68 klocków na stronie
+
+Pomiar (zimny start, cache wyczyszczony):
+
+| Wersja | Żądania | Transfer | JS |
+|---|---|---|---|
+| `/` pełna | 9 | 268 KB | 8 KB |
+| `/simple/` (C) | 4 | 21 KB | 0 |
+| `/blocks/` | 6 | **28 KB** | **0** |
+
+Ciekawostka: sama strona `/blocks/` waży 12 KB (najwięcej kodu HTML z trzech wersji), bo każdy element to osobny klocek, a chipy stacków to osobne elementy. Całość i tak trzy razy lżejsza od pełnej wersji.
+
+Wrażenie: to najbardziej „charakterne" z trzech podejść i szczerze — czyta się to lepiej, niż wygląda na papierze, bo rytm klocków zastępuje separatory i nagłówki. Minus: mono w połączeniu z klockami jest dość głośne przy dłuższych akapitach (np. opisie PushPushGo), więc nadawałoby się raczej na wersję „engineering zine" niż na stronę dla klienta biznesowego.
+
+## 11. Co proponuję dalej (kolejność wg zwrotu)
 
 1. **Podstrony SEO** `/fractional-cto/` i `/product-leadership/` — przełącznik toru jest świetny dla człowieka, ale Google nie zaindeksuje dwóch wariantów jednego URL-a jako dwóch osobnych ofert. Dwie lekkie strony na tym samym CSS + linki z głównej.
 2. **Screenshoty projektów** (4 obrazki) — zamiana kafelków tekstowych na wizualne.
