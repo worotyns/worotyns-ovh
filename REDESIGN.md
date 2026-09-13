@@ -125,29 +125,37 @@ Sprawdziłem publiczne źródła i użyłem: **Vercom S.A. nabył 67,42% udział
 
 **Uwaga:** zdjęcie pojawia się teraz dwa razy na stronie — w navbarze (34 px) i w sekcji About (88 px). Powiedz, jeśli mam zostawić tylko jedno.
 
-## 9. Eksperyment: wersja „simple" (`/simple/`)
+## 9. Wersja C — prostota + dwa realne adresy (`/simple/`)
 
-Osobna, równoległa wersja do porównania — **nie nadpisuje obecnej strony**. Jest na `noindex` (to eksperyment, nie druga strona do pozycjonowania), a obie wersje linkują do siebie w stopce.
+Wybrany wariant: układ i typografia z wersji simple, ale **przełącznik torów zostaje** — nie jako JS, tylko jako **dwa osobne adresy**:
 
-Zasady, które sobie narzuciłem:
+- `/simple/` — tor biznesowy (product & business)
+- `/simple/tech/` — tor techniczny (fractional CTO & architecture)
 
-- **zero JavaScriptu** — żadnego przełącznika torów, animacji, fasad wideo; nagrania są zwykłymi linkami
-- **zero webfontów** — systemowy stos fontów, więc zero zapytań do Google Fonts
-- **jedna kolumna**, 42 rem, bez kart, cieni i zaokrągleń; sekcje oddzielone samym nagłówkiem
-- **tor biznesowy i techniczny scalone** w jedną uczciwą listę (4 + 4 punkty) zamiast przełącznika
-- dark mode wyłącznie przez `prefers-color-scheme` (bez przycisku i bez zapisu w `localStorage`)
-- treść ta sama: kim jestem, co robię, cztery własne produkty, track record, AI, R&D (WDFT), nagrania, compliance, kontakt
+Przełącznik to zwykłe linki tekstowe pod nagłówkiem; aktualny tor oznaczony pogrubieniem, drugi jest linkiem. To rozwiązuje problem SEO, który zgłaszałem w rundzie 1: Google nie zaindeksuje dwóch wariantów jednego URL-a jako dwóch ofert, a tutaj każda oferta ma własny adres.
 
-Pomiar (Chrome, zimny start):
+Zasady, które się trzymają:
 
-| | Pełna wersja | Wersja simple |
+- **zero JavaScriptu** — brak przełącznika JS, animacji, fasad wideo; nagrania to zwykłe linki
+- **zero webfontów** — systemowy stos fontów (na stronie głównej same fonty to 131 KB z 268 KB transferu)
+- **jedna kolumna**, bez kart, cieni, zaokrągleń
+- **dark mode** przez `prefers-color-scheme`, bez przycisku i bez `localStorage`
+- treść toruje się na poziomie sekcji: „What I help with", „What I run today", „AI" i wybór nagrań mają inne framing w każdym torze; R&D, compliance i kontakt są wspólne
+
+Pomiar (Chrome, zimny start, cache wyczyszczony):
+
+| | Pełna wersja (`/`) | Wersja C (`/simple/`) |
 |---|---|---|
-| Żądania | 8 | **3** |
-| Transfer | 66 KB | **11 KB** |
-| JavaScript | tak (przełącznik, fasady, reveal) | **0 B** |
-| Pliki | HTML + CSS + JS + Google Fonts | HTML (8 KB) + CSS (2,7 KB) |
+| Żądania | 9 | **4** |
+| Transfer | 268 KB | **21 KB** |
+| w tym fonty | 131 KB (Google Fonts) | **0** |
+| w tym arkusz | 40 KB | **4 KB** |
+| w tym zdjęcie | 22 KB (`avatar.jpg`, 320 px) | **8 KB** (`avatar-96.jpg`) |
+| JavaScript | 8 KB | **0 B** |
 
-Czego wersja simple **nie** ma: przełącznika torów, kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, sekcji z opiniami, ściany klientów, panelu ASCII. Jeśli wybierzesz tę drogę, najsensowniej jest przenieść do niej treść z pełnej wersji, a nie odwrotnie.
+Po drodze złapałem dwa realne błędy, oba z tej samej rodziny (ścieżki względne vs serwowany URL): przełącznik prowadził do `/tech/` zamiast `/simple/tech/` (bo `../tech/` liczone od `/simple/` wychodzi poza katalog), a strona biznesowa ładowała **główny** arkusz 40 KB zamiast `simple/styles.css`. Oba naprawione, a `task check` dostał twarde reguły: każdy wewnętrzny link musi rozwiązać się do istniejącego pliku, a strony eksperymentu muszą ładować `simple/styles.css`.
+
+Czego wersja C nie ma względem pełnej: kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, opinii, ściany klientów, panelu ASCII i zapamiętywania wybranego toru przy reloadzie (tu tor trzyma URL).
 
 ## 10. Co proponuję dalej (kolejność wg zwrotu)
 

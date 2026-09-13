@@ -8,8 +8,9 @@
  */
 
 import { readFileSync, existsSync } from "node:fs";
+import { dirname, join } from "node:path";
 
-const files = ["index.html", "404.html"];
+const files = ["index.html", "404.html", "simple/index.html", "simple/tech/index.html"];
 const problems = [];
 const notes = [];
 
@@ -34,12 +35,13 @@ for (const file of files) {
     if (!ids.has(a)) fail(`${file}: anchor #${a} has no matching id`);
   }
 
-  // 2. referenced local assets exist
-  const assets = [...html.matchAll(/(?:src|href)="(\/[^"?#]+|[a-z0-9-]+\.(?:css|js|jpg|png|svg|webmanifest))"/gi)]
-    .map((m) => m[1].replace(/^\//, ""))
-    .filter((a) => !a.startsWith("http"));
+  // 2. referenced local assets exist (resolve ../ against the file's folder)
+  const assets = [...html.matchAll(/(?:src|href)="([^"?#]+\.(?:css|js|jpg|jpeg|png|svg|webmanifest|ico))"/gi)]
+    .map((m) => m[1])
+    .filter((a) => !/^https?:/i.test(a));
   for (const a of new Set(assets)) {
-    if (!existsSync(a)) fail(`${file}: asset ${a} not found on disk`);
+    const resolved = a.startsWith("/") ? a.slice(1) : join(dirname(file), a);
+    if (!existsSync(resolved)) fail(`${file}: asset ${a} not found on disk (looked for ${resolved})`);
   }
 
   // 3. track variants: .only-biz and .only-tech should come in pairs
@@ -146,6 +148,63 @@ if (!videoIds.length) {
     for (const id of videoIds) {
       if (!llms.includes(id)) fail(`llms.txt: recording ${id} is not listed under Talks`);
     }
+  }
+}
+
+/* ---------- internal links must resolve to a real file ---------- */
+
+function resolveHref(pageFile, href) {
+  if (!href || /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith("#")) return null;
+  let p = href.split("?")[0].split("#")[0];
+  if (!p) return null;
+  p = p.startsWith("/") ? p.slice(1) : join(dirname(pageFile), p);
+  if (p === "" || p === ".") return "index.html";
+  if (p.endsWith("/")) p += "index.html";
+  return p;
+}
+
+for (const file of files) {
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, "utf8");
+  for (const m of html.matchAll(/href="([^"#][^"]*)"/g)) {
+    const target = resolveHref(file, m[1]);
+    if (!target) continue;
+    if (!existsSync(target)) {
+      fail(`${file}: link ${m[1]} points at ${target}, which does not exist`);
+    }
+  }
+}
+
+/* ---------- the simple experiment: two tracks, two real URLs ---------- */
+
+const simplePages = {
+  biz: "simple/index.html",
+  tech: "simple/tech/index.html",
+};
+
+if (existsSync(simplePages.biz) || existsSync(simplePages.tech)) {
+  for (const [lane, file] of Object.entries(simplePages)) {
+    if (!existsSync(file)) {
+      fail(`${file}: the ${lane} track of the simple version is missing — the two pages must exist as a pair`);
+      continue;
+    }
+    const page = readFileSync(file, "utf8");
+    const otherHref = lane === "biz" ? "/simple/tech/" : "/simple/";
+    const otherFile = lane === "biz" ? simplePages.tech : simplePages.biz;
+    // the switch must point at the other page, resolved from this page's URL
+    const links = [...page.matchAll(/href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
+    if (!links.includes(otherFile)) {
+      fail(`${file}: the track switch does not resolve to ${otherHref} (${otherFile})`);
+    }
+    if (!/aria-current="page"/.test(page)) {
+      fail(`${file}: the track switch does not mark the current page`);
+    }
+    // the simple pages must load the simple stylesheet, not the main one
+    const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref(file, m[1]));
+    if (sheets.length !== 1 || sheets[0] !== "simple/styles.css") {
+      fail(`${file}: loads ${sheets.join(", ") || "no stylesheet"} — it must resolve to simple/styles.css`);
+    }
+    notes.push(`${file}: ${Math.round(page.length / 1024)} KB, ${lane} track, stylesheet ${sheets[0]}`);
   }
 }
 
