@@ -157,15 +157,21 @@ Po drodze złapałem dwa realne błędy, oba z tej samej rodziny (ścieżki wzgl
 
 Czego wersja C nie ma względem pełnej: kart projektów z tagami i stackami w dwóch odsłonach, galerii wideo z miniaturami, opinii, ściany klientów, panelu ASCII i zapamiętywania wybranego toru przy reloadzie (tu tor trzyma URL).
 
-## 10. Eksperyment 3: blocks.css (`/blocks/`)
+## 10. Eksperyment 3: blocks.css, split screen (`/blocks/`)
 
-Trzecia wersja, tym razem na cudzej bibliotece: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) — brutalistyczne „klocki" z twardym cieniem i przesunięciem na hover. Blocks.css to biblioteka **komponentowa**, nie styl strony: reset ustawia `system-ui`, a `.block` to klasa dla przycisków/kart. Więc:
+Trzecia wersja, na cudzej bibliotece: [blocks.css](https://thesephist.github.io/blocks.css/) Linusa Lee (MIT, ~2,2 KB) — brutalistyczne „klocki" z twardym cieniem i przesunięciem na hover. To biblioteka **komponentowa**, nie styl strony, więc nie „przestylowałem strony blocks.cssem", tylko użyłem go zgodnie z przeznaczeniem i dołożyłem cienką warstwę.
 
-- blocks.css i jego reset **vendored lokalnie** (`blocks/blocks.min.css`, `blocks/reset.min.css`, licencja obok) — zero zależności z CDN
-- **mono na całej stronie** (`ui-monospace, SF Mono, Menlo, Consolas`) — zgodnie z prośbą; reset prosi o `system-ui`, moja warstwa to nadpisuje
-- ~120 linii własnej warstwy: font, szerokość kolumny, dwa „mury" klocków w gridzie, chipy ze stacków jako `.block.inline`, akcentowy CTA na końcu
-- dark mode przez `prefers-color-scheme` (blocks.css ma zmienne CSS, więc to zmiana czterech wartości)
-- zero JavaScriptu, zero webfontów, 68 klocków na stronie
+**Layout: split screen w dwóch kolumnach.** Lewa to biznes, prawa to technologia; poniżej sekcje wspólne (track record, R&D, nagrania, compliance, kontakt) w neutralnych klockach. To najlepiej oddaje „dwa tory" z Twojego pierwotnego pomysłu, bo obie oferty widać jednocześnie, bez przełączania czegokolwiek.
+
+Jak zrobione:
+
+- **kolumny re-kolorują własne klocki przez zmienne CSS biblioteki** — `.col-biz { --block-accent-color: #b4471c }`, `.col-tech { --block-accent-color: #0f6f6a }`. Wszystko w środku (barwy sekcji, chipy, CTA, obramowania) zmienia kolor bez ani jednego selektora na dzieciach
+- **sticky nagłówki kolumn** (`position: sticky`, 10 px od góry) — przy scrollu cały czas widzisz, w którym torze jesteś; każdy ma chip-link do drugiej kolumny
+- etykiety sekcji jako **kolorowe belki** (`.block.accent` z biblioteki), chipy ze stacków jako `.block.inline`
+- kolumny równej wysokości (`align-items: stretch`, 2450 px obie)
+- mono na całej stronie (`ui-monospace, SF Mono, Menlo, Consolas`), więcej powietrza w klockach (padding 9/11 px), zero JavaScriptu, zero webfontów
+- dark mode przez `prefers-color-scheme` — własne tinty kolumn i jaśniejsze akcenty
+- na wąskim ekranie kolumny się układają jedna pod drugą, sticky wyłącza się
 
 Pomiar (zimny start, cache wyczyszczony):
 
@@ -173,11 +179,9 @@ Pomiar (zimny start, cache wyczyszczony):
 |---|---|---|---|
 | `/` pełna | 9 | 268 KB | 8 KB |
 | `/simple/` (C) | 4 | 21 KB | 0 |
-| `/blocks/` | 6 | **28 KB** | **0** |
+| `/blocks/` | 6 | **31 KB** | **0** |
 
-Ciekawostka: sama strona `/blocks/` waży 12 KB (najwięcej kodu HTML z trzech wersji), bo każdy element to osobny klocek, a chipy stacków to osobne elementy. Całość i tak trzy razy lżejsza od pełnej wersji.
-
-Wrażenie: to najbardziej „charakterne" z trzech podejść i szczerze — czyta się to lepiej, niż wygląda na papierze, bo rytm klocków zastępuje separatory i nagłówki. Minus: mono w połączeniu z klockami jest dość głośne przy dłuższych akapitach (np. opisie PushPushGo), więc nadawałoby się raczej na wersję „engineering zine" niż na stronę dla klienta biznesowego.
+Wrażenie: najbardziej charakterne z trzech podejść i jedyne, w którym widać oba tory naraz. Split screen + kolor per kolumna czyta się lepiej niż sam blocks.css w jednej kolumnie — kolumny same organizują treść, więc nie trzeba ani jednego separatora. Minus bez zmian: mono w długich akapitach (opis PushPushGo) jest głośne.
 
 ## 11. Co proponuję dalej (kolejność wg zwrotu)
 
