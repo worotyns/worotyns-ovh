@@ -326,7 +326,7 @@
     <div class="cell biz">
       <span class="tag">Business</span>
       <h3>Federated Payment Standard</h3>
-      <p>Card fees make small payments uneconomical: roughly 0.25 PLN plus 1–3% per transaction, so nothing below a few złoty is worth selling online. This standard takes no percentage at all — a flat fee per package of transactions, designed at 5 USD per 1,000, which brings the cost of a payment close to that of an Elixir transfer. At that price an article can be sold for 0.50 PLN.</p>
+      <p>Card fees make small payments uneconomical: roughly 0.25 PLN plus 1–3% per transaction, so nothing below a few PLN is worth selling online. This standard takes no percentage at all — a flat fee per package of transactions, designed at 5 USD per 1,000, which brings the cost of a payment close to that of an Elixir transfer. At that price an article can be sold for 0.50 PLN.</p>
       <ul class="list">
         <li>Microtransactions below 1 PLN become viable.</li>
         <li>No percentage commission, no chargebacks, no reserves.</li>
@@ -336,17 +336,17 @@
     </div>
     <div class="cell tech">
       <span class="tag">Technology</span>
+      <span class="meta">Concept · spec and bank sandbox</span>
       <h3>Federated Payment Standard</h3>
       <p>An open standard that uses the banks' existing rails and mobile apps — deep links and QR codes — instead of building another payment network. Four parts: a <strong>registry</strong> holding the bank directory, the webhook verification keys, an API and the mobile-app manifests; an <strong>SDK</strong> that generates payment links and verifies signatures; <strong>banks and providers</strong> that execute and notify; the <strong>implementor</strong> that creates the link and receives the webhooks.</p>
-      <p>Three payment states drive the order: <code>complete</code> when the customer confirms in their banking app (stock is reserved), <code>confirm</code> once the transfer is ordered and cannot be withdrawn (the order is fulfilled), <code>rejected</code>. Every webhook carries an HMAC-SHA-256 signature in <code>x-pay-signature</code>, checked against a key known to the registry and the bank, with a <code>/verify/:provider</code> endpoint for verification and HTTPS throughout. Payment links look like <code>https://&lt;registry&gt;/pay/&lt;provider&gt;?wh=&lt;callback&gt;</code>; the implementor receives <code>POST /webhook/:status</code>, the registry exposes <code>GET /providers</code>.</p>
-      <p class="stack"><small><span>status</span> · spec, bank sandbox, signature design</small></p>
+      <p class="stack"><small><span>sdk</span> · flutter · dart · kotlin · swift · typescript</small></p>
       <p class="links"><small><a href="https://docs.wdft.ovh/concept-federated-payment-system" rel="noopener" target="_blank">whitepaper</a></small></p>
     </div>
 
     <div class="cell biz">
       <span class="tag">Business</span>
       <h3>Session-Based Payments</h3>
-      <p>Instead of one subscription or nothing, a reader commits a few cents per article inside a session and settles it with a single transfer later — which monetises the readers who would never subscribe.</p>
+      <p>Instead of one subscription or nothing, a reader commits around 0.50 PLN per article inside a session and settles it with a single transfer later — which monetises the readers who would never subscribe.</p>
       <p class="links"><small><a href="https://docs.wdft.ovh/concept-session-based-payment" rel="noopener" target="_blank">whitepaper</a></small></p>
     </div>
     <div class="cell tech">
