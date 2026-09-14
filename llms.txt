@@ -77,6 +77,9 @@ Smaller things, published openly at https://github.com/worotyns — they show th
 - **csp_examples** (https://github.com/worotyns/csp_examples) — a Content-Security-Policy testing environment: a local server, a simulated third-party CDN, a service worker and CSP violation reporting, so you can see which directive stops which injection.
 - **atoms** (https://github.com/worotyns/atoms) — a two-method micro-framework (`persist`, `restore`) that keeps objects as files on disk instead of in a database, queryable with jq; the same file-based instinct as the storage in uff.email.
 - **wtdn** (https://github.com/worotyns/wtdn) — "what to do next": a small task board where each person can vote once, the top-voted task is the one that gets assigned, and only the author can close it.
+- **click2call** (https://github.com/worotyns/click2call) — a 2018 widget that takes a phone number on a publisher's page and orders a callback, with the whole telephony backend on the telecom operator's side. Built for Telecube as a barter arrangement, as a deliberate answer to CallPage.
+
+Dozens of older experiments and forks are at https://github.com/worotyns?tab=repositories; the page links to that list rather than describing them.
 
 ## Research & development — WDFT PSA
 

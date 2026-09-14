@@ -70,11 +70,11 @@ Naprawa: doorway został **przeniesiony przed macierz** (tam pełna szerokość 
 
 ## Off the clock — sekcja fun projects
 
-Między pasem compliance a panelem zamykającym stoi sześć kafelków-linków do GitHuba: llmact (aktorzy LLM w plikach Markdown), wtyczka Mermaid do Publii, self-hosted Deno KV z codziennym testem backupu, playground CSP, `atoms` (persist/restore na plikach) i `wtdn` (tablica zadań z głosowaniem). Każdy kafelek to ten sam `.strip`/`.tile` co pas compliance, tylko opakowany w `<a>` — kafel jest afordancją, więc na hover zmienia się kolor tytułu, nie pojawia się podkreślenie.
+Między pasem compliance a panelem zamykającym stoi siedem kafelków-linków do GitHuba — llmact (aktorzy LLM w plikach Markdown), wtyczka Mermaid do Publii, self-hosted Deno KV z codziennym testem backupu, playground CSP, `atoms` (persist/restore na plikach), `wtdn` (tablica zadań z głosowaniem) i `click2call` (widget zamawiający oddzwonienie, backend po stronie operatora) — plus ósmy kafelek „a dozen more, mostly experiments”, który prowadzi do listy repozytoriów i domyka siatkę 2×4. Każdy kafelek to ten sam `.strip`/`.tile` co pas compliance, tylko opakowany w `<a>` — kafel jest afordancją, więc na hover zmienia się kolor tytułu, nie pojawia się podkreślenie.
 
 Po co to tu: strona sprzedaje decyzje, a te projekty pokazują skąd one pochodzą — „pliki zamiast bazy” w uff.email i test odtwarzania w Terapeuto nie wzięły się z prezentacji, tylko z takich małych rzeczy robionych dla siebie. To także jedyne miejsce, w którym widać zakres i gust, a nie tylko wyniki.
 
-Reguła treści: opis każdego projektu musi pochodzić z jego README (sprawdzone), bez liczby gwiazdek i bez „w trakcie rozwoju”. Kolejność: od najbardziej pomysłowego do najbardziej użytkowego.
+Reguła treści: opis każdego projektu musi pochodzić z jego README (sprawdzone), bez liczby gwiazdek i bez „w trakcie rozwoju”. Nie każdy projekt zasługuje na kafelek — `png-diff` (porównywanie obrazów) i `wwown` (slackbot monitorujący zaangażowanie) zostają poza stroną świadomie: pierwszy był narzędziem martwego projektu, drugi eksperymentem bez odbiorcy. Kolejność: od najbardziej pomysłowego do najbardziej użytkowego, na końcu kafelek-łącze do reszty repozytoriów.
 
 ## Panel zamykający: dwie kolumny
 
