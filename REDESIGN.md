@@ -16,6 +16,7 @@ hero (kim jestem, dwa CTA)
 └───────────────────────────────────────────────────────────────────────────────────┘
 On the record (3 nagrania z miniaturami i czasem trwania)
 Compliance, folded into the work (4 kolorowe klocki)
+Off the clock — fun projects (6 kafelków-linków do GitHuba)
 closing CTA + stopka (llms.txt)
 ```
 
@@ -66,6 +67,14 @@ Każda ma: własny `title` i `description` w limicie, canonical do siebie, `og:i
 Pierwsza wersja reedycji wstawiła trzy grupy **pełnej szerokości** na sam początek macierzy (sytuacje, trzy powody, skonsolidowana lista kompetencji). Skutek: czytelnik dostawał trzy akapity bez podziału na tory, zanim zobaczył nagłówki „Track 01 / Track 02" — czyli dokładnie tam, gdzie koncept „tej samej pracy czytanej na dwa sposoby" miał się ustanowić. Koncept się rozjechał.
 
 Naprawa: doorway został **przeniesiony przed macierz** (tam pełna szerokość jest naturalna, bo to wprowadzenie), a wewnątrz macierzy **wszystkie wiersze są znów parowane** biznes | technologia — sytuacje, lista kompetencji, track record, R&D, produkty, AI. Stan obecny: **12 wierszy, wszystkie pary, zero komórek pełnej szerokości wewnątrz macierzy**. `task check` pilnuje teraz także tego, że liczba komórek biznesowych równa się technologicznym, i że macierz nie ma wycieków.
+
+## Off the clock — sekcja fun projects
+
+Między pasem compliance a panelem zamykającym stoi sześć kafelków-linków do GitHuba: llmact (aktorzy LLM w plikach Markdown), wtyczka Mermaid do Publii, self-hosted Deno KV z codziennym testem backupu, playground CSP, `atoms` (persist/restore na plikach) i `wtdn` (tablica zadań z głosowaniem). Każdy kafelek to ten sam `.strip`/`.tile` co pas compliance, tylko opakowany w `<a>` — kafel jest afordancją, więc na hover zmienia się kolor tytułu, nie pojawia się podkreślenie.
+
+Po co to tu: strona sprzedaje decyzje, a te projekty pokazują skąd one pochodzą — „pliki zamiast bazy” w uff.email i test odtwarzania w Terapeuto nie wzięły się z prezentacji, tylko z takich małych rzeczy robionych dla siebie. To także jedyne miejsce, w którym widać zakres i gust, a nie tylko wyniki.
+
+Reguła treści: opis każdego projektu musi pochodzić z jego README (sprawdzone), bez liczby gwiazdek i bez „w trakcie rozwoju”. Kolejność: od najbardziej pomysłowego do najbardziej użytkowego.
 
 ## Panel zamykający: dwie kolumny
 

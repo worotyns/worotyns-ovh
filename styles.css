@@ -776,6 +776,26 @@ h1 em {
   color: var(--muted);
 }
 
+/* the fun projects are the same tiles, but each one is a link out to GitHub:
+   the tile is the affordance, so the title is what changes on hover */
+.strip a.tile {
+  text-decoration: none;
+}
+
+.strip a.tile strong {
+  transition: color 0.15s ease;
+}
+
+.strip a.tile:hover strong {
+  color: var(--accent, var(--biz));
+}
+
+.strip .tile code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  color: var(--ink);
+}
+
 /* ---------- closing ---------- */
 
 .closing {

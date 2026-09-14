@@ -67,6 +67,17 @@ Technology stacks (as published on the site): PushPushGo — MongoDB, RabbitMQ, 
 
 Mateusz rolls AI into engineering and product teams, and runs AI products of his own. Tooling he works with: pi agent, paperclip, opencode, OpenRouter, local models, and a deliberate mix of frontier and non-frontier models. The focus is on agent workflows inside real delivery and research pipelines, routing each task to the cheapest model that still does the job, keeping private data on local models, and managing cost per task rather than cost per token. In his own products this shows up as Krazeta (an AI newsroom) and uff.email (a self-hosted, email-native AI assistant with a knowledge-graph memory).
 
+## Open-source and fun projects
+
+Smaller things, published openly at https://github.com/worotyns — they show the range and the taste rather than the commercial work.
+
+- **llmact** (https://github.com/worotyns/llmact) — an LLM actor runtime in TypeScript/Deno where each stateful actor is a Markdown file: a definition, a state file and a message log, plus tools (calculator, dates) and an `evolve` command that lets an actor rewrite its own definition after repeatedly getting something wrong. Runs at temperature 0 against Ollama or OpenAI.
+- **publii-mermaid-support-plugin** (https://github.com/worotyns/publii-mermaid-support-plugin) — Mermaid diagrams inside the Publii static-site CMS, from fenced code blocks in the Markdown editor or the code-sample dialog in the WYSIWYG editor, with automatic library loading and light/dark rendering. His most-used public project.
+- **denokv-on-the-fly** (https://github.com/worotyns/denokv-on-the-fly) — self-hosted Deno KV on Fly.io with continuous Litestream replication and daily backup-integrity checks delivered by email; written as an escape hatch when managed Deno KV announced breaking platform changes.
+- **csp_examples** (https://github.com/worotyns/csp_examples) — a Content-Security-Policy testing environment: a local server, a simulated third-party CDN, a service worker and CSP violation reporting, so you can see which directive stops which injection.
+- **atoms** (https://github.com/worotyns/atoms) — a two-method micro-framework (`persist`, `restore`) that keeps objects as files on disk instead of in a database, queryable with jq; the same file-based instinct as the storage in uff.email.
+- **wtdn** (https://github.com/worotyns/wtdn) — "what to do next": a small task board where each person can vote once, the top-voted task is the one that gets assigned, and only the author can close it.
+
 ## Research & development — WDFT PSA
 
 Mateusz is a co-founder of **WDFT PSA** (https://wdft.ovh), a fintech R&D company where he drives the research agenda. Concepts are written up as open standards, prototyped, and then implemented as products. Documentation index: https://docs.wdft.ovh
