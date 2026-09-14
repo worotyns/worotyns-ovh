@@ -303,7 +303,7 @@
         <ul class="facts">
           <li><strong>200+</strong><span>enterprise clients</span></li>
           <li><strong>15</strong><span>engineers hired and led</span></li>
-          <li><strong>67.42%</strong><span>stake acquired by Vercom S.A., 2021</span></li>
+          <li><strong>~70%</strong><span>stake acquired by Vercom S.A., 2021</span></li>
         </ul>
       </a>
     </div>
@@ -316,6 +316,7 @@
         <ul class="facts">
           <li><strong>1B+</strong><span>events a day</span></li>
           <li><strong>5</strong><span>push channels from one platform</span></li>
+          <li><strong>13 Gbps</strong><span>peak egress on the image CDN</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · mongodb · rabbitmq · typescript · bare metal + cloud</small></p>
       </a>
@@ -342,7 +343,7 @@
         <p>Three independent backends implement the same domain model — a Go event-sourced reference, a single-process Deno/SQLite build for small installs, and a Cloudflare Workers variant — wrapped by a TypeScript SDK and overlay, a WordPress plugin, an SMS router and analytics. Operator webhooks, idempotent accounting and DORA-aligned controls throughout.</p>
         <ul class="facts">
           <li><strong>3</strong><span>backends, one domain model</span></li>
-          <li><strong>614</strong><span>commits in the Go reference</span></li>
+          <li><strong>npm + WP</strong><span>client layers: SDK, plugin, edge router</span></li>
           <li><strong>2</strong><span>SMS operators integrated</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · go · kurrentdb · event sourcing · deno · sqlite · cloudflare workers · terraform · nomad</small></p>
@@ -403,9 +404,9 @@
         <h3>Terapeuto</h3>
         <p>Multi-tenant practice management under medical-data rules: schedules built from reusable slots, a four-level pricing engine (clinic, branch, therapist, patient), and notes, ID numbers and patient files sealed with a key per patient — delete the key and that patient's records are unreadable. One container runs the app, replicates SQLite to S3 and drives the daily cron.</p>
         <ul class="facts">
-          <li><strong>47</strong><span>tables, 77 migrations</span></li>
-          <li><strong>922</strong><span>tests: 649 unit, 273 end-to-end</span></li>
-          <li><strong>1 key</strong><span>per patient — destroy it and the record is gone</span></li>
+          <li><strong>Per patient</strong><span>encryption keys — destroy one and that record is gone</span></li>
+          <li><strong>Audited</strong><span>every write logged in the same transaction</span></li>
+          <li><strong>Restore tested</strong><span>daily, from the replicated copy of the database</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · python · sqlite · litestream · fly.io · docker</small></p>
       </a>
@@ -431,9 +432,9 @@
         <h3>uff.email</h3>
         <p>Self-hosted, email-native agent: mail lands in a filesystem queue, a scheduler runs reminders and background work, and the memory is a knowledge graph of people, companies, documents and events — YAML, JSONL and Markdown on a per-assistant encrypted volume, with no database in the stack at all.</p>
         <ul class="facts">
-          <li><strong>260</strong><span>commits in ten weeks, solo</span></li>
-          <li><strong>64 + 96</strong><span>agent and panel tests</span></li>
-          <li><strong>1 GB</strong><span>encrypted volume per assistant</span></li>
+          <li><strong>Isolated</strong><span>its own container and encrypted volume per assistant</span></li>
+          <li><strong>10 weeks</strong><span>empty repo to production, one author</span></li>
+          <li><strong>Hard cap</strong><span>on model spend per assistant</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · python · docker · ansible · mailu · filesystem state · openrouter</small></p>
       </a>
@@ -446,9 +447,9 @@
         <h3>Krazeta</h3>
         <p>A daily Kraków newspaper whose editorial team is AI: a new edition every day, city chronicle, business, sport, weather, an audio version. Founder.</p>
         <ul class="facts">
-          <li><strong>52</strong><span>editions with content</span></li>
-          <li><strong>1</strong><span>sponsor per edition, four in 2026</span></li>
-          <li><strong>0</strong><span>programmatic ads, no tracking</span></li>
+          <li><strong>Daily</strong><span>a closed edition every morning since July 2026</span></li>
+          <li><strong>1</strong><span>sponsor per edition — no ad network, no tracking</span></li>
+          <li><strong>No paywall</strong><span>reading is free; the sponsor pays</span></li>
         </ul>
       </a>
     </div>
@@ -459,9 +460,9 @@
         <h3>Krazeta</h3>
         <p>Agents collect sources, draft, section and publish the daily issue from Conductor workflows, with model calls routed through OpenRouter. No database and no CMS: every article and every piece of state is a Markdown or YAML file in Git, so the whole editorial history is versioned and auditable. Audio edition generated per issue.</p>
         <ul class="facts">
-          <li><strong>1,196</strong><span>articles as Markdown in Git</span></li>
-          <li><strong>8</strong><span>AI reporters, 94 approved sources</span></li>
-          <li><strong>$0.11</strong><span>model cost per text edition; audio 0.09–0.17</span></li>
+          <li><strong>8</strong><span>AI reporters working from 94 approved sources</span></li>
+          <li><strong>~$1</strong><span>model cost per edition — text, voice and images</span></li>
+          <li><strong>Git</strong><span>every article and every state file, versioned</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · python · conductor workflows · eleventy · markdown in git · openrouter</small></p>
       </a>
@@ -487,9 +488,9 @@
         <h3>ceemes.</h3>
         <p>Static-first: pages are generated as static files with islands for interactivity, and every piece is pluggable. The editorial side is built for AI to drive it — an MCP server is exposed, so agents manage content directly. Published in the open as it is built.</p>
         <ul class="facts">
-          <li><strong>7.5k</strong><span>lines of strict TypeScript</span></li>
-          <li><strong>Plugins</strong><span>own migrations and table prefix each</span></li>
+          <li><strong>Plugin-first</strong><span>features switched per site, no fork of the core</span></li>
           <li><strong>MCP</strong><span>exposed, so agents can drive the CMS</span></li>
+          <li><strong>No app server</strong><span>pages are files — nothing to run or patch</span></li>
         </ul>
         <p class="stack"><small><span>stack</span> · typescript · hono · react 19 · vite · sqlite · drizzle · plugin-first</small></p>
       </a>

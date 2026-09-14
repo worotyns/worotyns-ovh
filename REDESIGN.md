@@ -75,14 +75,16 @@ Przy okazji wyszło, że **kafelki-linki podkreślały całą swoją treść**: 
 
 ## Warstwa faktów w kartach produktów (`.facts`)
 
-Karty produktów miały dotąd opis i stack, ale żadnej liczby — a po przejściu repozytoriów projektów (wrzesień 2026) okazało się, że liczby są i to one sprzedają: 47 tabel i 922 testy w Terapeuto, 1 196 artykułów i 0,11 USD kosztu wydania w Krazaecie, 260 commitów w dziesięć tygodni w uff.email, trzy niezależne backendy GetViaMsg.
+Karty produktów miały dotąd opis i stack, ale żadnej liczby — a po przejściu repozytoriów projektów (wrzesień 2026) okazało się, że liczby są i to one sprzedają: 30 dni od pustego repo do prototypu w Terapeuto, ~1 USD kosztu wydania w Krazaecie, dziesięć tygodni od pustego repo do produkcji w uff.email, trzy niezależne backendy GetViaMsg.
 
 Do każdej karty produktu weszła więc stopka `.facts`: od dwóch do trzech liczb z jednozdaniowym podpisem — ta sama logika co pas dowodów pod hero, tylko w rozmiarze karty. Reguły:
 
-- **liczba musi pochodzić z repozytorium**: commity, tabele, migracje, testy, artykuły, wydania, koszt modelu na wydanie, domyślna prowizja. Żadnych deklaracji marketingowych w tym miejscu.
+- **liczba mówi o wyniku, nie o rzemiośle** — i pochodzi z repozytorium. Wchodzą: czas do rynku (30 dni do prototypu, dziesięć tygodni do produkcji), skala i szczyt (miliard zdarzeń dziennie, 13 Gbps na CDN w szczycie, jeden sponsor na wydanie), izolacja i zgodność (klucz per pacjent, audyt każdego zapisu, dzienny test odtwarzania), koszt i kontrola kosztu (~1 USD za wydanie gazety z tekstem, głosem i obrazami, twardy limit na model), model biznesowy (10% prowizji, 4,99 USD/mies., 0% prowizji, ~70% akcji).
+- **żadnych artefaktów kodu** (commity, testy, linie kodu, tabele, migracje) ani **parametrów serwera** (GB, RAM, vCPU, rozmiar wolumenu) — to detale wykonawcy, nie argumenty dla foundera ani CTO. Wolumen i przepustowość w szczycie są wyjątkiem, bo to skala, nie specyfikacja.
+- **zaokrąglaj** — „~70% akcji", nie „67,42%". Precyzja do drugiego miejsca po przecinku brzmi jak broszura, nie jak rozmowa.
 - **braki nie są faktami** („0 testów", „brak CI") — karta opowiada o produkcie, nie o audycie.
 - **2–3 pozycje, podpis do ~40 znaków**, bo kolumna w macierzy ma ~34 rem i dłuższy podpis zawija się do czterech linii.
-- ten sam materiał trafia do `llms.txt` w formie rozwiniętej (biznes i technika per produkt), żeby warstwa maszynowa niosła to samo co strona.
+- ten sam materiał trafia do `llms.txt` w formie rozwiniętej (biznes i technika per produkt) i podlega tym samym regułom; plik mówi wprost, czego nie publikujemy, żeby asystenci tego nie dopowiadali.
 
 Wizualnie: `.facts` to grid `auto-fit` z kreskowaną linią u góry, liczba w kolorze toru (`--accent`), podpis w monospace i `--faint`. Linia stacku pod spodem staje się wtedy ciągła (`.facts + .stack`), żeby dwie identyczne separatory nie czytały się jak błąd. Weryfikacja zrzutami z headless Chrome na 1200 px i 390 px — `getComputedStyle` tego nie pokaże, a decyduje zawijanie podpisów.
 
