@@ -406,6 +406,51 @@ h1 em {
   text-decoration-color: var(--accent, var(--faint));
 }
 
+/* ---------- verified numbers inside a product card ----------
+   Each fact is a stat with a caption underneath — the proof strip from the
+   top of the page, shrunk to card size. Three at most; the grid drops to
+   two or one per row as the card gets narrow. */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: 0.7rem 1.1rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0.9rem 0 0;
+  border-top: 1px dashed var(--line-strong);
+}
+
+.facts li {
+  min-width: 0;
+}
+
+.facts strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent, var(--biz));
+}
+
+.facts span {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--faint);
+}
+
+/* the stats already open the fine print, so the stack line below keeps its
+   rule but loses the dashes: two identical separators read as a mistake */
+.facts + .stack {
+  border-top-style: solid;
+}
+
 .list {
   list-style: none;
   margin: 0;

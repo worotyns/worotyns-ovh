@@ -39,7 +39,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/vendor/reset.min.css?v=a13a89a1">
   <link rel="stylesheet" href="/vendor/blocks.min.css?v=d416638c">
-  <link rel="stylesheet" href="/styles.css?v=bded0dd1">
+  <link rel="stylesheet" href="/styles.css?v=e7d6888c">
 
   <script type="application/ld+json">
   {
@@ -300,6 +300,11 @@
         <span class="meta">MarTech · exit, 2021</span>
         <h3>PushPushGo</h3>
         <p>From a side project to the leading push-notification platform in Poland: two hundred enterprise clients including TUI, POLITICO, Auchan, Hearst and Interia, a team of fifteen, and a majority acquisition by WSE-listed Vercom S.A. Co-founder, then CPO, then CTO.</p>
+        <ul class="facts">
+          <li><strong>200+</strong><span>enterprise clients</span></li>
+          <li><strong>15</strong><span>engineers hired and led</span></li>
+          <li><strong>67.42%</strong><span>stake acquired by Vercom S.A., 2021</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -307,7 +312,11 @@
       <a href="https://pushpushgo.com" class="block card" aria-label="PushPushGo — pushpushgo.com, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">Event-driven · high throughput</span>
         <h3>PushPushGo</h3>
-        <p>Multi-channel delivery platform: event ingest, fan-out, queueing and delivery for web and mobile push at over a billion events a day, on bare metal and cloud, with a data warehouse over the top and SDKs and APIs for customers — then inside a listed group after the acquisition, with the security and compliance reporting that comes with it.</p>
+        <p>Multi-channel delivery platform: event ingest, fan-out, queueing and delivery for web and mobile push, on bare metal and cloud, with a data warehouse over the top and SDKs and APIs for customers — then inside a listed group after the acquisition, with the security and compliance reporting that comes with it.</p>
+        <ul class="facts">
+          <li><strong>1B+</strong><span>events a day</span></li>
+          <li><strong>5</strong><span>push channels from one platform</span></li>
+        </ul>
         <p class="stack"><small><span>stack</span> · mongodb · rabbitmq · typescript · bare metal + cloud</small></p>
       </a>
     </div>
@@ -317,7 +326,12 @@
       <a href="https://getviamsg.wdft.ovh" class="block card" aria-label="GetViaMsg — getviamsg.wdft.ovh, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">FinTech · beta, going to market</span>
         <h3>GetViaMsg</h3>
-        <p>57% of readers leave when they hit a paywall. One SMS unlocks one article — no card, no account, commission instead of fixed fees, and payout the next business day instead of after sixty. Co-founder and CTO.</p>
+        <p>57% of readers leave when they hit a paywall. One SMS is the whole sign-up and the whole payment: the phone number is the identity, commitments gathered across a session settle into one bill, and the publisher pays commission on volume instead of a fee per transaction. Co-founder and CTO.</p>
+        <ul class="facts">
+          <li><strong>10%</strong><span>default commission on volume, capped under 20%</span></li>
+          <li><strong>SMS</strong><span>is the identity and the consent — no sign-up</span></li>
+          <li><strong>1</strong><span>settlement per session, paid by transfer</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -325,8 +339,13 @@
       <a href="https://getviamsg.wdft.ovh" class="block card" aria-label="GetViaMsg — getviamsg.wdft.ovh, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">Session-based payments · DORA</span>
         <h3>GetViaMsg</h3>
-        <p>Session-based micro-payments: QR or link, one SMS, content unlocked in seconds with settlement handled asynchronously. Operator webhooks, idempotent accounting, and DORA-aligned controls with documented operational resilience — the regulator's checklist treated as engineering work.</p>
-        <p class="stack"><small><span>stack</span> · fly.io · cloudflare · oracle cloud · two sms operators</small></p>
+        <p>Three independent backends implement the same domain model — a Go event-sourced reference, a single-process Deno/SQLite build for small installs, and a Cloudflare Workers variant — wrapped by a TypeScript SDK and overlay, a WordPress plugin, an SMS router and analytics. Operator webhooks, idempotent accounting and DORA-aligned controls throughout.</p>
+        <ul class="facts">
+          <li><strong>3</strong><span>backends, one domain model</span></li>
+          <li><strong>614</strong><span>commits in the Go reference</span></li>
+          <li><strong>2</strong><span>SMS operators integrated</span></li>
+        </ul>
+        <p class="stack"><small><span>stack</span> · go · kurrentdb · event sourcing · deno · sqlite · cloudflare workers · terraform · nomad</small></p>
       </a>
     </div>
 
@@ -370,6 +389,11 @@
         <span class="meta">MedTech · live, paying customers</span>
         <h3>Terapeuto</h3>
         <p>Scheduling, records, billing and waitlists in one system for therapy centres — with every booking arriving on the clinic's own domain instead of a marketplace that takes the patient and the commission. Founder, CTO and CPO.</p>
+        <ul class="facts">
+          <li><strong>0%</strong><span>commission per booking</span></li>
+          <li><strong>1</strong><span>install, many clinics, roles per person</span></li>
+          <li><strong>30 days</strong><span>empty repo to working prototype</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -377,7 +401,12 @@
       <a href="https://terapeuto.com" class="block card" aria-label="Terapeuto — terapeuto.com, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">Multi-tenant · encrypted records</span>
         <h3>Terapeuto</h3>
-        <p>Four-level pricing engine, AES-256 session records, conflict-free room and therapist scheduling, end-to-end coverage. Prototype in 30 days, feature lead time around two days.</p>
+        <p>Multi-tenant practice management under medical-data rules: schedules built from reusable slots, a four-level pricing engine (clinic, branch, therapist, patient), and notes, ID numbers and patient files sealed with a key per patient — delete the key and that patient's records are unreadable. One container runs the app, replicates SQLite to S3 and drives the daily cron.</p>
+        <ul class="facts">
+          <li><strong>47</strong><span>tables, 77 migrations</span></li>
+          <li><strong>922</strong><span>tests: 649 unit, 273 end-to-end</span></li>
+          <li><strong>1 key</strong><span>per patient — destroy it and the record is gone</span></li>
+        </ul>
         <p class="stack"><small><span>stack</span> · python · sqlite · litestream · fly.io · docker</small></p>
       </a>
     </div>
@@ -388,6 +417,11 @@
         <span class="meta">AI · live, paying customers</span>
         <h3>uff.email</h3>
         <p>An assistant you hire by giving it a name: forward it the work you hate and the answer comes back in the same thread. No app, no onboarding, no card to start. Founder, CTO and CPO.</p>
+        <ul class="facts">
+          <li><strong>4.99</strong><span>USD a month per assistant, 14.99 PLN</span></li>
+          <li><strong>30 days</strong><span>free trial, then monthly by transfer</span></li>
+          <li><strong>1</strong><span>address and one memory, no tiers</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -395,8 +429,13 @@
       <a href="https://uff.email" class="block card" aria-label="uff.email — uff.email, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">Agentic · knowledge graph</span>
         <h3>uff.email</h3>
-        <p>Self-hosted, email-native agent that keeps its own memory as a knowledge graph of people, companies, documents and events, isolated per assistant, and replies in the same thread.</p>
-        <p class="stack"><small><span>stack</span> · python · docker · knowledge graph · ai</small></p>
+        <p>Self-hosted, email-native agent: mail lands in a filesystem queue, a scheduler runs reminders and background work, and the memory is a knowledge graph of people, companies, documents and events — YAML, JSONL and Markdown on a per-assistant encrypted volume, with no database in the stack at all.</p>
+        <ul class="facts">
+          <li><strong>260</strong><span>commits in ten weeks, solo</span></li>
+          <li><strong>64 + 96</strong><span>agent and panel tests</span></li>
+          <li><strong>1 GB</strong><span>encrypted volume per assistant</span></li>
+        </ul>
+        <p class="stack"><small><span>stack</span> · python · docker · ansible · mailu · filesystem state · openrouter</small></p>
       </a>
     </div>
 
@@ -406,6 +445,11 @@
         <span class="meta">Local media · AI newsroom · no-person company experiment</span>
         <h3>Krazeta</h3>
         <p>A daily Kraków newspaper whose editorial team is AI: a new edition every day, city chronicle, business, sport, weather, an audio version. Founder.</p>
+        <ul class="facts">
+          <li><strong>52</strong><span>editions with content</span></li>
+          <li><strong>1</strong><span>sponsor per edition, four in 2026</span></li>
+          <li><strong>0</strong><span>programmatic ads, no tracking</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -413,8 +457,13 @@
       <a href="https://krazeta.pl" class="block card" aria-label="Krazeta — krazeta.pl, opens in a new tab" rel="noopener" target="_blank">
         <span class="meta">Pipeline · agents · AI experiment: cost optimisation</span>
         <h3>Krazeta</h3>
-        <p>Agents collect sources, draft, section and publish the daily issue, orchestrated in Python workflows with model calls routed through OpenRouter. Audio edition generated per issue.</p>
-        <p class="stack"><small><span>stack</span> · python · paperclip · conductor · openrouter</small></p>
+        <p>Agents collect sources, draft, section and publish the daily issue from Conductor workflows, with model calls routed through OpenRouter. No database and no CMS: every article and every piece of state is a Markdown or YAML file in Git, so the whole editorial history is versioned and auditable. Audio edition generated per issue.</p>
+        <ul class="facts">
+          <li><strong>1,196</strong><span>articles as Markdown in Git</span></li>
+          <li><strong>8</strong><span>AI reporters, 94 approved sources</span></li>
+          <li><strong>$0.11</strong><span>model cost per text edition; audio 0.09–0.17</span></li>
+        </ul>
+        <p class="stack"><small><span>stack</span> · python · conductor workflows · eleventy · markdown in git · openrouter</small></p>
       </a>
     </div>
 
@@ -424,6 +473,11 @@
         <span class="meta">Publishing tech · PoC, in progress</span>
         <h3>ceemes.</h3>
         <p>A proof of concept for a modern CMS for publishers. I own the product, the technology and the delivery. Early days — the site is at ceemes.eu.</p>
+        <ul class="facts">
+          <li><strong>1</strong><span>install = one newsroom, one SQLite file</span></li>
+          <li><strong>7.6 KB</strong><span>JavaScript on a published page</span></li>
+          <li><strong>Static</strong><span>HTML, no runtime CMS in front of the reader</span></li>
+        </ul>
       </a>
     </div>
     <div class="cell tech">
@@ -432,7 +486,12 @@
         <span class="meta">PoC · in progress</span>
         <h3>ceemes.</h3>
         <p>Static-first: pages are generated as static files with islands for interactivity, and every piece is pluggable. The editorial side is built for AI to drive it — an MCP server is exposed, so agents manage content directly. Published in the open as it is built.</p>
-        <p class="stack"><small><span>design</span> · static-first generation · islands · pluggable · mcp server exposed</small></p>
+        <ul class="facts">
+          <li><strong>7.5k</strong><span>lines of strict TypeScript</span></li>
+          <li><strong>Plugins</strong><span>own migrations and table prefix each</span></li>
+          <li><strong>MCP</strong><span>exposed, so agents can drive the CMS</span></li>
+        </ul>
+        <p class="stack"><small><span>stack</span> · typescript · hono · react 19 · vite · sqlite · drizzle · plugin-first</small></p>
       </a>
     </div>
 

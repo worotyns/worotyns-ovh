@@ -73,6 +73,21 @@ Copy po lewej, cena po prawej jako osobny blok z ramką („RATE" + duże 175 PL
 
 Przy okazji wyszło, że **kafelki-linki podkreślały całą swoją treść**: `text-decoration` z kotwicy jest rysowane przez wszystkie dzieci, więc tytuły, akapity i podpisy w kartach doorwaya (oraz napisy na przyciskach CTA) miały linie. `a.block { text-decoration: none }` to naprawia; podkreślenia zostają tylko tam, gdzie link jest osobny: `.links a` w kartach i `.jump` przy nagłówkach torów. Uwaga metodyczna: sprawdzenie `getComputedStyle` na dzieciach tego **nie wykryje** — dekoracja przodka nie pojawia się w ich computed style, trzeba patrzeć na zrzut.
 
+## Warstwa faktów w kartach produktów (`.facts`)
+
+Karty produktów miały dotąd opis i stack, ale żadnej liczby — a po przejściu repozytoriów projektów (wrzesień 2026) okazało się, że liczby są i to one sprzedają: 47 tabel i 922 testy w Terapeuto, 1 196 artykułów i 0,11 USD kosztu wydania w Krazaecie, 260 commitów w dziesięć tygodni w uff.email, trzy niezależne backendy GetViaMsg.
+
+Do każdej karty produktu weszła więc stopka `.facts`: od dwóch do trzech liczb z jednozdaniowym podpisem — ta sama logika co pas dowodów pod hero, tylko w rozmiarze karty. Reguły:
+
+- **liczba musi pochodzić z repozytorium**: commity, tabele, migracje, testy, artykuły, wydania, koszt modelu na wydanie, domyślna prowizja. Żadnych deklaracji marketingowych w tym miejscu.
+- **braki nie są faktami** („0 testów", „brak CI") — karta opowiada o produkcie, nie o audycie.
+- **2–3 pozycje, podpis do ~40 znaków**, bo kolumna w macierzy ma ~34 rem i dłuższy podpis zawija się do czterech linii.
+- ten sam materiał trafia do `llms.txt` w formie rozwiniętej (biznes i technika per produkt), żeby warstwa maszynowa niosła to samo co strona.
+
+Wizualnie: `.facts` to grid `auto-fit` z kreskowaną linią u góry, liczba w kolorze toru (`--accent`), podpis w monospace i `--faint`. Linia stacku pod spodem staje się wtedy ciągła (`.facts + .stack`), żeby dwie identyczne separatory nie czytały się jak błąd. Weryfikacja zrzutami z headless Chrome na 1200 px i 390 px — `getComputedStyle` tego nie pokaże, a decyduje zawijanie podpisów.
+
+Przy okazji wyszło, że `.wall.three` (doorway na stronie głównej, sekcja Evidence na podstronach) **nie ma `display: grid`** — sama `grid-template-columns` nic nie robi, więc te karty układają się jedna pod drugą na pełną szerokość i tak są publikowane. Warstwa `.facts` na podstronach z tego korzysta: trzy liczby rozkładają się szeroko. Zmiana tego to decyzja o całym układzie, nie poprawka.
+
 ## Linki i dostępność
 
 - **Wszystkie linki zewnętrzne otwierają się w nowej karcie** (`target="_blank" rel="noopener"`) — i pilnuje tego checker dla każdej strony, nie tylko dla kart.
@@ -92,6 +107,8 @@ Poza rzeczami strukturalnymi: długość `title` i `description` w limicie, cano
 1. **Opinie klientów** — odłożone przez Ciebie. To nadal jedyny brakujący element zaufania; mamy gotowe cytaty z Terapeuto, GetViaMsg i Interię o PushPushGo.
 2. **`ceemes.eu`** — domena delegowana do Cloudflare, ale bez rekordu A/AAAA, więc link celowo wyprzedza stronę.
 3. **Wersja polska** — treść jest po angielsku; gdyby klienci mieli być głównie z PL, `hreflang` i `/pl/` to naturalny następny krok (struktura jest już gotowa pod to).
+4. **Twierdzenia, których nie ma w repozytoriach** — „live, paying customers" przy Terapeuto i uff.email, „57%" i „0,25 PLN" przy GetViaMsg, „beta, going to market", gdy repo pokazuje środowiska dev/QA i listę „przed PROD". Zostawione na stronie jako Twoje deklaracje; każde z nich jest do potwierdzenia albo wycięcia.
+5. **Ceny** — uff.email 4,99 USD/mies. jest publikowane, bo stoi w `terms.njk`; Terapeuto i ceemes. nie mają ceny w repo i nie ma jej na stronie. Krazeta jest darmowa dla czytelnika, płaci sponsor.
 
 ## Historia decyzji (skrót)
 
