@@ -1,6 +1,6 @@
 # worotyns.ovh — stan obecny
 
-Jedna strona, dwa tory, zero JavaScriptu. Wersja z `/blocks/split` przeszła na `/`, eksperymenty (`/simple/`, `/blocks/`) usunięte — zostają w historii gita.
+Jedna strona, dwa tory, jeden mały skrypt (agg.js). Wersja z `/blocks/split` przeszła na `/`, eksperymenty (`/simple/`, `/blocks/`) usunięte — zostają w historii gita.
 
 ## Struktura strony
 
@@ -16,7 +16,7 @@ hero (kim jestem, dwa CTA)
 └───────────────────────────────────────────────────────────────────────────────────┘
 On the record (3 nagrania z miniaturami i czasem trwania)
 Compliance, folded into the work (4 kolorowe klocki)
-Off the clock — fun projects (6 kafelków-linków do GitHuba)
+Off the clock — fun projects (8 kafelków-linków do GitHuba + kafelek-łącze na pełną szerokość)
 closing CTA + stopka (llms.txt)
 ```
 
@@ -28,8 +28,8 @@ Kolejność grup jest celowa: **najpierw to, co można kupić, potem najmocniejs
 - **Space Grotesk** w nagłówkach i treści, systemowy mono na metadanych, stackach, etykietach i stopce
 - **kolor jako akcent**: terakota dla biznesu, teal dla technologii — tint komórki, kolor eyebrow, podkreślenie linku, kolor belki
 - **tło**: kolorowy „blat" (piaskowy gradient, widoczny na całym viewporcie), strona jako arkusz z obramowaniem i miękkim cieniem
-- zero JavaScriptu, zero cookies, zero trackingu
-- **pomiar zimny: 10 żądań / 88 KB** (z tego ~20 KB font, ~22 KB miniatury YouTube)
+- jeden skrypt — `agg.js` (~3 KB, async) z własnego, self-hosted agg: bez cookies, bez zewnętrznego trackingu, losowy visitor id w `localStorage`
+- **pomiar zimny: 11 żądań / ~91 KB** (z tego ~20 KB font, ~22 KB miniatury YouTube, ~3 KB `agg.js`)
 
 ### Reguły, których trzyma się ta strona
 
@@ -70,7 +70,7 @@ Naprawa: doorway został **przeniesiony przed macierz** (tam pełna szerokość 
 
 ## Off the clock — sekcja fun projects
 
-Między pasem compliance a panelem zamykającym stoi siedem kafelków-linków do GitHuba — llmact (aktorzy LLM w plikach Markdown), wtyczka Mermaid do Publii, self-hosted Deno KV z codziennym testem backupu, playground CSP, `atoms` (persist/restore na plikach), `wtdn` (tablica zadań z głosowaniem) i `click2call` (widget zamawiający oddzwonienie, backend po stronie operatora) — plus ósmy kafelek „a dozen more, mostly experiments”, który prowadzi do listy repozytoriów i domyka siatkę 2×4. Każdy kafelek to ten sam `.strip`/`.tile` co pas compliance, tylko opakowany w `<a>` — kafel jest afordancją, więc na hover zmienia się kolor tytułu, nie pojawia się podkreślenie.
+Między pasem compliance a panelem zamykającym stoi osiem kafelków-linków do GitHuba — llmact (aktorzy LLM w plikach Markdown), wtyczka Mermaid do Publii, self-hosted Deno KV z codziennym testem backupu, playground CSP, `atoms` (persist/restore na plikach), `wtdn` (tablica zadań z głosowaniem), `click2call` (widget zamawiający oddzwonienie, backend po stronie operatora) i `agg` (self-hosted analityka: page views i własne zdarzenia, agregaty w oknach od 5 minut do 30 dni, alerty i eksport do Prometheusa — jeden binarny plik Go + SQLite; ta strona na nim działa) — plus dziewiąty kafelek „a dozen more, mostly experiments”, który prowadzi do listy repozytoriów. Osiem projektów wypełnia siatkę 2×4, więc kafelek-łącze dostał pełną szerokość (`.wide`), żeby nie wisieć samotnie w nowym rzędzie. Każdy kafelek to ten sam `.strip`/`.tile` co pas compliance, tylko opakowany w `<a>` — kafel jest afordancją, więc na hover zmienia się kolor tytułu, nie pojawia się podkreślenie.
 
 Po co to tu: strona sprzedaje decyzje, a te projekty pokazują skąd one pochodzą — „pliki zamiast bazy” w uff.email i test odtwarzania w Terapeuto nie wzięły się z prezentacji, tylko z takich małych rzeczy robionych dla siebie. To także jedyne miejsce, w którym widać zakres i gust, a nie tylko wyniki.
 

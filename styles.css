@@ -755,6 +755,12 @@ h1 em {
   --accent: var(--tech);
 }
 
+/* eight project tiles fill the 2×4 grid, so the link out to everything else
+   spans both columns instead of hanging alone in a new row */
+.strip .tile.wide {
+  grid-column: 1 / -1;
+}
+
 .strip .tile .meta {
   color: var(--accent);
   letter-spacing: 0.12em;
