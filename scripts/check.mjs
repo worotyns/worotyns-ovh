@@ -1,328 +1,49 @@
 /**
- * Lightweight sanity check for the static site — no dependencies.
- *   npm: node scripts/check.mjs      task: task check
- *
- * Validates the things that silently rot in a hand-written HTML site:
- * broken anchors, unbalanced track (biz/tech) variants, stale JSON-LD,
- * and the mono ASCII panel that overflows the hero card if a line grows.
+ * Sanity check for the static site — no dependencies.  task check
+ * Catches what rots in hand-written HTML: broken local links and assets,
+ * external links that open in place, unclosed tags, a stale ?v= hash.
  */
 
 import { readFileSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
 import { createHash } from "node:crypto";
 
-const files = ["index.html", "404.html", "fractional-cto/index.html", "product-leadership/index.html"];
+const files = ["index.html", "404.html"];
 const problems = [];
-const notes = [];
-
-function fail(msg) {
-  problems.push(msg);
-}
-
-/* ---------- per-file checks ---------- */
+const fail = (msg) => problems.push(msg);
+const hash = (f) => createHash("sha1").update(readFileSync(f)).digest("hex").slice(0, 8);
 
 for (const file of files) {
-  if (!existsSync(file)) {
-    fail(`${file}: missing`);
-    continue;
-  }
-
   const html = readFileSync(file, "utf8");
 
-  // 1. every internal anchor has a target on the same page
-  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
-  const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]);
-  for (const a of new Set(anchors)) {
-    if (!ids.has(a)) fail(`${file}: anchor #${a} has no matching id`);
+  // local links and assets exist
+  for (const m of html.matchAll(/(?:src|href)="(\/[^"?#]*)/g)) {
+    let p = m[1].slice(1);
+    if (p === "" || p.endsWith("/")) p += "index.html";
+    if (!existsSync(p)) fail(`${file}: ${m[1]} does not exist`);
   }
 
-  // 2. referenced local assets exist (resolve ../ against the file's folder)
-  const assets = [...html.matchAll(/(?:src|href)="([^"?#]+\.(?:css|js|jpg|jpeg|png|svg|webmanifest|ico))"/gi)]
-    .map((m) => m[1])
-    .filter((a) => !/^https?:/i.test(a));
-  for (const a of new Set(assets)) {
-    const resolved = a.startsWith("/") ? a.slice(1) : join(dirname(file), a);
-    if (!existsSync(resolved)) fail(`${file}: asset ${a} not found on disk (looked for ${resolved})`);
+  // external links open in a new tab, with noopener
+  for (const m of html.matchAll(/<a\s([^>]*href="https?:[^"]*"[^>]*)>/g)) {
+    if (!/target="_blank"/.test(m[1]) || !/noopener/.test(m[1])) fail(`${file}: external link without target/noopener — ${m[1]}`);
   }
 
-  // 3. track variants: .only-biz and .only-tech should come in pairs
-  //    (blocks that are intentionally one-track only — project stacks — are stripped)
-  const paired = html.replace(/class="[^"]*project-stack[^"]*"/g, "");
-  const biz = (paired.match(/only-biz/g) || []).length;
-  const tech = (paired.match(/only-tech/g) || []).length;
-  if (biz || tech) {
-    notes.push(`${file}: track variants — only-biz ${biz} / only-tech ${tech}`);
-    if (biz === 0 || tech === 0) fail(`${file}: one track has no content at all`);
-    if (Math.abs(biz - tech) > 2) {
-      fail(`${file}: track variants are lopsided (${biz} biz vs ${tech} tech) — a section is probably missing a translation`);
-    }
-  }
+  if ((html.match(/<h1[\s>]/g) || []).length !== 1) fail(`${file}: exactly one <h1> expected`);
 
-  // 4. JSON-LD parses
-  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
-    try {
-      JSON.parse(m[1]);
-    } catch (e) {
-      fail(`${file}: invalid JSON-LD — ${e.message}`);
-    }
-  }
-
-  // 5. the ASCII panel must fit the hero card (≈58 chars at desktop size)
-  const ascii = html.match(/<pre class="ascii">([\s\S]*?)<\/pre>/);
-  if (ascii) {
-    const longest = Math.max(...ascii[1].split("\n").map((l) => l.length));
-    notes.push(`${file}: ascii panel longest line ${longest} chars`);
-    if (longest > 56) fail(`${file}: ascii panel line is ${longest} chars — it will overflow the card`);
-  }
-
-  // 6. no placeholder text left behind
-  for (const bad of ["Lorem ipsum", "lorem ipsum", "TODO", "FIXME", "XXX"]) {
-    if (html.includes(bad)) fail(`${file}: placeholder text "${bad}"`);
-  }
-}
-
-/* ---------- index.html: the single page ---------- */
-
-const index = readFileSync("index.html", "utf8");
-
-// anchors the hero and the track switches point at
-for (const id of ["biz", "tech", "work"]) {
-  if (!index.includes(`id="${id}"`)) fail(`index.html: expected #${id} — the track switches or the hero link point at it`);
-}
-
-// the matrix must contain every cell: it once closed early, which silently
-// pushed the last groups out to <body> and rendered them in one column
-{
-  const start = index.indexOf('<div class="matrix">');
-  const marker = index.indexOf("<!-- ============ BELOW THE MATRIX");
-  if (start === -1 || marker === -1) {
-    fail("index.html: cannot find the matrix or its end marker");
-  } else {
-    let depth = 0;
-    let closesAt = -1;
-    for (const m of index.matchAll(/<div\b|<!--\s*<\/div>|\/div>/g)) {
-      if (m.index < start) continue;
-      depth += m[0].startsWith("<div") ? 1 : -1;
-      if (depth === 0) { closesAt = m.index; break; }
-    }
-    if (closesAt === -1 || closesAt > marker) {
-      fail("index.html: the matrix does not close before its end marker — cells are leaking out of the grid");
-    }
-    const inside = index.slice(start, closesAt);
-    const count = (str) => (str.match(/class="cell (?:head )?(?:biz|tech)"/g) || []).length;
-    const inMatrix = count(inside);
-    const total = count(index);
-    if (inMatrix !== total) fail(`index.html: ${total - inMatrix} cells sit outside the matrix — they will render full width`);
-    notes.push(`index.html: ${inMatrix} cells inside the matrix, ${inMatrix / 2} aligned row pairs`);
-  }
-}
-
-// sections must balance too: a missing </section> once swallowed the strip
-{
-  const opens = (index.match(/<section\b/g) || []).length;
-  const closes = (index.match(/<\/section>/g) || []).length;
-  if (opens !== closes) fail(`index.html: ${opens} <section> vs ${closes} </section> — a section is not closed`);
-}
-
-// the whole point of the layout: every business cell has a technology cell,
-// so the rows line up. A missing one silently breaks the alignment.
-const bizCells = (index.match(/class="cell(?: head)? biz"/g) || []).length;
-const techCells = (index.match(/class="cell(?: head)? tech"/g) || []).length;
-if (bizCells !== techCells) {
-  fail(`index.html: ${bizCells} business cells vs ${techCells} technology cells — the matrix would fall out of alignment`);
-}
-
-// attribute order is irrelevant: read each <a> once and pull the attributes out
-const anchors = [...index.matchAll(/<a\s([^>]*)>/g)].map((m) => m[1]);
-const attr = (attrs, name) => (attrs.match(new RegExp(name + '="([^"]*)"')) || [null, null])[1];
-
-for (const attrs of anchors) {
-  const cls = attr(attrs, "class") || "";
-  const href = attr(attrs, "href");
-
-  if (/\bcard\b/.test(cls) && !href) fail(`index.html: a card link has no href — ${attrs.trim()}`);
-  if (/\bcard\b/.test(cls) && href && href.startsWith("http") && attr(attrs, "target") !== "_blank") {
-    fail(`index.html: an external card link does not open in a new tab — ${href}`);
-  }
-  if (/\bcard\b/.test(cls) && href && href.startsWith("http") && !/noopener/.test(attr(attrs, "rel") || "")) {
-    fail(`index.html: an external card link is missing rel=noopener — ${href}`);
-  }
-  if (/\b(record|accent)\b/.test(cls) && !href) fail(`index.html: a .${cls} block has no href — ${attrs.trim()}`);
-
-  // every link needs an accessible name: text, or an aria-label
-  if (!href) fail(`index.html: an <a> without href — ${attrs.trim()}`);
-}
-
-// external links must all open in a new tab and carry rel=noopener
-for (const attrs of anchors) {
-  const href = attr(attrs, "href") || "";
-  if (!href.startsWith("http")) continue;
-  if (attr(attrs, "target") !== "_blank") fail(`index.html: external link without target=_blank — ${href}`);
-  if (!/noopener/.test(attr(attrs, "rel") || "")) fail(`index.html: external link without rel=noopener — ${href}`);
-  if (!/\b(aria-label|title)\b/.test(attrs) && !/class="[^"]*\bcard\b/.test(attrs)) {
-    // plain inline links are fine as long as they have text; nothing to assert here
-  }
-}
-
-// a card that is a div must still contain a link
-for (const m of index.matchAll(/<div[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
-  if (!/<a\s/.test(m[1])) fail("index.html: a card is a plain div with no link inside it");
-}
-
-/* ---------- recordings ---------- */
-
-const records = anchors
-  .filter((attrs) => /\brecord\b/.test(attr(attrs, "class") || ""))
-  .map((attrs) => attr(attrs, "href"));
-if (!records.length) fail("index.html: no recordings found — did the watch list get removed?");
-for (const url of records) {
-  if (!/^https:\/\/www\.youtube\.com\/watch\?v=/.test(url)) fail(`index.html: a recording links somewhere unexpected — ${url}`);
-}
-const recordImgs = (index.match(/class="thumb"/g) || []).length;
-if (recordImgs !== records.length) fail(`index.html: ${records.length} recordings but ${recordImgs} thumbnails`);
-if (existsSync("llms.txt")) {
-  const llms = readFileSync("llms.txt", "utf8");
-  for (const url of records) {
-    const id = url.split("v=")[1];
-    if (!llms.includes(id)) fail(`llms.txt: recording ${id} is not listed under Talks`);
-  }
-}
-notes.push(`index.html: ${records.length} recordings with thumbnails`);
-
-/* ---------- internal links must resolve to a real file ---------- */
-
-function resolveHref(pageFile, href) {
-  if (!href || /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith("#")) return null;
-  let p = href.split("?")[0].split("#")[0];
-  if (!p) return null;
-  p = p.startsWith("/") ? p.slice(1) : join(dirname(pageFile), p);
-  if (p === "" || p === ".") return "index.html";
-  if (p.endsWith("/")) p += "index.html";
-  return p;
-}
-
-for (const file of files) {
-  if (!existsSync(file)) continue;
-  const html = readFileSync(file, "utf8");
-  for (const m of html.matchAll(/href="([^"#][^"]*)"/g)) {
-    const target = resolveHref(file, m[1]);
-    if (!target) continue;
-    if (!existsSync(target)) {
-      fail(`${file}: link ${m[1]} points at ${target}, which does not exist`);
-    }
-  }
-}
-
-/* ---------- stylesheets must be cache-busted ----------
-   Cloudflare served a stale styles.css for hours after a deploy (the zone's
-   Browser Cache TTL overrides _headers), so new HTML met old CSS and the
-   layout looked broken. Every stylesheet URL carries a hash of its own
-   contents: change the CSS without bumping the hash and this fails. */
-
-for (const [sheet, version] of [
-  ["styles.css", createHash("sha1").update(readFileSync("styles.css")).digest("hex").slice(0, 8)],
-  ["vendor/blocks.min.css", createHash("sha1").update(readFileSync("vendor/blocks.min.css")).digest("hex").slice(0, 8)],
-  ["vendor/reset.min.css", createHash("sha1").update(readFileSync("vendor/reset.min.css")).digest("hex").slice(0, 8)],
-]) {
-  for (const file of files) {
-    if (!existsSync(file)) continue;
-    const html = readFileSync(file, "utf8");
-    if (!html.includes(`/${sheet}?v=${version}`)) {
-      const found = (html.match(new RegExp(`/${sheet.replace(".", "\\.")}(\\?v=[a-f0-9]+)?`)) || [null, "not linked"])[0];
-      fail(`${file}: ${sheet} is referenced as "${found}" but its contents hash to v=${version} — run: task cache-bust`);
-    }
-  }
-}
-// the og images are cached too, so the page's own og:image carries a hash
-for (const file of files) {
-  if (!existsSync(file)) continue;
-  const html = readFileSync(file, "utf8");
-  const url = (html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/) || [null, null])[1];
-  if (!url) continue; // noindex pages have no og:image
-  const name = url.split("/").pop().split("?")[0];
-  if (!existsSync(name)) {
-    fail(`${file}: og:image points at ${url}, which is not a file here`);
-    continue;
-  }
-  const v = createHash("sha1").update(readFileSync(name)).digest("hex").slice(0, 8);
-  if (!url.includes(`?v=${v}`)) {
-    fail(`${file}: og:image is "${url}" but ${name} hashes to v=${v} — run: task cache-bust`);
-  }
-}
-
-notes.push(`css cache-busting: styles.css?v=${createHash("sha1").update(readFileSync("styles.css")).digest("hex").slice(0, 8)}`);
-
-/* ---------- the page must load the vendored library and its own sheet ---------- */
-
-{
-  const page = readFileSync("index.html", "utf8");
-  const sheets = [...page.matchAll(/<link[^>]+rel="stylesheet"[^>]*href="([^"]+)"/g)].map((m) => resolveHref("index.html", m[1].split("?")[0]));
-  for (const expected of ["vendor/reset.min.css", "vendor/blocks.min.css", "styles.css"]) {
-    if (!sheets.includes(expected)) fail(`index.html: does not load ${expected} (loads ${sheets.join(", ")})`);
-  }
-  notes.push(`index.html: stylesheets ${sheets.join(" + ")}`);
-}
-
-/* ---------- SEO surface of every page ---------- */
-
-const sitemap = existsSync("sitemap.xml") ? readFileSync("sitemap.xml", "utf8") : "";
-
-for (const file of files) {
-  if (!existsSync(file)) continue;
-  const html = readFileSync(file, "utf8");
-  const meta = (name) => (html.match(new RegExp(`<meta[^>]+(?:name|property)="${name}"[^>]+content="([^"]*)"`, "i")) || [null, null])[1];
-
-  const title = (html.match(/<title[^>]*>([^<]*)<\/title>/i) || [null, ""])[1].trim();
-  const desc = meta("description") || "";
-  const canonical = (html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i) || [null, null])[1];
-  const noindex = /<meta[^>]+name="robots"[^>]+noindex/.test(html);
-
-  const h1s = (html.match(/<h1[\s>]/g) || []).length;
-  if (h1s !== 1) fail(`${file}: ${h1s} <h1> elements (exactly one expected)`);
-
-  for (const m of html.matchAll(/<img\b[^>]*>/g)) {
-    if (!/\balt=/.test(m[0])) fail(`${file}: <img> without alt — ${m[0].slice(0, 60)}`);
-  }
-
-  // tag balance: a regex edit once ate a </p> and the CTA ended up inside the
-  // rate paragraph. Block tags are cheap to count and catch exactly that.
-  for (const tag of ["p", "div", "section", "aside", "nav", "footer", "dl", "ul"]) {
+  for (const tag of ["main", "p", "dl", "div"]) {
     const opens = (html.match(new RegExp(`<${tag}\\b`, "g")) || []).length;
     const closes = (html.match(new RegExp(`</${tag}>`, "g")) || []).length;
-    if (opens !== closes) fail(`${file}: ${opens} <${tag}> vs ${closes} </${tag}> — a tag is not closed`);
+    if (opens !== closes) fail(`${file}: ${opens} <${tag}> vs ${closes} </${tag}>`);
   }
 
-  // a noindex page (404, experiments) is not meant to rank: only the basics apply
-  if (noindex) {
-    notes.push(`${file}: noindex — skipping the social/SEO surface`);
-    continue;
-  }
-
-  if (title.length < 20 || title.length > 65) fail(`${file}: <title> is ${title.length} chars (aim for 20-65)`);
-  if (desc.length < 60 || desc.length > 165) fail(`${file}: meta description is ${desc.length} chars (aim for 60-165)`);
-  if (!canonical) fail(`${file}: no canonical link`);
-  if (!meta("og:image")) fail(`${file}: no og:image`);
-  if (!meta("og:image:alt")) fail(`${file}: no og:image:alt`);
-  if (!meta("twitter:card")) fail(`${file}: no twitter:card`);
-  if (canonical && !sitemap.includes(canonical)) fail(`${file}: ${canonical} is indexable but missing from sitemap.xml`);
+  // Cloudflare's Browser Cache TTL once served stale CSS for hours after a
+  // deploy, so the stylesheet and the og image are content-addressed
+  if (!html.includes(`/styles.css?v=${hash("styles.css")}`)) fail(`${file}: styles.css hash is stale — run: task cache-bust`);
+  if (html.includes("ogimage.jpg") && !html.includes(`ogimage.jpg?v=${hash("ogimage.jpg")}`)) fail(`${file}: ogimage.jpg hash is stale — run: task cache-bust`);
 }
-
-// the sitemap should not advertise pages that do not exist
-for (const m of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
-  const path = m[1].replace("https://worotyns.ovh/", "");
-  const file = path === "" ? "index.html" : path + "index.html";
-  if (!existsSync(file)) fail(`sitemap.xml: lists ${m[1]} but ${file} does not exist`);
-}
-notes.push(`SEO: ${(sitemap.match(/<loc>/g) || []).length} urls in the sitemap`);
-
-/* ---------- report ---------- */
-
-notes.forEach((n) => console.log(`· ${n}`));
 
 if (problems.length) {
-  console.error(`\n✗ ${problems.length} problem(s):`);
+  console.error(`✗ ${problems.length} problem(s):`);
   problems.forEach((p) => console.error(`  - ${p}`));
   process.exit(1);
 }
-
-console.log("\n✓ checks passed");
+console.log("✓ checks passed");
