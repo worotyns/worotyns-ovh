@@ -12,8 +12,12 @@ const problems = [];
 const fail = (msg) => problems.push(msg);
 const hash = (f) => createHash("sha1").update(readFileSync(f)).digest("hex").slice(0, 8);
 
+// Commented-out markup is not served, so it must not be link-checked either
+// (a parked link in a comment once made `task check` fail on every run).
+const stripComments = (html) => html.replace(/<!--[\s\S]*?-->/g, "");
+
 for (const file of files) {
-  const html = readFileSync(file, "utf8");
+  const html = stripComments(readFileSync(file, "utf8"));
 
   // local links and assets exist
   for (const m of html.matchAll(/(?:src|href)="(\/[^"?#]*)/g)) {

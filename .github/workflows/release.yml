@@ -1,0 +1,56 @@
+# Merge to main -> check -> next semver tag -> GitHub release -> Cloudflare Pages deploy, in the SAME workflow.
+# (A tag pushed with GITHUB_TOKEN does not start other workflows, so the deploy cannot live in an on:tag workflow.)
+# Bump: label on the merged PR `release:major` / `release:minor`, default patch; `release:none` skips.
+# Deploy needs the repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; without them it is skipped.
+name: release
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency: { group: release, cancel-in-progress: false }
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/check.mjs
+
+  release:
+    needs: check
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - id: version
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          labels=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0].labels[].name' || true)
+          if echo "$labels" | grep -qx 'release:none'; then echo "skip"; exit 0; fi
+          last=$(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -1); last=${last:-v0.0.0}
+          IFS=. read -r ma mi pa <<<"${last#v}"
+          if   echo "$labels" | grep -qx 'release:major'; then ma=$((ma+1)); mi=0; pa=0
+          elif echo "$labels" | grep -qx 'release:minor'; then mi=$((mi+1)); pa=0
+          else pa=$((pa+1)); fi
+          echo "tag=v$ma.$mi.$pa" >> "$GITHUB_OUTPUT"
+      - if: steps.version.outputs.tag != ''
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "${{ steps.version.outputs.tag }}" --target "${{ github.sha }}" --generate-notes
+
+  deploy:
+    needs: release
+    if: needs.release.outputs.tag != ''
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: npx --yes wrangler pages deploy . --project-name worotyns
