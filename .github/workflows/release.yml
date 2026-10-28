@@ -1,6 +1,7 @@
-# Merge to main -> next semver tag -> GitHub release -> image build (+ deploy) in the SAME workflow.
-# (A tag pushed with GITHUB_TOKEN does not start other workflows, so the build cannot live in an on:tag workflow.)
+# Merge to main -> check -> next semver tag -> GitHub release -> Cloudflare Pages deploy, in the SAME workflow.
+# (A tag pushed with GITHUB_TOKEN does not start other workflows, so the deploy cannot live in an on:tag workflow.)
 # Bump: label on the merged PR `release:major` / `release:minor`, default patch; `release:none` skips.
+# Deploy needs the repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; without them it is skipped.
 name: release
 on:
   push:
@@ -8,13 +9,19 @@ on:
 
 permissions:
   contents: write
-  packages: write
   pull-requests: read
 
 concurrency: { group: release, cancel-in-progress: false }
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/check.mjs
+
   release:
+    needs: check
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.version.outputs.tag }}
@@ -36,25 +43,14 @@ jobs:
         env: { GH_TOKEN: "${{ github.token }}" }
         run: gh release create "${{ steps.version.outputs.tag }}" --target "${{ github.sha }}" --generate-notes
 
-  image:
+  deploy:
     needs: release
     if: needs.release.outputs.tag != ''
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
-      - if: hashFiles('Dockerfile') != ''
-        uses: docker/login-action@v3
-        with: { registry: ghcr.io, username: "${{ github.actor }}", password: "${{ github.token }}" }
-      - if: hashFiles('Dockerfile') != ''
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository }}:${{ needs.release.outputs.tag }}
-            ghcr.io/${{ github.repository }}:latest
-
-  # deploy:
-  #   needs: [release, image]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "deploy ghcr.io/${{ github.repository }}:${{ needs.release.outputs.tag }}"   # per repo
+      - if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: npx --yes wrangler pages deploy . --project-name worotyns
